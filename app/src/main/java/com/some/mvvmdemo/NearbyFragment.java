@@ -70,6 +70,12 @@ public class NearbyFragment extends Fragment {
 
             Toast.makeText(getActivity(),"点击",Toast.LENGTH_SHORT).show();
 
+            switch (view.getId()){
+                case R.id.btn_add:
+                    nearbyVM.add();
+                    break;
+            }
+
         }
     }
 

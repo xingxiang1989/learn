@@ -15,7 +15,7 @@ import com.some.mvvmdemo.entity.Account;
 
 import java.util.List;
 
-public class NearbyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class NearbyAdapter extends RecyclerView.Adapter<BindingViewHolder> {
 
     private static final String TAG = NearbyAdapter.class.getSimpleName();
     private List<Account> mList;
@@ -27,21 +27,20 @@ public class NearbyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
+    public BindingViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
                                                       int viewType) {
         ItemNearbyBinding binding =
                 DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
                 R.layout.item_nearby,parent,false);
 
-        VHolder vHolder = new VHolder(binding);
+        BindingViewHolder vHolder = new BindingViewHolder(binding);
         return vHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull BindingViewHolder holder, int position) {
 
-        VHolder vHolder = (VHolder)holder;
-        ItemNearbyBinding binding = (ItemNearbyBinding) vHolder.getBinding();
+        ItemNearbyBinding binding = (ItemNearbyBinding) holder.getBinding();
         binding.setAccount(mList.get(position));
         Log.d(TAG, "binding.tvName =  " + binding.tvName.getText());
 
@@ -50,24 +49,5 @@ public class NearbyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public int getItemCount() {
         return mList.size();
-    }
-
-
-    static class VHolder extends RecyclerView.ViewHolder{
-
-        ViewDataBinding binding;
-
-        public VHolder(@NonNull ViewDataBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
-
-        public ViewDataBinding getBinding() {
-            return binding;
-        }
-
-        public void setBinding(ViewDataBinding binding) {
-            this.binding = binding;
-        }
     }
 }

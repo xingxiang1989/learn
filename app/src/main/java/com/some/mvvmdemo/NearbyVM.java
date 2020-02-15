@@ -8,6 +8,7 @@ import com.some.mvvmdemo.entity.Account;
 import java.nio.channels.MulticastChannel;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class NearbyVM extends ViewModel {
 
@@ -23,6 +24,15 @@ public class NearbyVM extends ViewModel {
         mList.add(new Account("xiangxing5",5));
         mList.add(new Account("xiangxing6",6));
 
+        mLiveData.postValue(mList);
+    }
+
+    public void add(){
+
+        Random random = new Random();
+        int level = random.nextInt(300);
+        List<Account> mList = mLiveData.getValue();
+        mList.add(0,new Account("add " + level , level));
         mLiveData.postValue(mList);
     }
 
