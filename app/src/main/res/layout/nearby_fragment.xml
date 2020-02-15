@@ -3,6 +3,10 @@
 
     <data>
 
+        <variable
+            name="eventListener"
+            type="com.some.mvvmdemo.NearbyFragment.EventListener" />
+
     </data>
 
     <LinearLayout
@@ -10,10 +14,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <Button
+            android:id="@+id/btn_add"
+            android:text="添加"
+            android:onClick="@{eventListener.onClick}"
+            android:layout_width="100dp"
+            android:layout_height="50dp"></Button>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 </layout>
