@@ -19,7 +19,7 @@ import com.some.mvvmdemo.entity.Account;
 
 import java.util.List;
 
-public class NearbyFragment extends Fragment {
+public class NearbyFragment extends Fragment implements View.OnClickListener {
 
     NearbyFragmentBinding binding;
     NearbyVM nearbyVM;
@@ -38,7 +38,9 @@ public class NearbyFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater,R.layout.nearby_fragment,container,
                 false);
-        binding.setEventListener(new EventListener());
+//        binding.setEventListener(new EventListener());
+
+        binding.setClick(this);
 
         LinearLayoutManager linearLayoutManager =
                 new LinearLayoutManager(getActivity(),
@@ -63,6 +65,18 @@ public class NearbyFragment extends Fragment {
         });
     }
 
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_remove:
+                Toast.makeText(getActivity(),"点击remove",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.btn_add:
+                nearbyVM.add();
+                break;
+        }
+    }
 
     public class EventListener{
 

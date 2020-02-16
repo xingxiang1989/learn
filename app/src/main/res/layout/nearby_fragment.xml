@@ -7,6 +7,10 @@
             name="eventListener"
             type="com.some.mvvmdemo.NearbyFragment.EventListener" />
 
+        <variable
+            name="click"
+            type="android.view.View.OnClickListener" />
+
     </data>
 
     <LinearLayout
@@ -17,7 +21,14 @@
         <Button
             android:id="@+id/btn_add"
             android:text="添加"
-            android:onClick="@{eventListener.onClick}"
+            android:onClick="@{v->click.onClick(v)}"
+            android:layout_width="100dp"
+            android:layout_height="50dp"></Button>
+
+        <Button
+            android:id="@+id/btn_remove"
+            android:text="删除"
+            android:onClick="@{v->click.onClick(v)}"
             android:layout_width="100dp"
             android:layout_height="50dp"></Button>
 
