@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="click"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="50dp"
+            android:background="@color/colorAccent"
+            app:layout_constraintBottom_toTopOf="@+id/ll_bottom_tab"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/ll_bottom_tab"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <TextView
+                android:id="@+id/tab_msg"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:onClick="@{v->click.onClick(v)}"
+                android:gravity="center"
+                android:text="消息"></TextView>
+
+            <TextView
+                android:id="@+id/tab_nearby"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:onClick="@{v->click.onClick(v)}"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="附近"></TextView>
+
+            <TextView
+                android:id="@+id/tab_setting"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:onClick="@{v->click.onClick(v)}"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="设置"></TextView>
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     public void onclick(View view){
 //        Toast.makeText(this,"点击",Toast.LENGTH_SHORT).show();
 //        startActivity(new Intent(MainActivity.this, MvvmActivity.class));
-        startActivity(new Intent(MainActivity.this, NearbyActivity.class));
+//        startActivity(new Intent(MainActivity.this, NearbyActivity.class));
+        startActivity(new Intent(MainActivity.this, HomeTabActivity.class));
     }
 }
