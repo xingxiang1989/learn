@@ -5,6 +5,7 @@ import android.os.Message;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -158,5 +159,11 @@ public class HomeTabActivity extends BaseActiviy implements View.OnClickListener
                 mTabViews.get(i).setTextColor(getResources().getColor(R.color.black));
             }
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("currentTab",currentTab);
     }
 }
