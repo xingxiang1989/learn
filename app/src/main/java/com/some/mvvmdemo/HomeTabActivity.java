@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.some.mvvmdemo.base.BaseActiviy;
 import com.some.mvvmdemo.databinding.ActivityHomeTabBinding;
+import com.some.mvvmdemo.reentranlock.SynchronizedExceptionRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +55,12 @@ public class HomeTabActivity extends BaseActiviy implements View.OnClickListener
 
         switchTab(currentTab);
 
+        SynchronizedExceptionRunnable runnable = new SynchronizedExceptionRunnable();
+
+        Thread thread1 = new Thread(runnable,"杯子");
+        Thread thread2 = new Thread(runnable,"人");
+        thread1.start();
+        thread2.start();
     }
 
     @Override
