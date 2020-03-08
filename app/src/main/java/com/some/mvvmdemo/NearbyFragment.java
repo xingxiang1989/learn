@@ -17,14 +17,21 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.some.mvvmdemo.databinding.NearbyFragmentBinding;
 import com.some.mvvmdemo.entity.Account;
+import com.some.mvvmdemo.swipe.ItemDragListener;
+import com.some.mvvmdemo.swipe.ItemMoveListener;
+import com.some.mvvmdemo.swipe.MyItemTouchHelperCallback;
 
+import java.util.Collections;
 import java.util.List;
 
-public class NearbyFragment extends Fragment implements View.OnClickListener {
+public class NearbyFragment extends Fragment implements View.OnClickListener,
+        ItemDragListener, ItemMoveListener {
 
     private static final String TAG = NearbyFragment.class.getSimpleName();
     NearbyFragmentBinding binding;
@@ -32,6 +39,8 @@ public class NearbyFragment extends Fragment implements View.OnClickListener {
     NearbyAdapter adapter;
 
     private Activity mActivity;
+    private ItemTouchHelper itemTouchHelper;
+    private MyItemTouchHelperCallback callback;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,6 +48,10 @@ public class NearbyFragment extends Fragment implements View.OnClickListener {
         Log.d(TAG, "onCreate ");
         nearbyVM = ViewModelProviders.of(this).get(NearbyVM.class);
         nearbyVM.initData();
+
+
+        callback = new MyItemTouchHelperCallback(this);
+        itemTouchHelper = new ItemTouchHelper(callback);
 
     }
 
@@ -63,6 +76,8 @@ public class NearbyFragment extends Fragment implements View.OnClickListener {
         divider.setDrawable(ContextCompat.getDrawable(mActivity,R.drawable.shape_divider_line));
         binding.recyclerview.addItemDecoration(divider);
 
+        itemTouchHelper.attachToRecyclerView(binding.recyclerview);
+
         return binding.getRoot();
     }
 
@@ -73,7 +88,8 @@ public class NearbyFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onChanged(List<Account> accounts) {
                 if(adapter == null){
-                    adapter = new NearbyAdapter(nearbyVM.getLiveData().getValue());
+                    adapter = new NearbyAdapter(nearbyVM.getLiveData().getValue(),
+                            NearbyFragment.this);
                     binding.recyclerview.setAdapter(adapter);
                 }else{
                     adapter.notifyDataSetChanged();
@@ -172,4 +188,22 @@ public class NearbyFragment extends Fragment implements View.OnClickListener {
     }
 
 
+    @Override
+    public void onStartDrags(RecyclerView.ViewHolder viewHolder) {
+        itemTouchHelper.startDrag(viewHolder);
+    }
+
+    @Override
+    public boolean onItemMove(int fromPosition, int toPosition) {
+        Collections.swap(nearbyVM.getLiveData().getValue(), fromPosition,toPosition);
+        adapter.notifyItemMoved(fromPosition,toPosition);
+        return true;
+    }
+
+    @Override
+    public boolean onItemRemoved(int position) {
+        nearbyVM.getLiveData().getValue().remove(position);
+        adapter.notifyItemRemoved(position);
+        return false;
+    }
 }
