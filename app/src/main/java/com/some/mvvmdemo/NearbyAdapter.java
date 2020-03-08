@@ -2,6 +2,7 @@ package com.some.mvvmdemo;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -43,6 +44,13 @@ public class NearbyAdapter extends RecyclerView.Adapter<BindingViewHolder> {
         ItemNearbyBinding binding = (ItemNearbyBinding) holder.getBinding();
         binding.setAccount(mList.get(position));
         Log.d(TAG, "binding.tvName =  " + binding.tvName.getText());
+
+        binding.tvDrag.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return false;
+            }
+        });
 
     }
 

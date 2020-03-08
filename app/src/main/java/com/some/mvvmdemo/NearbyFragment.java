@@ -1,5 +1,6 @@
 package com.some.mvvmdemo;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,10 +11,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.some.mvvmdemo.databinding.NearbyFragmentBinding;
@@ -27,6 +30,8 @@ public class NearbyFragment extends Fragment implements View.OnClickListener {
     NearbyFragmentBinding binding;
     NearbyVM nearbyVM;
     NearbyAdapter adapter;
+
+    private Activity mActivity;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,7 +49,6 @@ public class NearbyFragment extends Fragment implements View.OnClickListener {
         Log.d(TAG, "onCreateView ");
         binding = DataBindingUtil.inflate(inflater,R.layout.nearby_fragment,container,
                 false);
-//        binding.setEventListener(new EventListener());
 
         binding.setClick(this);
 
@@ -52,6 +56,13 @@ public class NearbyFragment extends Fragment implements View.OnClickListener {
                 new LinearLayoutManager(getActivity(),
                         LinearLayoutManager.VERTICAL,false);
         binding.recyclerview.setLayoutManager(linearLayoutManager);
+
+        //添加自定义分割线
+        DividerItemDecoration divider = new DividerItemDecoration(mActivity,
+                DividerItemDecoration.VERTICAL);
+        divider.setDrawable(ContextCompat.getDrawable(mActivity,R.drawable.shape_divider_line));
+        binding.recyclerview.addItemDecoration(divider);
+
         return binding.getRoot();
     }
 
@@ -103,6 +114,7 @@ public class NearbyFragment extends Fragment implements View.OnClickListener {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         Log.d(TAG, "onAttach ");
+        mActivity = (Activity) context;
     }
 
     @Override
