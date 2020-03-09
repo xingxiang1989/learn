@@ -15,6 +15,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.some.mvvmdemo.databinding.FragmentMsgBinding;
+import com.some.mvvmdemo.widget.LoadingView;
 
 public class SettingFragment extends Fragment implements View.OnClickListener{
 
@@ -122,6 +123,11 @@ public class SettingFragment extends Fragment implements View.OnClickListener{
             }
         }else if(v.getId() == R.id.btn){
             Toast.makeText(getActivity(),"11",Toast.LENGTH_SHORT).show();
+        }else if(v.getId() == R.id.tv_loading){
+            ViewStub viewStub = binding.viewStubLoading.getViewStub();
+            if(viewStub != null){
+                LoadingView loadingView = (LoadingView) viewStub.inflate();
+            }
         }
     }
 }

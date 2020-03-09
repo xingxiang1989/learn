@@ -31,9 +31,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
+        <TextView
+            android:id="@+id/tv_loading"
+            android:text="显示loading"
+            android:padding="10dp"
+            android:onClick="@{v->click.onClick(v)}"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
         <ViewStub
             android:id="@+id/viewstub"
             android:layout="@layout/layout_nodata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <ViewStub
+            android:id="@+id/viewStubLoading"
+            android:layout="@layout/layout_loading_viewstub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
