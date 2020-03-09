@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,12 +16,12 @@ import androidx.fragment.app.Fragment;
 
 import com.some.mvvmdemo.databinding.FragmentMsgBinding;
 
-public class SettingFragment extends Fragment {
+public class SettingFragment extends Fragment implements View.OnClickListener{
 
     private static final String TAG = SettingFragment.class.getSimpleName();
 
-
-    FragmentMsgBinding binding;
+    private FragmentMsgBinding binding;
+    private View emptyView;
 
     @Nullable
     @Override
@@ -28,7 +30,7 @@ public class SettingFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_msg,container,
                 false);
 
-        binding.tv.setText("SettingFragment");
+        binding.setClick(this);
 
         return binding.getRoot();
     }
@@ -97,5 +99,29 @@ public class SettingFragment extends Fragment {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         Log.d(TAG, "onHiddenChanged hidden = " + hidden);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.tv){
+            ViewStub viewStub = binding.viewstub.getViewStub();
+            if(viewStub != null){
+                emptyView = viewStub.inflate();
+                emptyView.findViewById(R.id.btn).setOnClickListener(this);
+            }else{
+                emptyView.setVisibility(View.VISIBLE);
+            }
+
+        }else if(v.getId() == R.id.tv2){
+            ViewStub viewStub = binding.viewstub.getViewStub();
+            if(viewStub != null){
+                emptyView = viewStub.inflate();
+                emptyView.setVisibility(View.GONE);
+            }else{
+                emptyView.setVisibility(View.GONE);
+            }
+        }else if(v.getId() == R.id.btn){
+            Toast.makeText(getActivity(),"11",Toast.LENGTH_SHORT).show();
+        }
     }
 }
