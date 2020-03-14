@@ -19,7 +19,7 @@ public class MainActivity extends BaseActiviy {
 
     Account account;
     ActivityMainBinding binding;
-    Animation animDown,animUp;
+    Animation animDown,animUp, animLeftIn, animLeftOut,animRightIn, animRightOut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +68,78 @@ public class MainActivity extends BaseActiviy {
         });
 
 
+        animLeftIn = AnimationUtils.loadAnimation(this,R.anim.anim_left_in);
+        animLeftIn.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                binding.LeftLayout.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        animLeftOut = AnimationUtils.loadAnimation(this,R.anim.anim_left_out);
+        animLeftOut.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                binding.LeftLayout.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        animRightIn = AnimationUtils.loadAnimation(this,R.anim.anim_right_in);
+        animRightIn.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                binding.RightLayout.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        animRightOut = AnimationUtils.loadAnimation(this,R.anim.anim_right_out);
+        animRightOut.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                binding.RightLayout.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
     }
 
     public void onclick(View view){
@@ -81,6 +153,21 @@ public class MainActivity extends BaseActiviy {
             case R.id.btn_up:
                 binding.topLayout.startAnimation(animUp);
                 break;
+
+            case R.id.btn_left_in:
+                binding.LeftLayout.startAnimation(animLeftIn);
+                break;
+            case R.id.btn_left_out:
+                binding.LeftLayout.startAnimation(animLeftOut);
+                break;
+
+            case R.id.btn_right_in:
+                binding.RightLayout.startAnimation(animRightIn);
+                break;
+            case R.id.btn_right_out:
+                binding.RightLayout.startAnimation(animRightOut);
+                break;
+
         }
     }
 }
