@@ -28,6 +28,13 @@ public class MyItemTouchHelperCallback extends ItemTouchHelper.Callback {
         return flags;
     }
 
+    /**
+     * 最终move完的结果
+     * @param recyclerView
+     * @param viewHolder
+     * @param target
+     * @return
+     */
     @Override
     public boolean onMove(@NonNull RecyclerView recyclerView,
                           @NonNull RecyclerView.ViewHolder viewHolder,
@@ -36,6 +43,11 @@ public class MyItemTouchHelperCallback extends ItemTouchHelper.Callback {
                 target.getAdapterPosition());
     }
 
+    /**
+     * 最终swipe后的结果
+     * @param viewHolder
+     * @param direction
+     */
     @Override
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
 
