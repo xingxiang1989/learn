@@ -10,11 +10,15 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.some.common.RouteUrl;
 import com.some.mvvmdemo.base.BaseActiviy;
 import com.some.mvvmdemo.databinding.ActivityMainBinding;
 import com.some.mvvmdemo.entity.Account;
 import com.some.mvvmdemo.mvvm.MvvmActivity;
 
+@Route(path = RouteUrl.Main)
 public class MainActivity extends BaseActiviy {
 
     Account account;
@@ -148,7 +152,8 @@ public class MainActivity extends BaseActiviy {
                 startActivity(new Intent(MainActivity.this, HomeTabActivity.class));
                 break;
             case R.id.btn_down:
-                binding.topLayout.startAnimation(animDown);
+//                binding.topLayout.startAnimation(animDown);
+                ARouter.getInstance().build(RouteUrl.A).navigation();
                 break;
             case R.id.btn_up:
                 binding.topLayout.startAnimation(animUp);

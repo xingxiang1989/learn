@@ -5,6 +5,10 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.some.common.RouteUrl;
+
+@Route(path = RouteUrl.A)
 public class ModuleAActivity extends FragmentActivity {
 
     @Override
