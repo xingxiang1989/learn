@@ -10,6 +10,14 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            // 显式声明支持注解
+            annotationProcessorOptions {
+                includeCompileClasspath true
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
     buildTypes {
         release {
@@ -34,5 +42,6 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:2.0.0"
     implementation project(path: ':common')
 
+    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
 
 }
