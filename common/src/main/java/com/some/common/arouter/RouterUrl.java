@@ -22,9 +22,4 @@ public class RouterUrl {
     private static final String SCHEME_VCHAT = "/moduleA/";
     public static final String A = SCHEME_VCHAT + "A";
 
-
-    //-----common 模块 --------//
-    public static final String SCHEME_COMMON = "/modulecommon/";
-    public static final String LUCKY_RULE = SCHEME_COMMON + "luckyrule";
-    public static final String DIALOG_SITWAIT_DISPOSE = SCHEME_COMMON + "sitwaitdispose";
 }
