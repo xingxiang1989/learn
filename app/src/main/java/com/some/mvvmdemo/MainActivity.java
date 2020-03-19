@@ -1,6 +1,5 @@
 package com.some.mvvmdemo;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
@@ -8,17 +7,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.some.common.RouteUrl;
+import com.some.common.arouter.RouterUrl;
 import com.some.mvvmdemo.base.BaseActiviy;
 import com.some.mvvmdemo.databinding.ActivityMainBinding;
 import com.some.mvvmdemo.entity.Account;
-import com.some.mvvmdemo.mvvm.MvvmActivity;
 
-@Route(path = RouteUrl.Main)
+@Route(path = RouterUrl.Main)
 public class MainActivity extends BaseActiviy {
 
     Account account;
@@ -153,7 +150,7 @@ public class MainActivity extends BaseActiviy {
                 break;
             case R.id.btn_down:
 //                binding.topLayout.startAnimation(animDown);
-                ARouter.getInstance().build(RouteUrl.A).navigation();
+                ARouter.getInstance().build(RouterUrl.A).navigation();
                 break;
             case R.id.btn_up:
                 binding.topLayout.startAnimation(animUp);

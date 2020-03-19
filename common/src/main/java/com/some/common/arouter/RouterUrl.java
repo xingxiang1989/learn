@@ -1,6 +1,6 @@
-package com.some.common;
+package com.some.common.arouter;
 
-public class RouteUrl {
+public class RouterUrl {
 
     public static final String SCHEME = "/oversea/";
     public static final String SYSTEM = "/arouter/";//ARouter系统内置path

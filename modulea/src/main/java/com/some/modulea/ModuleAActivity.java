@@ -6,9 +6,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.some.common.RouteUrl;
+import com.some.common.arouter.RouterUrl;
 
-@Route(path = RouteUrl.A)
+@Route(path = RouterUrl.A)
 public class ModuleAActivity extends FragmentActivity {
 
     @Override
