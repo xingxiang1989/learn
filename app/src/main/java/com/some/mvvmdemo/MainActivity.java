@@ -147,6 +147,7 @@ public class MainActivity extends BaseActiviy {
         switch (view.getId()){
             case R.id.btn:
                 startActivity(new Intent(MainActivity.this, HomeTabActivity.class));
+                overridePendingTransition(R.anim.anim_left_in,0);
                 break;
             case R.id.btn_down:
 //                binding.topLayout.startAnimation(animDown);
