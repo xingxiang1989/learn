@@ -13,8 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.some.mvvmdemo.databinding.FragmentMsgBinding;
+import com.some.mvvmdemo.mvvm.ShareDataVM;
 import com.some.mvvmdemo.widget.LoadingView;
 
 public class SettingFragment extends Fragment implements View.OnClickListener{
@@ -23,6 +25,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener{
 
     private FragmentMsgBinding binding;
     private View emptyView;
+    private ShareDataVM shareDataVM;
 
     @Nullable
     @Override
@@ -46,6 +49,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate ");
+        shareDataVM = ViewModelProviders.of(getActivity()).get(ShareDataVM.class);
     }
 
     @Override
@@ -128,6 +132,9 @@ public class SettingFragment extends Fragment implements View.OnClickListener{
             if(viewStub != null){
                 LoadingView loadingView = (LoadingView) viewStub.inflate();
             }
+
+            shareDataVM.getLiveData().postValue("点击settingfragment 的内容");
+
         }
     }
 }

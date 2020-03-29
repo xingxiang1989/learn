@@ -11,14 +11,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.some.mvvmdemo.base.BaseFragment;
 import com.some.mvvmdemo.databinding.FragmentMsgBinding;
+import com.some.mvvmdemo.mvvm.ShareDataVM;
 
 public class MessageFragment extends BaseFragment {
 
     private static final String TAG = MessageFragment.class.getSimpleName();
     FragmentMsgBinding binding;
+    ShareDataVM shareDataVM;
 
     @Nullable
     @Override
@@ -43,6 +47,20 @@ public class MessageFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate ");
+        shareDataVM = ViewModelProviders.of(getActivity()).get(ShareDataVM.class);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Log.d(TAG, "onViewCreated ");
+        shareDataVM.getLiveData().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                Log.d(TAG, "onViewCreated onChanged ");
+                binding.contentTv.setText(s);
+            }
+        });
     }
 
     @Override
