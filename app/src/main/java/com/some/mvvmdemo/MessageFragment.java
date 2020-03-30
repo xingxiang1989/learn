@@ -20,7 +20,7 @@ import com.some.mvvmdemo.mvvm.ShareDataVM;
 
 public class MessageFragment extends BaseFragment {
 
-    private static final String TAG = MessageFragment.class.getSimpleName();
+    private static final String TAG = "xingtest-MessageFragment";
     FragmentMsgBinding binding;
     ShareDataVM shareDataVM;
 

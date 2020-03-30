@@ -21,7 +21,7 @@ import com.some.mvvmdemo.widget.LoadingView;
 
 public class SettingFragment extends Fragment implements View.OnClickListener{
 
-    private static final String TAG = SettingFragment.class.getSimpleName();
+    private static final String TAG = "xingtest-SettingFragment";
 
     private FragmentMsgBinding binding;
     private View emptyView;

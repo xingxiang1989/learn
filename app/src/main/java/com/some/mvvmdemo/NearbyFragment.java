@@ -33,7 +33,7 @@ import java.util.List;
 public class NearbyFragment extends Fragment implements View.OnClickListener,
         ItemDragListener, ItemMoveListener {
 
-    private static final String TAG = NearbyFragment.class.getSimpleName();
+    private static final String TAG = "xingtest-NearbyFragment";
     NearbyFragmentBinding binding;
     NearbyVM nearbyVM;
     NearbyAdapter adapter;
