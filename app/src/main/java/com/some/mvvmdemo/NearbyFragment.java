@@ -84,6 +84,7 @@ public class NearbyFragment extends Fragment implements View.OnClickListener,
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Log.d(TAG, "onViewCreated ");
         nearbyVM.getLiveData().observe(this, new Observer<List<Account>>() {
             @Override
             public void onChanged(List<Account> accounts) {
