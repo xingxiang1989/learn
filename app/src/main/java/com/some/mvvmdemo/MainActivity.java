@@ -149,6 +149,9 @@ public class MainActivity extends BaseActiviy {
                 startActivity(new Intent(MainActivity.this, HomeTabActivity.class));
                 overridePendingTransition(R.anim.anim_left_in,0);
                 break;
+            case R.id.btnviewpager:
+                startActivity(new Intent(MainActivity.this, HomeViewPagerActivity.class));
+                break;
             case R.id.btn_down:
 //                binding.topLayout.startAnimation(animDown);
                 ARouter.getInstance().build(RouterUrl.A).navigation();

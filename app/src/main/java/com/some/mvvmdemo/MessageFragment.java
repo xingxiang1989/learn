@@ -117,5 +117,9 @@ public class MessageFragment extends BaseFragment {
         Log.d(TAG, "onHiddenChanged hidden = " + hidden);
     }
 
-
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        Log.d(TAG, "setUserVisibleHint isVisibleToUser = " + isVisibleToUser);
+    }
 }

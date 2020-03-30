@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.some.mvvmdemo.base.BaseFragment;
 import com.some.mvvmdemo.databinding.NearbyFragmentBinding;
 import com.some.mvvmdemo.entity.Account;
 import com.some.mvvmdemo.swipe.ItemDragListener;
@@ -30,7 +31,7 @@ import com.some.mvvmdemo.swipe.MyItemTouchHelperCallback;
 import java.util.Collections;
 import java.util.List;
 
-public class NearbyFragment extends Fragment implements View.OnClickListener,
+public class NearbyFragment extends BaseFragment implements View.OnClickListener,
         ItemDragListener, ItemMoveListener {
 
     private static final String TAG = "xingtest-NearbyFragment";
@@ -206,5 +207,11 @@ public class NearbyFragment extends Fragment implements View.OnClickListener,
         nearbyVM.getLiveData().getValue().remove(position);
         adapter.notifyItemRemoved(position);
         return false;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        Log.d(TAG, "setUserVisibleHint isVisibleToUser = " + isVisibleToUser);
     }
 }

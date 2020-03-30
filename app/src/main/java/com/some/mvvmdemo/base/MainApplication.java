@@ -8,9 +8,11 @@ import com.some.common.BuildConfig;
 public class MainApplication extends Application {
 
 
+    static MainApplication instance;
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
         initRouter();
     }
 
@@ -23,5 +25,9 @@ public class MainApplication extends Application {
             ARouter.openDebug();   // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
         }
         ARouter.init(this);
+    }
+
+    public static Application getInstance(){
+        return instance;
     }
 }

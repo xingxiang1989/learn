@@ -15,11 +15,12 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.some.mvvmdemo.base.BaseFragment;
 import com.some.mvvmdemo.databinding.FragmentMsgBinding;
 import com.some.mvvmdemo.mvvm.ShareDataVM;
 import com.some.mvvmdemo.widget.LoadingView;
 
-public class SettingFragment extends Fragment implements View.OnClickListener{
+public class SettingFragment extends BaseFragment implements View.OnClickListener{
 
     private static final String TAG = "xingtest-SettingFragment";
 
@@ -136,5 +137,11 @@ public class SettingFragment extends Fragment implements View.OnClickListener{
             shareDataVM.getLiveData().postValue("点击settingfragment 的内容");
 
         }
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        Log.d(TAG, "setUserVisibleHint isVisibleToUser = " + isVisibleToUser);
     }
 }
