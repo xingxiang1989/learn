@@ -9,7 +9,7 @@ public class ConcreteObservable<T> extends Observable<T>{
     @Override
     public void publishData(T t) {
         for(Observer<T> observer: mObservers){
-            if(observer instanceof Person){
+            if(observer instanceof PersonBean){
                 observer.receiverEvent(t);
             }
         }

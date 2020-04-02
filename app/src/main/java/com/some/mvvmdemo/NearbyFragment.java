@@ -1,6 +1,7 @@
 package com.some.mvvmdemo;
 
 import android.app.Activity;
+import android.app.Person;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +25,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.some.mvvmdemo.base.BaseFragment;
 import com.some.mvvmdemo.databinding.NearbyFragmentBinding;
 import com.some.mvvmdemo.entity.Account;
+import com.some.mvvmdemo.observer.AnimalBean;
+import com.some.mvvmdemo.observer.ConcreteObservable;
+import com.some.mvvmdemo.observer.PersonBean;
 import com.some.mvvmdemo.swipe.ItemDragListener;
 import com.some.mvvmdemo.swipe.ItemMoveListener;
 import com.some.mvvmdemo.swipe.MyItemTouchHelperCallback;
@@ -98,6 +102,26 @@ public class NearbyFragment extends BaseFragment implements View.OnClickListener
                 }
             }
         });
+
+        PersonBean<String> observerPerson = new PersonBean<String>() {
+            @Override
+            public void dealWithEvent(String s) {
+                Log.d(TAG,"PersonBean dealWithEvent s=" +s);
+            }
+        };
+
+        AnimalBean<String> observerAnimal = new AnimalBean<String>() {
+            @Override
+            public void dealWithEvent(String s) {
+                Log.d(TAG,"AnimalBean dealWithEvent s=" +s);
+            }
+        };
+
+        ConcreteObservable<String> observable = new ConcreteObservable<>();
+        observable.registerObserver(observerPerson);
+        observable.registerObserver(observerAnimal);
+
+        observable.publishData("今天天气好");
     }
 
 
