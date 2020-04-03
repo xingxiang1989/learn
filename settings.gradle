@@ -1,2 +1,2 @@
-include ':app', ':common', ':modulea', ':moduleb'
+include ':app', ':common', ':modulea'
 rootProject.name='MvvmDemo'

@@ -154,7 +154,7 @@ public class MainActivity extends BaseActiviy {
                 break;
             case R.id.btn_down:
 //                binding.topLayout.startAnimation(animDown);
-                ARouter.getInstance().build(RouterUrl.A).navigation();
+                ARouter.getInstance().build("/moduleA/moduleA").navigation();
                 break;
             case R.id.btn_up:
                 binding.topLayout.startAnimation(animUp);

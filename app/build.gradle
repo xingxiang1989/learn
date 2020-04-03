@@ -41,9 +41,9 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation "android.arch.lifecycle:extensions:2.0.0"
     implementation project(path: ':common')
+    implementation project(path: ':modulea')
 
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
-    implementation project(path: ':modulea')
-    implementation project(path: ':moduleb')
+
 
 }
