@@ -11,15 +11,16 @@ import com.some.common.arouter.RouterUrl;
 public class PathReplaceServiceImpl implements PathReplaceService {
     @Override
     public String forString(String path) {
-        if (path.startsWith(RouterUrl.SCHEME) || path.startsWith(RouterUrl.SYSTEM)) {
-            return path;
-        } else {
-            if (path.startsWith("/")) {
-                return RouterUrl.SCHEME + path.substring(1);
-            } else {
-                return RouterUrl.SCHEME + path;
-            }
-        }
+//        if (path.startsWith(RouterUrl.SCHEME) || path.startsWith(RouterUrl.SYSTEM)) {
+//            return path;
+//        } else {
+//            if (path.startsWith("/")) {
+//                return RouterUrl.SCHEME + path.substring(1);
+//            } else {
+//                return RouterUrl.SCHEME + path;
+//            }
+//        }
+        return path;
     }
 
     @Override
