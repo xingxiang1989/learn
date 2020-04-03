@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.alibaba.arouter'
 
 android {
     compileSdkVersion 29
@@ -44,5 +43,7 @@ dependencies {
     implementation project(path: ':common')
 
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
+    implementation project(path: ':modulea')
+    implementation project(path: ':moduleb')
 
 }
