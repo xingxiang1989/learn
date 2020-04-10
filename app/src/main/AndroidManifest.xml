@@ -27,6 +27,8 @@
         <activity android:name=".HomeTabActivity"/>
 
         <activity android:name=".HomeViewPagerActivity"/>
+
+        <activity android:name=".http.RetrofitTestActivity"/>
     </application>
 
 </manifest>
