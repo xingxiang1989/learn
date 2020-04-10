@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.some.mvvmdemo"
-        minSdkVersion 16
+        minSdkVersion 26
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -46,4 +46,8 @@ dependencies {
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
 
 
+    //  retrofit的依赖
+    implementation 'com.squareup.retrofit2:retrofit:2.8.1'
+    //将JSON字符串转换为对象需要使用的依赖
+    implementation 'com.squareup.retrofit2:converter-gson:2.8.1'
 }

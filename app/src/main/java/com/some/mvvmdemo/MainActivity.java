@@ -3,7 +3,9 @@ package com.some.mvvmdemo;
 import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -31,6 +33,9 @@ public class MainActivity extends BaseActiviy {
         account = new Account("XiaoLei",100);
         binding.setAccount(account);
         binding.setActivity(this);
+
+        final float scale = Resources.getSystem().getDisplayMetrics().density;
+        Log.d("MainActivity","scale=" + scale);
 
 
         animDown = AnimationUtils.loadAnimation(this,R.anim.anim_down);

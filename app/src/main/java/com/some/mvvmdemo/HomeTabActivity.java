@@ -1,7 +1,9 @@
 package com.some.mvvmdemo;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -61,6 +63,10 @@ public class HomeTabActivity extends BaseActiviy implements View.OnClickListener
         Thread thread2 = new Thread(runnable,"人");
         thread1.start();
         thread2.start();
+
+
+        final float scale = Resources.getSystem().getDisplayMetrics().density;
+        Log.d("MainActivity","scale=" + scale);
     }
 
     @Override
