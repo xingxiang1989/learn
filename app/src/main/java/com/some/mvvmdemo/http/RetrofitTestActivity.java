@@ -20,5 +20,7 @@ public class RetrofitTestActivity extends BaseActiviy {
 
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_retrofit_test);
         vm = ViewModelProviders.of(this).get(RetrofitTestVM.class);
+
+        vm.request();
     }
 }

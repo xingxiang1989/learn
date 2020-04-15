@@ -1,6 +1,7 @@
 package com.some.mvvmdemo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.some.mvvmdemo.base.BaseFragment;
 import com.some.mvvmdemo.databinding.FragmentMsgBinding;
+import com.some.mvvmdemo.http.RetrofitTestActivity;
 import com.some.mvvmdemo.mvvm.ShareDataVM;
 
 public class MessageFragment extends BaseFragment {
@@ -35,6 +37,7 @@ public class MessageFragment extends BaseFragment {
 
         return binding.getRoot();
     }
+
 
 
     @Override
@@ -59,6 +62,13 @@ public class MessageFragment extends BaseFragment {
             public void onChanged(String s) {
                 Log.d(TAG, "onViewCreated onChanged ");
                 binding.contentTv.setText(s);
+            }
+        });
+
+        binding.retrofitTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mActivity, RetrofitTestActivity.class));
             }
         });
     }
