@@ -16,6 +16,7 @@ import com.some.common.arouter.RouterUrl;
 import com.some.mvvmdemo.base.BaseActiviy;
 import com.some.mvvmdemo.databinding.ActivityMainBinding;
 import com.some.mvvmdemo.entity.Account;
+import com.some.mvvmdemo.testkotlin.Entity;
 
 @Route(path = RouterUrl.Main)
 public class MainActivity extends BaseActiviy {
