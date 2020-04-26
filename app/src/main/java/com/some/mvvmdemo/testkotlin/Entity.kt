@@ -36,4 +36,57 @@ class Entity {
         const val PI = "3.14"
     }
 
+    fun sum(a:Int, b:Int): Int{
+        return a + b
+    }
+
+    public fun sumAB(a:Int, b:Int):Int = a+b
+
+    fun printSum(a:Int ,b:Int){
+        print(a+b)
+    }
+
+    fun varargs(vararg v: Int){
+        for (vt in v){
+            print(vt)
+        }
+    }
+
+    fun main(args: Array<String>){
+        varargs(1,2,3,4)
+    }
+
+    fun getStringLength(obj:Any):Int?{
+        if(obj is String){
+            // 做过类型判断以后，obj会被系统自动转换为String类型
+            return obj.length;
+        }
+        return null;
+    }
+
+    fun getState(x:Int){
+        when(x){
+            1-> print(x)
+            2-> print(x)
+            3,4-> print("x==3 or x== 4")
+            else ->{
+                print("都不存在")
+            }
+        }
+    }
+
+    fun loop(){
+        var items = listOf("apple","pear","banana")
+        //直接拿到数据
+        for (item in items){
+            print(item)
+        }
+        //遍历index
+        for(index in items.indices){
+            print("item pos is $index and value is $items[index]")
+        }
+    }
+
+
+
 }
