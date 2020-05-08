@@ -12,6 +12,8 @@ class Entity {
     var f : String ? = null
     lateinit var e : String
 
+    var city: String?="hangzhou"
+
     var list = arrayOf(1,2,4,"33")
 
     var emptyList = arrayOfNulls<Int>(3)
@@ -30,6 +32,7 @@ class Entity {
 
     fun foo(){
         Log.d("Entity","foo")
+        var length : Int? = city?.length
     }
 
     companion object{
