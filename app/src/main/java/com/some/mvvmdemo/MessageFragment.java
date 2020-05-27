@@ -71,6 +71,14 @@ public class MessageFragment extends BaseFragment {
                 startActivity(new Intent(mActivity, RetrofitTestActivity.class));
             }
         });
+
+        binding.ringTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onclick to FiveRingsActivity ");
+                startActivity(new Intent(mActivity, FiveRingsActivity.class));
+            }
+        });
     }
 
     @Override

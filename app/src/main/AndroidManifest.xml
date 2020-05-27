@@ -29,6 +29,8 @@
         <activity android:name=".HomeViewPagerActivity"/>
 
         <activity android:name=".http.RetrofitTestActivity"/>
+
+        <activity android:name=".FiveRingsActivity"/>
     </application>
 
 </manifest>
