@@ -30,7 +30,7 @@
 
         <activity android:name=".http.RetrofitTestActivity"/>
 
-        <activity android:name=".FiveRingsActivity"/>
+        <activity android:name=".view.FiveRingsActivity"/>
     </application>
 
 </manifest>

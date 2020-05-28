@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -19,6 +18,7 @@ import com.some.mvvmdemo.base.BaseFragment;
 import com.some.mvvmdemo.databinding.FragmentMsgBinding;
 import com.some.mvvmdemo.http.RetrofitTestActivity;
 import com.some.mvvmdemo.mvvm.ShareDataVM;
+import com.some.mvvmdemo.view.FiveRingsActivity;
 
 public class MessageFragment extends BaseFragment {
 

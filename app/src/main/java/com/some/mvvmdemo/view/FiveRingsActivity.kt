@@ -1,18 +1,10 @@
-package com.some.mvvmdemo
+package com.some.mvvmdemo.view
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.PersistableBundle
 import androidx.databinding.DataBindingUtil
-import com.blankj.utilcode.util.LogUtils
+import com.some.mvvmdemo.R
 import com.some.mvvmdemo.base.BaseActiviy
 import com.some.mvvmdemo.databinding.ActivityViewgroupBinding
-import io.reactivex.Observable
-import io.reactivex.Scheduler
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import java.util.concurrent.TimeUnit
-import java.util.function.Consumer
 
 /**
  * @author xiangxing
@@ -23,8 +15,7 @@ class FiveRingsActivity: BaseActiviy() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this,R.layout
-                .activity_viewgroup)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_viewgroup)
 
 //        var degree = 0
 //        Observable.interval(100,TimeUnit.MILLISECONDS)
