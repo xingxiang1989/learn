@@ -1,4 +1,4 @@
-package com.some.mvvmdemo.widget
+package com.some.mvvmdemo.widget.ring
 
 import android.content.Context
 import android.graphics.Canvas
@@ -24,12 +24,17 @@ class RingView: View {
 
         mPaint = Paint()
         mPaint.color = resources.getColor(R.color.colorAccent)
-        mPaint.strokeWidth = SizeUtils.dp2px(40f).toFloat()
+        mPaint.strokeWidth = SizeUtils.dp2px(20f).toFloat()
         mPaint.style = Paint.Style.STROKE
         mPaint.isAntiAlias = true
 
         LogUtils.d("init ")
 
+    }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+        setMeasuredDimension(SizeUtils.dp2px(200f),SizeUtils.dp2px(200f))
     }
 
     override fun onDraw(canvas: Canvas?) {
