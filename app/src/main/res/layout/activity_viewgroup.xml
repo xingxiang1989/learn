@@ -19,8 +19,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <com.some.mvvmdemo.widget.ring.Ring2View
-            android:id="@+id/roate_ring"
+<!--        <com.some.mvvmdemo.widget.ring.Ring2View-->
+<!--            android:id="@+id/roate_ring"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"/>-->
+
+
+        <com.some.mvvmdemo.widget.ring.Ring3View
+            android:id="@+id/ring3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 

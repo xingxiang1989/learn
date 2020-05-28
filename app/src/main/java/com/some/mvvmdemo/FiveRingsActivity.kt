@@ -26,18 +26,16 @@ class FiveRingsActivity: BaseActiviy() {
         binding = DataBindingUtil.setContentView(this,R.layout
                 .activity_viewgroup)
 
-        LogUtils.d("2222")
-
-        var degree = 0
-        Observable.interval(100,TimeUnit.MILLISECONDS)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { Consumer<Long> {
-                        LogUtils.d("1111")
-                        degree += 10
-                        binding.roateRing.setDegreeAngele(degree)
-                    }
-                    io.reactivex.functions.Consumer<Throwable> { t -> LogUtils.d("t=${t.toString()}") }
-                }
+//        var degree = 0
+//        Observable.interval(100,TimeUnit.MILLISECONDS)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe { Consumer<Long> {
+//                        LogUtils.d("1111")
+//                        degree += 10
+//                        binding.roateRing.setDegreeAngele(degree)
+//                    }
+//                    io.reactivex.functions.Consumer<Throwable> { t -> LogUtils.d("t=${t.toString()}") }
+//                }
     }
 }
