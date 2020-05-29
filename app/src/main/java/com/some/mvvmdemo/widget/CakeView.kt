@@ -9,6 +9,7 @@ import android.util.AttributeSet
 import android.view.View
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.SizeUtils
+import com.blankj.utilcode.util.SpanUtils
 import com.some.mvvmdemo.R
 import com.some.mvvmdemo.entity.CakeBean
 import com.some.mvvmdemo.testkotlin.b
@@ -23,6 +24,9 @@ class CakeView: View {
     var mList: MutableList<CakeBean>?= null
     var minParamer: Int =0
     var sum = 0f
+
+    var rectW = SizeUtils.dp2px(40f)
+    var rectH = SizeUtils.dp2px(25f)
 
     constructor(context: Context?) : this(context,null)
     constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs,0)
@@ -40,10 +44,8 @@ class CakeView: View {
         for(bean in list){
             sum += bean.amount
         }
-//        LogUtils.d("setCakeList sum = $sum")
         for(bean in list){
             bean.degree = bean.amount/sum * 360
-//            LogUtils.d("setCakeList bean = $bean")
         }
         mList = list
         invalidate()
@@ -54,7 +56,7 @@ class CakeView: View {
      * 这样才能确定绘制在哪里
      */
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+//        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
 
         var mWMode = MeasureSpec.getMode(widthMeasureSpec)
         var mWidth = MeasureSpec.getSize(widthMeasureSpec)
@@ -132,11 +134,27 @@ class CakeView: View {
         canvas?.drawColor(Color.YELLOW)
         var rectF = RectF(0f,0f,minParamer.toFloat(),minParamer.toFloat())
         var startDegree = 0f
+
+        var left = (minParamer + SizeUtils.dp2px(50f)).toFloat()
+        var right = left + rectW
+        var top = 0f
+
         for(bean in mList!!){
 
             mPaint.color = bean.color
             canvas?.drawArc(rectF,startDegree,bean.degree,true,mPaint)
             startDegree += bean.degree
+
+            canvas?.drawRect(left,top,right,top+rectH,mPaint)
+
+            //设置文字
+            mPaint.color = Color.BLACK
+            mPaint.textSize = 30f
+            canvas?.drawText(bean.name + bean.amount + "%", right + SizeUtils.dp2px(10f)
+                    ,top + SizeUtils.dp2px(15f),
+                    mPaint)
+
+            top+= rectH
         }
     }
 }
