@@ -2,7 +2,9 @@ package com.some.mvvmdemo.widget
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
 import com.blankj.utilcode.util.LogUtils
@@ -38,9 +40,10 @@ class CakeView: View {
         for(bean in list){
             sum += bean.amount
         }
-        LogUtils.d("sum = $sum")
+//        LogUtils.d("setCakeList sum = $sum")
         for(bean in list){
-            bean.degree = bean.amount/sum
+            bean.degree = bean.amount/sum * 360
+//            LogUtils.d("setCakeList bean = $bean")
         }
         mList = list
         invalidate()
@@ -53,11 +56,13 @@ class CakeView: View {
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
 
-        LogUtils.d("onMeasure")
         var mWMode = MeasureSpec.getMode(widthMeasureSpec)
         var mWidth = MeasureSpec.getSize(widthMeasureSpec)
         var mHMode = MeasureSpec.getMode(heightMeasureSpec)
         var mHeight = MeasureSpec.getSize(heightMeasureSpec)
+
+        LogUtils.d("onMeasure parent mwMode= $mWMode , mWidth=$mWidth, mHMode=$mHMode, " +
+                " mHeight=$mHeight")
 
         var width = 0
         var height = 0
@@ -66,12 +71,18 @@ class CakeView: View {
             MeasureSpec.EXACTLY -> {
                 //match_parent或者具体的数值
                 width = mWidth
+
+                LogUtils.d("onMeasure parent wMode MeasureSpec.EXACTLY ")
             }
             MeasureSpec.AT_MOST -> {
                 //最多，wrap_content
                 width = SizeUtils.dp2px(400f)
+
+                LogUtils.d("onMeasure parent wMode  MeasureSpec.AT_MOST ")
+
             }
             MeasureSpec.UNSPECIFIED -> {
+                LogUtils.d("onMeasure parent wMode  MeasureSpec.UNSPECIFIED ")
 
             }
 
@@ -82,12 +93,17 @@ class CakeView: View {
             MeasureSpec.EXACTLY -> {
                 //match_parent或者具体的数值
                 height = mHeight
+                LogUtils.d("onMeasure parent hMode MeasureSpec.EXACTLY ")
+
             }
             MeasureSpec.AT_MOST -> {
                 //最多，wrap_content
-                height = SizeUtils.dp2px(600f)
+                height = SizeUtils.dp2px(400f)
+                LogUtils.d("onMeasure parent hMode MeasureSpec.AT_MOST ")
+
             }
             MeasureSpec.UNSPECIFIED -> {
+                LogUtils.d("onMeasure parent hMode MeasureSpec.UNSPECIFIED ")
 
             }
 
@@ -110,7 +126,17 @@ class CakeView: View {
         super.onDraw(canvas)
 
         if(mList == null || sum == 0f){
+            LogUtils.d("mList == null or sum == 0")
+            return
+        }
+        canvas?.drawColor(Color.YELLOW)
+        var rectF = RectF(0f,0f,minParamer.toFloat(),minParamer.toFloat())
+        var startDegree = 0f
+        for(bean in mList!!){
 
+            mPaint.color = bean.color
+            canvas?.drawArc(rectF,startDegree,bean.degree,true,mPaint)
+            startDegree += bean.degree
         }
     }
 }

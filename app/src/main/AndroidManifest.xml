@@ -31,6 +31,8 @@
         <activity android:name=".http.RetrofitTestActivity"/>
 
         <activity android:name=".view.FiveRingsActivity"/>
+
+        <activity android:name=".view.CakeViewActivity"/>
     </application>
 
 </manifest>

@@ -18,6 +18,7 @@ import com.some.mvvmdemo.base.BaseFragment;
 import com.some.mvvmdemo.databinding.FragmentMsgBinding;
 import com.some.mvvmdemo.http.RetrofitTestActivity;
 import com.some.mvvmdemo.mvvm.ShareDataVM;
+import com.some.mvvmdemo.view.CakeViewActivity;
 import com.some.mvvmdemo.view.FiveRingsActivity;
 
 public class MessageFragment extends BaseFragment {
@@ -77,6 +78,14 @@ public class MessageFragment extends BaseFragment {
             public void onClick(View v) {
                 Log.d(TAG, "onclick to FiveRingsActivity ");
                 startActivity(new Intent(mActivity, FiveRingsActivity.class));
+            }
+        });
+
+        binding.cakeViewTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onclick to CakeViewActivity ");
+                startActivity(new Intent(mActivity, CakeViewActivity.class));
             }
         });
     }
