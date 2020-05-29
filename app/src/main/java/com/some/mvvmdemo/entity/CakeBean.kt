@@ -16,9 +16,8 @@ class CakeBean {
         this.amount = amount
     }
 
-
     override fun toString(): String {
-        return "CakeBean(name=$name, color=$color, amount=$amount)"
+        return "CakeBean(name=$name, color=$color, amount=$amount, degree=$degree)"
     }
 
 
