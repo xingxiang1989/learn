@@ -71,7 +71,7 @@
 
         <TextView
             android:id="@+id/ringTv"
-            android:text="自定义view圆环"
+            android:text="奥运五环"
             android:layout_width="match_parent"
             android:gravity="center"
             android:layout_marginTop="10dp"

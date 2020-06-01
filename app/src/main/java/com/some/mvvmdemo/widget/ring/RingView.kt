@@ -16,15 +16,17 @@ import com.some.mvvmdemo.R
 class RingView: View {
 
     var mPaint:Paint
+    var strokeWidth = 0f
 
     constructor(context: Context?) : this(context,null)
     constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs,0)
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super
     (context, attrs, defStyleAttr){
 
+        strokeWidth = SizeUtils.dp2px(5f).toFloat()
         mPaint = Paint()
         mPaint.color = resources.getColor(R.color.colorAccent)
-        mPaint.strokeWidth = SizeUtils.dp2px(20f).toFloat()
+        mPaint.strokeWidth = strokeWidth
         mPaint.style = Paint.Style.STROKE
         mPaint.isAntiAlias = true
 
@@ -34,17 +36,16 @@ class RingView: View {
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        setMeasuredDimension(SizeUtils.dp2px(200f),SizeUtils.dp2px(200f))
+        setMeasuredDimension(SizeUtils.dp2px(90f),SizeUtils.dp2px(90f))
     }
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
-        var centerX = width/2f
-        var radius = SizeUtils.dp2px(80f).toFloat()
+        var rWidth = measuredWidth
+        var centerX = rWidth/2f
 
-        LogUtils.d("centerX=$centerX , width = $width")
-
-        canvas!!.drawCircle(centerX,centerX,radius,mPaint)
+        LogUtils.d("centerX=$centerX , rWidth = $rWidth")
+        canvas!!.drawCircle(centerX,centerX,rWidth/2f - strokeWidth,mPaint)
     }
 }
