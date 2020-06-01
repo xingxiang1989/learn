@@ -3,6 +3,7 @@ package com.some.mvvmdemo.widget.ring
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.ViewGroup
 import androidx.core.view.marginEnd
@@ -16,18 +17,26 @@ import com.blankj.utilcode.util.SizeUtils
  */
 class FiveRingViewGroup: ViewGroup {
 
-    var mWidth = SizeUtils.dp2px(50f)
+    var textHeight = SizeUtils.dp2px(30f)
+    var textSpacing = SizeUtils.dp2px(8f)
+    var mPaint: Paint? = null
 
     constructor(context: Context?) : this(context,null)
     constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs,0)
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super
     (context, attrs, defStyleAttr){
 
-        var params = ViewGroup.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT)
+        var params = ViewGroup.MarginLayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT)
+        params.marginEnd = SizeUtils.dp2px(10f)
         for (i in 1..5){
             addView(RingView(context),params)
         }
         setWillNotDraw(false)
+
+        mPaint = Paint()
+        mPaint?.setColor(Color.BLACK)
+        mPaint?.textSize = 30f
+
 
     }
 
@@ -58,7 +67,7 @@ class FiveRingViewGroup: ViewGroup {
         }
 
         var totalWidth = Math.max(tWidth,bWidth)
-        var totalHeight = Math.max(tHeight,bHeight)
+        var totalHeight = Math.max(tHeight,bHeight) + 2 * textHeight + 2 * textSpacing
 
         LogUtils.d("onMeasure totalWidth=$totalWidth , totalHeight=$totalHeight")
 
@@ -106,7 +115,7 @@ class FiveRingViewGroup: ViewGroup {
 
             childView.layout(left,top,left + childView.measuredWidth,bottom)
 
-            left += childView.measuredWidth + SizeUtils.dp2px(10f)
+            left += childView.measuredWidth + childView.marginEnd
         }
 
     }
@@ -115,5 +124,10 @@ class FiveRingViewGroup: ViewGroup {
         super.onDraw(canvas)
         LogUtils.d("onDraw")
         canvas?.drawColor(Color.YELLOW)
+        var x = getChildAt(0).measuredWidth.toFloat()
+        var y = (getChildAt(0).measuredHeight * 1.5 + textSpacing).toFloat()
+        canvas?.drawText("同一个世界，同一个梦想",x,y,mPaint!!)
+        y += textSpacing + textHeight
+        canvas?.drawText("One World, One Dream",x,y,mPaint!!)
     }
 }
