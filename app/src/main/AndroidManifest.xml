@@ -33,6 +33,8 @@
         <activity android:name=".view.FiveRingsActivity"/>
 
         <activity android:name=".view.CakeViewActivity"/>
+
+        <activity android:name=".slideconflict.SlideConfictActivity"/>
     </application>
 
 </manifest>
