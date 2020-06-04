@@ -35,6 +35,8 @@
         <activity android:name=".view.CakeViewActivity"/>
 
         <activity android:name=".slideconflict.SlideConfictActivity"/>
+
+        <activity android:name=".viewpager2.ViewPager2Activity"/>
     </application>
 
 </manifest>
