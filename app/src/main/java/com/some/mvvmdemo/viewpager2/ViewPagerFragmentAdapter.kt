@@ -21,14 +21,11 @@ class ViewPagerFragmentAdapter: FragmentStateAdapter {
     }
 
 
-
-
     override fun getItemCount(): Int {
-
-        return fragments!!.size
+        return fragments?.size?:0
     }
 
     override fun createFragment(position: Int): Fragment {
-        return fragments!!.get(position)
+        return fragments?.get(position)?:Fragment()
     }
 }
