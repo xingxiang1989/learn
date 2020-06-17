@@ -10,6 +10,8 @@ import java.util.ArrayList
 
 /**
  * @author xiangxing
+ * 解决scrollView 与 viewpager的冲突，
+ * scrollview 上下滑动，viewpager是左右滑动
  */
 class SlideConfictActivity:BaseActiviy() {
 
