@@ -38,6 +38,16 @@ android {
         }
     }
 
+    sourceSets {
+        main{
+            if(isModule.toBoolean()){
+                manifest.srcFile 'src/main/module/AndroidManifest.xml'
+            }else{
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            }
+        }
+    }
+
 }
 
 dependencies {

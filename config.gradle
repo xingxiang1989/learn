@@ -1,4 +1,4 @@
 ext{
     //true 为 application模式， false 为library
-    isModule = false
+    isModule = true
 }

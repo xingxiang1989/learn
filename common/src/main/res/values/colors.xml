@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent_30">#4dD81B60</color>
+
+    <color name="theme">@color/blue</color>
+    <color name="transparent">#00000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="gray">#BBBBBB</color>
+    <color name="red">#FF0000</color>
+    <color name="blue">#0099FF</color>
+    <color name="black">#000000</color>
+    <color name="orange">#FFA82E</color>
+    <color name="bg">#eeeff3</color>
+    <color name="yellow">#ff8000</color>
+    <color name="light_white">#eeeeee</color>
+    <color name="light_blue">#E1FFFF</color>
+    <color name="light_yellow">#F0E68C</color>
+    <color name="light_green">#7FFF00</color>
+    <color name="color_3E97FF">#3E97FF</color>
+
+
+    <color name="color_main_color">#641BDF</color>
+    <color name="color_641BDF">#641BDF</color>
+    <color name="color_D07AF5">#D07AF5</color>
+    <color name="color_tab_unchecked">#6C6678</color>
+    <color name="color_ffffff">#ffffff</color>
+    <color name="color_1C004C">#1C004C</color>
+    <color name="color_8C3FE7">#8C3FE7</color>
+    <color name="color_BF6BF1">#BF6BF1</color>
+    <color name="color_6C6678">#6C6678</color>
+    <color name="color_443956">#443956</color>
+    <color name="color_B5AEC0">#B5AEC0</color>
+    <color name="color_9B44FD">#9B44FD</color>
+    <color name="color_6A6670">#6A6670</color>
+
+    <color name="text_color">#ffffff</color>
+    <color name="color_95909D">#95909D</color>
+    <color name="color_F2F2FB">#F2F2FB</color>
+    <color name="color_DEDEF0">#DEDEF0</color>
+    <color name="color_9BA2B1">#9BA2B1</color>
+    <color name="color_EE2DE8">#EE2DE8</color>
+    <color name="color_FF4C62">#FF4C62</color>
+    <color name="color_F4C11F">#F4C11F</color>
+    <color name="color_26EA83">#26EA83</color>
+
+    <color name="color_message_divider">#EEEEF7</color>
+    <color name="color_message_unread_bg">#FF4C62</color>
+    <color name="color_FE9555">#FE9555</color>
+    <color name="color_mask">#cc000000</color>
+
+    <color name="bg_shadow">#BF000000</color>
+    <color name="color_3300">#33000000</color>
+    <color name="color_7C7883">#7C7883</color>
+    <color name="color_black_30">#4d000000</color>
+    <color name="color_1c004c_30">#4d1C004C</color>
+    <color name="color_1c004c_80">#CC1C004C</color>
+    <color name="color_ffffff_10">#1affffff</color>
+    <color name="color_ffffff_20">#33ffffff</color>
+</resources>
