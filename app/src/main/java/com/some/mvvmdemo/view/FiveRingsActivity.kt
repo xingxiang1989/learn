@@ -24,11 +24,17 @@ class FiveRingsActivity: BaseActiviy() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_five_ring)
 
+        binding.btn.setOnClickListener{
+            this.startActivity(Intent(this, CakeViewActivity::class.java))
+        }
+
         val intent = Intent(this, TestServiceOne::class.java)
         this.bindService(intent,serviceConn, Context.BIND_AUTO_CREATE)
+
+
     }
 
-    val serviceConn = object: ServiceConnection{
+    private val serviceConn = object: ServiceConnection{
         override fun onServiceDisconnected(name: ComponentName?) {
             LogUtils.d("TestServiceOne onServiceDisconnected")
 
