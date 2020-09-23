@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Bundle
+import android.os.Handler
 import android.os.IBinder
 import androidx.databinding.DataBindingUtil
 import com.blankj.utilcode.util.LogUtils
@@ -29,7 +30,12 @@ class FiveRingsActivity: BaseActiviy() {
         }
 
         val intent = Intent(this, TestServiceOne::class.java)
-        this.bindService(intent,serviceConn, Context.BIND_AUTO_CREATE)
+        this.startService(intent)
+
+        Handler().postDelayed({
+            this@FiveRingsActivity.bindService(intent, serviceConn, Context.BIND_AUTO_CREATE)
+        },
+                2000)
 
 
     }
@@ -50,6 +56,7 @@ class FiveRingsActivity: BaseActiviy() {
 
     override fun onDestroy() {
         super.onDestroy()
+        this.stopService(Intent(this, TestServiceOne::class.java))
         this.unbindService(serviceConn)
     }
 }
