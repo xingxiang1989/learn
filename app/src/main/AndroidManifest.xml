@@ -37,6 +37,8 @@
         <activity android:name=".slideconflict.SlideConfictActivity"/>
 
         <activity android:name=".viewpager2.ViewPager2Activity"/>
+
+        <service android:name=".service.TestServiceOne"/>
     </application>
 
 </manifest>
