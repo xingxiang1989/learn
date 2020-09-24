@@ -33,6 +33,6 @@ class ParentView: FrameLayout {
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         LogUtils.d("onTouchEvent ACTION_DOWN")
-        return super.onTouchEvent(event)
+        return true
     }
 }

@@ -33,9 +33,9 @@ class ChildView: FrameLayout {
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         LogUtils.d("onTouchEvent ACTION_DOWN")
-        if(event?.action ==  MotionEvent.ACTION_DOWN){
-            return true
-        }
+//        if(event?.action ==  MotionEvent.ACTION_DOWN){
+//            return true
+//        }
         return super.onTouchEvent(event)
     }
 }
