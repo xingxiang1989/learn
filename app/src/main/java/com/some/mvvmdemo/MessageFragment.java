@@ -19,6 +19,7 @@ import com.some.mvvmdemo.databinding.FragmentMsgBinding;
 import com.some.mvvmdemo.http.RetrofitTestActivity;
 import com.some.mvvmdemo.mvvm.ShareDataVM;
 import com.some.mvvmdemo.slideconflict.SlideConfictActivity;
+import com.some.mvvmdemo.touch.TouchActivity;
 import com.some.mvvmdemo.view.CakeViewActivity;
 import com.some.mvvmdemo.view.FiveRingsActivity;
 import com.some.mvvmdemo.viewpager2.ViewPager2Activity;
@@ -103,6 +104,13 @@ public class MessageFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(mActivity, SlideConfictActivity.class));
+            }
+        });
+
+        binding.dispatchEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mActivity, TouchActivity.class));
             }
         });
     }

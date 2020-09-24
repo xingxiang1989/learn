@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <com.some.mvvmdemo.touch.ParentView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.some.mvvmdemo.touch.ChildView
+            android:background="@color/color_F4C11F"
+            android:layout_width="200dp"
+            android:layout_height="200dp"/>
+
+    </com.some.mvvmdemo.touch.ParentView>
+</layout>

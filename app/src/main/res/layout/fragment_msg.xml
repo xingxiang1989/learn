@@ -105,6 +105,14 @@
             android:padding="10dp"
             android:layout_height="wrap_content"/>
 
+        <TextView
+            android:id="@+id/dispatchEvent"
+            android:text="事件分发"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 </layout>

@@ -39,6 +39,8 @@
         <activity android:name=".viewpager2.ViewPager2Activity"/>
 
         <service android:name=".service.TestServiceOne"/>
+
+        <activity android:name=".touch.TouchActivity"/>
     </application>
 
 </manifest>
