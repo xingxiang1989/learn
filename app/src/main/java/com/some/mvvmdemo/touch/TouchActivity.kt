@@ -2,6 +2,9 @@ package com.some.mvvmdemo.touch
 
 import android.app.Activity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.os.Message
 import androidx.databinding.DataBindingUtil
 import com.blankj.utilcode.util.LogUtils
 import com.some.mvvmdemo.R
@@ -21,30 +24,53 @@ class TouchActivity: BaseActiviy() {
         super.onCreate(savedInstanceState)
          DataBindingUtil.setContentView<ActivityTouchBinding>(this, R.layout.activity_touch)
          LogUtils.d("init")
-        scheduledExecutorService.schedule(object: Runnable{
-            override fun run() {
-               LogUtils.d("延迟执行")
-            }
-        },2, TimeUnit.SECONDS)
+//        scheduledExecutorService.schedule(object: Runnable{
+//            override fun run() {
+//               LogUtils.d("延迟执行")
+//            }
+//        },2, TimeUnit.SECONDS)
+//
+//        /**
+//         * 结束后再执行
+//         */
+//        scheduledExecutorService.scheduleAtFixedRate({
+//            LogUtils.d("scheduleAtFixedRate ")
+//            Thread.sleep(3000L)
+//
+//        },0,1,TimeUnit.SECONDS)
+//
+//        /**
+//         * 任务结束后，在加上间隔周期
+//         */
+//        scheduledExecutorService.scheduleWithFixedDelay({
+//
+//            LogUtils.d("scheduleWithFixedDelay ")
+//            Thread.sleep(3000L)
+//        },
+//                0,1,TimeUnit.SECONDS)
 
-        /**
-         * 结束后再执行
-         */
-        scheduledExecutorService.scheduleAtFixedRate({
-            LogUtils.d("scheduleAtFixedRate ")
-            Thread.sleep(3000L)
+        val thread = MyThread()
+        thread.start()
 
-        },0,1,TimeUnit.SECONDS)
+    }
 
-        /**
-         * 任务结束后，在加上间隔周期
-         */
-        scheduledExecutorService.scheduleWithFixedDelay({
+    class MyThread: Thread(){
 
-            LogUtils.d("scheduleWithFixedDelay ")
-            Thread.sleep(3000L)
-        },
-                0,1,TimeUnit.SECONDS)
+        override fun run() {
+            super.run()
 
+            Looper.prepare()
+            val handler = MyHandler()
+            handler.sendEmptyMessage(10)
+            Looper.loop()
+
+        }
+    }
+
+    class MyHandler: Handler(){
+        override fun handleMessage(msg: Message) {
+            super.handleMessage(msg)
+            LogUtils.d("msg =" + msg.what)
+        }
     }
 }
