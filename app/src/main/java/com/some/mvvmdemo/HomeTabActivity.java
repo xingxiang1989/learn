@@ -15,6 +15,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.blankj.utilcode.util.LogUtils;
+import com.ljoy.chatbot.sdk.ELvaChatServiceSdk;
 import com.some.mvvmdemo.base.BaseActiviy;
 import com.some.mvvmdemo.databinding.ActivityHomeTabBinding;
 import com.some.mvvmdemo.reentranlock.SynchronizedExceptionRunnable;
@@ -67,6 +69,18 @@ public class HomeTabActivity extends BaseActiviy implements View.OnClickListener
 
         final float scale = Resources.getSystem().getDisplayMetrics().density;
         Log.d("MainActivity","scale=" + scale);
+
+//        try {
+//            // 初始化AIHelpSDK
+//            ELvaChatServiceSdk.init(this,
+//                    "FULIAOHONGKONGLIMITED_app_eb7ee016ccd246e6b12ff003b7a5b4c3",
+//                    "FuliaoHONGKONGLIMITED@aihelp.net",
+//                    "FuliaoHONGKONGLIMITED_platform_e9324216-d314-418c-9cf9-84c4382dc25d");
+//
+//            ELvaChatServiceSdk.setName("");
+//        } catch (Exception e) {
+//            LogUtils.d("invalid init params :  e " + e);
+//        }
     }
 
     @Override
