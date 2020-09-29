@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.blankj.utilcode.util.LogUtils
 import com.some.mvvmdemo.R
@@ -20,9 +21,13 @@ class TouchActivity: BaseActiviy() {
 
     val scheduledExecutorService = Executors.newScheduledThreadPool(4)
 
+    lateinit var mBinding: ActivityTouchBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-         DataBindingUtil.setContentView<ActivityTouchBinding>(this, R.layout.activity_touch)
+        mBinding =
+                DataBindingUtil.setContentView<ActivityTouchBinding>(this, R.layout
+                .activity_touch)
          LogUtils.d("init")
 //        scheduledExecutorService.schedule(object: Runnable{
 //            override fun run() {
@@ -54,15 +59,26 @@ class TouchActivity: BaseActiviy() {
 
     }
 
-    class MyThread: Thread(){
+    inner class MyThread: Thread(){
 
         override fun run() {
             super.run()
 
-            Looper.prepare()
-            val handler = MyHandler()
-            handler.sendEmptyMessage(10)
-            Looper.loop()
+            //case 1：handler 需要配合Looper的使用
+//            Looper.prepare()
+//            val handler = MyHandler()
+//            handler.sendEmptyMessage(10)
+//            Looper.loop()
+
+            //case 2: 子线程更新UI，toast，showdialog
+//            Looper.prepare()
+//            Toast.makeText(this@TouchActivity, "toast", Toast.LENGTH_SHORT).show()
+//            Looper.loop()
+
+            Thread.sleep(3000L)
+
+            //case 3:
+            mBinding.tv.text = " hello world"
 
         }
     }
