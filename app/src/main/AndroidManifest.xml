@@ -41,6 +41,11 @@
         <service android:name=".service.TestServiceOne"/>
 
         <activity android:name=".touch.TouchActivity"/>
+
+        <service android:name=".service.RemoteService"
+            android:process=":remote"/>
+
+        <activity android:name=".aidl.AIDLActivity"/>
     </application>
 
 </manifest>

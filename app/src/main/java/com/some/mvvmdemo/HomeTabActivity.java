@@ -21,6 +21,8 @@ import com.some.mvvmdemo.reentranlock.SynchronizedExceptionRunnable;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observable;
+
 public class HomeTabActivity extends BaseActiviy implements View.OnClickListener {
 
     ActivityHomeTabBinding mBinding;
@@ -73,6 +75,7 @@ public class HomeTabActivity extends BaseActiviy implements View.OnClickListener
 
             }
         });
+
     }
 
     @Override
