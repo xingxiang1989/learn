@@ -46,6 +46,8 @@
             android:process=":remote"/>
 
         <activity android:name=".aidl.AIDLActivity"/>
+
+        <activity android:name=".testkotlin.TestKotlinActivity"/>
     </application>
 
 </manifest>

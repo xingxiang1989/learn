@@ -20,6 +20,7 @@ import com.some.mvvmdemo.databinding.FragmentMsgBinding;
 import com.some.mvvmdemo.http.RetrofitTestActivity;
 import com.some.mvvmdemo.mvvm.ShareDataVM;
 import com.some.mvvmdemo.slideconflict.SlideConfictActivity;
+import com.some.mvvmdemo.testkotlin.TestKotlinActivity;
 import com.some.mvvmdemo.touch.TouchActivity;
 import com.some.mvvmdemo.view.CakeViewActivity;
 import com.some.mvvmdemo.view.FiveRingsActivity;
@@ -119,6 +120,13 @@ public class MessageFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(mActivity, AIDLActivity.class));
+            }
+        });
+
+        binding.countDownLatch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mActivity, TestKotlinActivity.class));
             }
         });
     }
