@@ -5,6 +5,11 @@ apply plugin: 'com.some.jiaguplugin'
 
 jiagu{
     userName '993819762@qq.com'
+    userPwd '123456abc'
+    keyStorePass '123456abc'
+    keyStoreKeyAliasPwd '123456abc'
+    keyStoreKeyAlias 'MvvmDemo'
+    keyStorePath file('release.keystore').absolutePath
 }
 
 android {
