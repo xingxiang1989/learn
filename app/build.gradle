@@ -4,12 +4,13 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.some.jiaguplugin'
 
 jiagu{
-    userName '993819762@qq.com'
-    userPwd '123456abc'
+    userName '15267436589'
+    userPwd '123456abcd'
     keyStorePass '123456abc'
     keyStoreKeyAliasPwd '123456abc'
     keyStoreKeyAlias 'MvvmDemo'
-    keyStorePath file('release.keystore').absolutePath
+    keyStorePath '/Users/xiangxing/AndroidProjects2/MvvmDemo/release.keystore'
+    jiaguToolPath '/Users/xiangxing/Downloads/360jiagubao_mac/jiagu/jiagu.jar'
 }
 
 android {

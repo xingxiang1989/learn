@@ -33,7 +33,30 @@ public class JiaguTask extends DefaultTask {
         getProject().exec(new Action<ExecSpec>() {
             @Override
             public void execute(ExecSpec execSpec) {
-                execSpec.commandLine("java","-version");
+                execSpec.commandLine("java","-jar",jiaguExt.getJiaguToolPath(),
+                        "-login",jiaguExt.getUserName(),jiaguExt.getUserPwd());
+            }
+        });
+
+        getProject().exec(new Action<ExecSpec>() {
+            @Override
+            public void execute(ExecSpec execSpec) {
+                execSpec.commandLine("java", "-jar", jiaguExt.getJiaguToolPath(),
+                        "-importsign", jiaguExt.getKeyStorePath(),
+                        jiaguExt.getKeyStorePass(),
+                        jiaguExt.getKeyStoreKeyAlias(),
+                        jiaguExt.getKeyStoreKeyAliasPwd()
+                        );
+            }
+        });
+
+        getProject().exec(new Action<ExecSpec>() {
+            @Override
+            public void execute(ExecSpec execSpec) {
+                execSpec.commandLine("java", "-jar", jiaguExt.getJiaguToolPath(),
+                        "-jiagu", apkFile.getAbsolutePath(),
+                        apkFile.getParent(),
+                        "-autosign");
             }
         });
     }
