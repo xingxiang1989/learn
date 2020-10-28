@@ -4,9 +4,8 @@ if(isModule.toBoolean()){
     apply plugin: 'com.android.library'
 }
 
-
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 29
@@ -60,7 +59,7 @@ dependencies {
     implementation project(path: ':common')
 
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
-    compile "androidx.core:core-ktx:+"
+    implementation "androidx.core:core-ktx:+"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 repositories {
