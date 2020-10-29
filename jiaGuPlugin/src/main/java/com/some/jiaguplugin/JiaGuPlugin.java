@@ -37,6 +37,7 @@ public class JiaGuPlugin implements Plugin<Project> {
                             @Override
                             public void execute(BaseVariantOutput baseVariantOutput) {
                                 File outPutFile = baseVariantOutput.getOutputFile();
+                                System.out.println("outPutFile =" + outPutFile.getAbsolutePath());
                                 String name = baseVariantOutput.getName();
                                 project.getTasks().create("jiagu" + name,
                                         JiaguTask.class, outPutFile, jiaguExt);
