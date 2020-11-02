@@ -46,23 +46,36 @@ public class RetrofitTestActivity extends BaseActiviy {
         joinDemo2.start();
 
         readFile();
-        showResult();
     }
+
 
     @Async
     public void readFile() {
-        LogUtils.d("readFile thread = " + Thread.currentThread().getName());
+        LogUtils.d("readFile thread = " + Thread.currentThread().toString());
 
         try{
             Thread.sleep(1000L);
         }catch (Exception e){
 
         }
+        showResult();
+    }
+
+    @Async
+    public void writeFile() {
+        LogUtils.d("readFile thread = " + Thread.currentThread().toString());
+
+        try{
+            Thread.sleep(1000L);
+        }catch (Exception e){
+
+        }
+        showResult();
     }
 
     @Main
     public void showResult(){
-        LogUtils.d("showResult");
+        LogUtils.d("showResult" + Thread.currentThread().toString());
         ToastUtils.showShort("hello Aspectj");
     }
 }

@@ -22,6 +22,11 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
 }
 
 dependencies {
@@ -39,10 +44,10 @@ dependencies {
 import org.aspectj.bridge.IMessage
 import org.aspectj.bridge.MessageHandler
 import org.aspectj.tools.ajc.Main
-project.android.libraryVariants.all { variant ->
+android.libraryVariants.all { variant ->
     JavaCompile javaCompile = variant.javaCompile
     javaCompile.doLast {
-        println("执行Aspectj 编译器")
+        System.out.println("aoplib 执行Aspectj 编译器")
         String[] args = ["-showWeaveInfo",
                          "-1.8",
                          //aspectj 处理的源文件
@@ -67,14 +72,14 @@ project.android.libraryVariants.all { variant ->
                 case IMessage.ERROR:
                 case IMessage.FAIL:
                     log.error message.message, message.thrown
-                    break;
+                    break
                 case IMessage.WARNING:
                 case IMessage.INFO:
                     log.info message.message, message.thrown
-                    break;
+                    break
                 case IMessage.DEBUG:
                     log.debug message.message, message.thrown
-                    break;
+                    break
             }
         }
     }

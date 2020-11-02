@@ -5,6 +5,7 @@ import android.util.Log;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -18,7 +19,11 @@ import io.reactivex.schedulers.Schedulers;
 @Aspect
 public class ThreadAspect {
 
-    @Around("execution(@com.some.aoplib.Async void*(..))")
+
+    @Pointcut("execution(@com.some.aoplib.Async void *(..))")
+    public void method() {}
+
+    @Around("method()")
     public void doAsync(final ProceedingJoinPoint joinPoint){
         Log.d("ThreadAspect","doAsync");
         Observable.create(new ObservableOnSubscribe<String>() {
@@ -30,15 +35,13 @@ public class ThreadAspect {
                 }catch (Throwable throwable){
                     throwable.printStackTrace();
                 }
-                emitter.onComplete();
-
             }
         }).subscribeOn(Schedulers.io())
                 .subscribe();
     }
 
 
-    @Around("execution(@com.some.aoplib.Main void*(..))")
+    @Around("execution(@com.some.aoplib.Main void *(..))")
     public void doMain(final ProceedingJoinPoint joinPoint){
         Log.d("ThreadAspect","doMain");
         Observable.create(new ObservableOnSubscribe<String>() {
@@ -50,8 +53,6 @@ public class ThreadAspect {
                 }catch (Throwable throwable){
                     throwable.printStackTrace();
                 }
-                emitter.onComplete();
-
             }
         }).subscribeOn(AndroidSchedulers.mainThread())
                 .subscribe();
