@@ -1,5 +1,7 @@
 package com.some.aoplib;
 
+import android.util.Log;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -18,6 +20,7 @@ public class ThreadAspect {
 
     @Around("execution(@com.some.aoplib.Async void*(..))")
     public void doAsync(final ProceedingJoinPoint joinPoint){
+        Log.d("ThreadAspect","doAsync");
         Observable.create(new ObservableOnSubscribe<String>() {
             @Override
             public void subscribe(ObservableEmitter<String> emitter) throws Exception {
@@ -37,6 +40,7 @@ public class ThreadAspect {
 
     @Around("execution(@com.some.aoplib.Main void*(..))")
     public void doMain(final ProceedingJoinPoint joinPoint){
+        Log.d("ThreadAspect","doMain");
         Observable.create(new ObservableOnSubscribe<String>() {
             @Override
             public void subscribe(ObservableEmitter<String> emitter) throws Exception {

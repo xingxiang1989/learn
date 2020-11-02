@@ -9,9 +9,9 @@
             name="account"
             type="com.some.mvvmdemo.entity.Account" />
 
-        <variable
-            name="activity"
-            type="com.some.mvvmdemo.MainActivity" />
+       <variable
+           name="click"
+           type="android.view.View.OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -71,6 +71,7 @@
         <Button
             android:id="@+id/btn_down"
             android:text="跳转"
+            android:onClick="@{v -> click.onClick(v)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_width="wrap_content"
@@ -79,6 +80,7 @@
         <Button
             android:id="@+id/btn_up"
             android:text="滑上去"
+            android:onClick="@{v -> click.onClick(v)}"
             android:layout_marginLeft="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/btn_down"
@@ -88,6 +90,7 @@
         <Button
             android:id="@+id/btn_left_in"
             android:text="左侧滑进"
+            android:onClick="@{v -> click.onClick(v)}"
             android:layout_marginLeft="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/btn_up"
@@ -97,6 +100,7 @@
         <Button
             android:id="@+id/btn_left_out"
             android:text="左侧滑出"
+            android:onClick="@{v -> click.onClick(v)}"
             android:layout_marginLeft="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/btn_left_in"
@@ -108,6 +112,7 @@
             android:id="@+id/btn_right_in"
             android:text="右侧滑进"
             android:layout_marginLeft="10dp"
+            android:onClick="@{v -> click.onClick(v)}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/btn_left_in"
             android:layout_width="wrap_content"
@@ -116,6 +121,7 @@
         <Button
             android:id="@+id/btn_right_out"
             android:text="右侧滑出"
+            android:onClick="@{v -> click.onClick(v)}"
             android:layout_marginLeft="10dp"
             app:layout_constraintLeft_toRightOf="@+id/btn_right_in"
             app:layout_constraintBottom_toTopOf="@+id/btn_left_in"
@@ -141,6 +147,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="btn"
+            android:onClick="@{v -> click.onClick(v)}"
             android:layout_marginTop="20dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -153,6 +160,7 @@
             android:layout_height="wrap_content"
             android:text="btn_viewpager"
             android:layout_marginTop="20dp"
+            android:onClick="@{v -> click.onClick(v)}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn"/>

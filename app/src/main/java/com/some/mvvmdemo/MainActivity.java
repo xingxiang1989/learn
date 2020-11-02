@@ -12,6 +12,7 @@ import android.view.animation.AnimationUtils;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.blankj.utilcode.util.LogUtils;
 import com.some.common.arouter.RouterUrl;
 import com.some.mvvmdemo.base.BaseActiviy;
 import com.some.mvvmdemo.databinding.ActivityMainBinding;
@@ -22,7 +23,7 @@ import com.some.mvvmdemo.testkotlin.Entity;
  * @author xiangxing
  */
 @Route(path = RouterUrl.Main)
-public class MainActivity extends BaseActiviy {
+public class MainActivity extends BaseActiviy implements View.OnClickListener {
 
     Account account;
     ActivityMainBinding binding;
@@ -36,7 +37,7 @@ public class MainActivity extends BaseActiviy {
 
         account = new Account("XiaoLei",100);
         binding.setAccount(account);
-        binding.setActivity(this);
+        binding.setClick(this);
 
         final float scale = Resources.getSystem().getDisplayMetrics().density;
         Log.d("MainActivity","scale=" + scale);
@@ -152,9 +153,11 @@ public class MainActivity extends BaseActiviy {
 
     }
 
-    public void onclick(View view){
-        switch (view.getId()){
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
             case R.id.btn:
+                LogUtils.d("xiangxingtest 点击btn");
                 startActivity(new Intent(MainActivity.this, HomeTabActivity.class));
                 overridePendingTransition(R.anim.anim_left_in,0);
                 break;

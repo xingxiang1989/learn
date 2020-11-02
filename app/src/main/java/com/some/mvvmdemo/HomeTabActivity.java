@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.blankj.utilcode.util.LogUtils;
 import com.some.mvvmdemo.base.BaseActiviy;
 import com.some.mvvmdemo.databinding.ActivityHomeTabBinding;
 import com.some.mvvmdemo.reentranlock.SynchronizedExceptionRunnable;
@@ -43,6 +45,10 @@ public class HomeTabActivity extends BaseActiviy implements View.OnClickListener
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        LogUtils.d("xiangxingtest HomeTabActivity");
+
+
         mBinding = DataBindingUtil.setContentView(this,R.layout.activity_home_tab);
         mBinding.setClick(this);
 
