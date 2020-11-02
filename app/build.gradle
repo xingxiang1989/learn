@@ -58,6 +58,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation "android.arch.lifecycle:extensions:2.0.0"
     implementation project(path: ':common')
+    implementation project(path: ':aoplib')
     if(!isModule.toBoolean()){
         implementation project(path: ':modulea')
     }

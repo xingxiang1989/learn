@@ -7,6 +7,9 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ToastUtils;
+import com.some.aoplib.Async;
+import com.some.aoplib.Main;
 import com.some.mvvmdemo.R;
 import com.some.mvvmdemo.base.BaseActiviy;
 import com.some.mvvmdemo.databinding.ActivityRetrofitTestBinding;
@@ -41,5 +44,19 @@ public class RetrofitTestActivity extends BaseActiviy {
         }
 
         joinDemo2.start();
+    }
+
+    @Async
+    public void readFile() {
+        try{
+            Thread.sleep(1000L);
+        }catch (Exception e){
+
+        }
+    }
+
+    @Main
+    public void showResult(){
+        ToastUtils.showShort("hello Aspectj");
     }
 }
