@@ -1,5 +1,7 @@
 package com.some.mvvmdemo.entity;
 
+import com.blankj.utilcode.util.LogUtils;
+
 public class Account {
 
     private String name;
@@ -25,5 +27,14 @@ public class Account {
 
     public void setLevel(int level) {
         this.level = level;
+
+        LogUtils.d("name =" + name + ",  level = " + level);
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "Account{" + "name='" + name + '\'' + ", level=" + level + '}';
     }
 }

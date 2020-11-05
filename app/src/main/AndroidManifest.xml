@@ -48,6 +48,7 @@
         <activity android:name=".aidl.AIDLActivity"/>
 
         <activity android:name=".testkotlin.TestKotlinActivity"/>
+        <activity android:name=".reflect.ReflectActivity"/>
     </application>
 
 </manifest>
