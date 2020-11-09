@@ -1,6 +1,7 @@
 package com.some.mvvmdemo.base;
 
 import android.app.Application;
+import android.os.StrictMode;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.CrashUtils;
@@ -24,6 +25,20 @@ public class MainApplication extends Application {
 
         if (BuildConfig.DEBUG) {
             CrashUtils.init();
+
+            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+                    .detectCustomSlowCalls()
+                    .detectDiskReads()
+                    .detectDiskWrites()
+                    .detectNetwork()   // or .detectAll() for all detectable problems
+                    .penaltyLog()
+                    .build());
+            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+                    .detectLeakedSqlLiteObjects()
+                    .detectLeakedClosableObjects()
+                    .penaltyLog()
+                    .penaltyDeath()
+                    .build());
         }
 
         initRouter();
