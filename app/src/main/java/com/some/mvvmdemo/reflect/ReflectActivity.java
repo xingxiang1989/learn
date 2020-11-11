@@ -1,30 +1,24 @@
 package com.some.mvvmdemo.reflect;
 
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.android.arouter.thread.DefaultPoolExecutor;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.Utils;
 import com.some.mvvmdemo.R;
 import com.some.mvvmdemo.base.BaseActiviy;
-import com.some.mvvmdemo.entity.Account;
 
 import java.io.File;
-import java.lang.ref.SoftReference;
-import java.lang.reflect.Constructor;
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 import dalvik.system.DexClassLoader;
-import dalvik.system.DexFile;
 
 /**
  * @author xiangxing
@@ -38,25 +32,72 @@ public class ReflectActivity extends BaseActiviy {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reflect);
 
+        addPluginApkToDex("");
+
+
+
+    }
+
+    /**
+     * 插件化将apk中的dex文件加入进来
+     */
+    private void addPluginApkToDex(String apkPath){
         try {
-            Class classObj = Class.forName("com.some.mvvmdemo.entity.Account");
-            Constructor constructor = classObj.getConstructor(String.class,int.class);
-            //强制性转换用于演示
-            String log = ((Account)constructor.newInstance("111",222)).toString();
-            LogUtils.d("log = " + log);
 
-            Field levelField = classObj.getDeclaredField("level");
-            levelField.setAccessible(true);
-            levelField.set(classObj, 55);
+            Class baseDexLoaderClass = Class.forName("dalvik.system.BaseDexClassLoader");
+            Field pathListField = baseDexLoaderClass.getDeclaredField("pathList");
+            pathListField.setAccessible(true);
 
-            Object object = constructor.newInstance("111",222);
+            LogUtils.d(" addPluginApkToDex pathListField = " + pathListField);
 
-            classObj.getMethod("setLevel",new Class[]{int.class}).invoke(object,102);
+            Class dexPathListClass = Class.forName("dalvik.system.DexPathList");
+            Field elementsField = dexPathListClass.getDeclaredField("dexElements");
+            elementsField.setAccessible(true);
+
+            LogUtils.d(" addPluginApkToDex elementsField = " + elementsField);
+
+            //1. 获取插件的dex
+            DexClassLoader dexClassLoader = new DexClassLoader(apkPath,
+                    getApplicationContext().getCacheDir().toString(),null,
+                    getBaseContext().getClassLoader());
+
+            Object pathListObj = pathListField.get(dexClassLoader);
+            Object[] elementObj = (Object[]) elementsField.get(pathListObj);
+
+            LogUtils.d(" addPluginApkToDex elementObj = " + elementObj.length);
+
+            //2.获取宿主的dex
+            ClassLoader classLoader = getClassLoader();
+            Object hostPathListObj = pathListField.get(classLoader);
+            Object[] hostElementsObj = (Object[]) elementsField.get(hostPathListObj);
+
+            LogUtils.d(" addPluginApkToDex hostElementObj = " + hostElementsObj.length);
+
+
+            //3.将插件dex，宿主dex组装起来
+            Object[] dexElements =
+                    (Object[])Array.newInstance(hostElementsObj.getClass().getComponentType(),
+                    elementObj.length + hostElementsObj.length);
+
+            LogUtils.d(" addPluginApkToDex getComponentType = " + hostElementsObj.getClass().getComponentType());
+
+            System.arraycopy(hostElementsObj,0,dexElements,0,hostElementsObj.length);
+            System.arraycopy(elementObj,0,dexElements,
+                    hostElementsObj.length,elementObj.length);
+
+            //4.设置进去
+            elementsField.set(hostPathListObj,dexElements);
+
+            LogUtils.d(" addPluginApkToDex complete ");
+
+
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.d( e.toString());
         }
+    }
 
 
+    private void getClassFromDex(){
         /**
          * 目的，ARouter是在编译期对注解进行编译，生成编译文件
          * 需要理解点：
@@ -103,6 +144,5 @@ public class ReflectActivity extends BaseActiviy {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 }
