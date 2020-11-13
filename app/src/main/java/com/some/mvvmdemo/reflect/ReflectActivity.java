@@ -2,6 +2,7 @@ package com.some.mvvmdemo.reflect;
 
 import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
+import android.os.Environment;
 
 import androidx.annotation.Nullable;
 
@@ -24,6 +25,7 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 import dalvik.system.DexClassLoader;
+import retrofit2.http.FieldMap;
 
 /**
  * @author xiangxing
@@ -39,7 +41,9 @@ public class ReflectActivity extends BaseActiviy {
 
 //        addPluginApkToDex("");
 
-        testInnovationHandler();
+//        testInnovationHandler();
+
+        testClassLoaderFromApk();
     }
 
     /**
@@ -177,7 +181,9 @@ public class ReflectActivity extends BaseActiviy {
     }
 
 
-
+    /**
+     * 动态代理
+     */
     private void testInnovationHandler(){
         final IHello hello = new RealSubject();
 
@@ -201,5 +207,54 @@ public class ReflectActivity extends BaseActiviy {
         proxySubject.sayHello();
         proxySubject.sayBye();
 
+        LogUtils.d("proxySubject = " + proxySubject.getClass().getName());
+        LogUtils.d("proxySubject = " + proxySubject.getClass().getSuperclass().getName());
+
+    }
+
+    /**
+     * 插件开发
+     * 插件化动态加载的文件是不是必须是apk文件？
+     *
+     * dex也可以加载，不过作为完整的插件文件需要是apk或者是aar，因为还包含资源文件
+     */
+    private void testClassLoaderFromApk(){
+
+        String dexPath = Environment.getExternalStorageDirectory().toString() + File.separator + "app-test.apk";
+        File sourceFile = new File(dexPath);
+        if(sourceFile.exists()){
+            LogUtils.d("testClassLoaderFromApk 目标apk存在 " );
+
+        }
+
+        File outPutFile = getDir("dex11", MODE_PRIVATE);
+
+        LogUtils.d("testClassLoaderFromApk outPutFile =" + outPutFile.toString());
+
+        //这里要注意，最开始没加读取sd卡的权限，提示did not findClass，添加后，还需要手动去打开权限。
+        DexClassLoader dexClassLoader = new DexClassLoader(dexPath,
+                outPutFile.toString(),null,getClassLoader());
+
+        try {
+            //就前面两步与Class.forName()有区别，通过newInstance构建对象
+            Class<?> classz = dexClassLoader.loadClass("com.some.testdemo.LogUtils");
+            Object object = classz.newInstance();
+            Method method = classz.getDeclaredMethod("printLog");
+            method.setAccessible(true);
+            method.invoke(object);
+
+
+            Method method2 = classz.getDeclaredMethod("printMessage");
+            method2.setAccessible(true);
+            method2.invoke(object);
+
+            LogUtils.d("testClassLoaderFromApk invoke 完成 " );
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            LogUtils.d("testClassLoaderFromApk Exception e= " + e.toString());
+
+        }
     }
 }
