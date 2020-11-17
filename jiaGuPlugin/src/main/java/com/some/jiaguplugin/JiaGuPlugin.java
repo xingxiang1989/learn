@@ -21,7 +21,11 @@ public class JiaGuPlugin implements Plugin<Project> {
         //让使用者配置JiaguExt的参数
         final JiaguExt jiaguExt = project.getExtensions().create("jiagu",JiaguExt.class);
 
-        //注册监听
+        /**
+         *在所有build.gradle解析完成后，开始执行task之前，
+         *此时所有的脚本已经解析完成，task，plugins等所有信息可以获取，task的依赖关系也已经生成，
+         *如果此时需要做一些事情，可以写在afterEvaluate
+         */
         project.afterEvaluate(new Action<Project>() {
             @Override
             public void execute(final Project project) {
@@ -45,6 +49,18 @@ public class JiaGuPlugin implements Plugin<Project> {
                         });
                     }
                 });
+            }
+        });
+
+        /**
+         * 在解析setting.gradle之后，开始解析build.gradle之前，
+         * 这里如果要干些事情（更改build.gradle校本内容），可以写在beforeEvaluate
+         */
+        project.beforeEvaluate(new Action<Project>() {
+            @Override
+            public void execute(Project project) {
+                System.out.println("project.beforeEvaluate ---- > ");
+
             }
         });
     }

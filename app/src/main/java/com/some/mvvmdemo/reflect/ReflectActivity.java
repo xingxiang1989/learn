@@ -9,6 +9,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -29,10 +30,14 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 
 import dalvik.system.DexClassLoader;
+import dalvik.system.DexFile;
 
 /**
  * @author xiangxing
@@ -40,6 +45,9 @@ import dalvik.system.DexClassLoader;
 public class ReflectActivity extends BaseActiviy implements View.OnClickListener {
 
     private static final String EXTRACTED_NAME_EXT = ".classes";
+    private static final String EXTRACTED_SUFFIX = ".zip";
+    public static final String ROUTE_ROOT_PAKCAGE = "com.alibaba.android.arouter.routes";
+
     private ImageView imageView;
 
     @Override
@@ -50,6 +58,9 @@ public class ReflectActivity extends BaseActiviy implements View.OnClickListener
         imageView = findViewById(R.id.imageView);
         findViewById(R.id.btn1).setOnClickListener(this);
         findViewById(R.id.btn2).setOnClickListener(this);
+
+        getARouterClass();
+
 
 
 //        addPluginApkToDex("");
@@ -199,8 +210,12 @@ public class ReflectActivity extends BaseActiviy implements View.OnClickListener
         }
     }
 
-
+    /**
+     *
+     */
     private void getARouterClass(){
+
+        final Set<String> classNames = new HashSet<>();
         /**
          * 目的，ARouter是在编译期对注解进行编译，生成编译文件
          * 需要理解点：
@@ -229,37 +244,35 @@ public class ReflectActivity extends BaseActiviy implements View.OnClickListener
                 DefaultPoolExecutor.getInstance().execute(new Runnable() {
                     @Override
                     public void run() {
-                        File dexOutputDir = getDir("dex1", 0);
-                        DexClassLoader dexClassLoader = new DexClassLoader(path,
-                                dexOutputDir.getAbsolutePath(),null,getClassLoader());
 
-                        //1.因为DexFile 在8.0 被弃用，因此要通过classloader，然后反射拿到
-                        //思路跟上面的插件化思路一致
-                        //通过field.get()拿到某值，必须要得到field 这个变量的对象。
+                        DexFile dexfile = null;
 
                         try {
-                            Class baseDexLoaderClass = Class.forName("dalvik.system" +
-                                        ".BaseDexClassLoader");
-                            Field pathListField = baseDexLoaderClass.getDeclaredField("pathList");
-                            pathListField.setAccessible(true);
+                            if (path.endsWith(EXTRACTED_SUFFIX)) {
+                                //NOT use new DexFile(path), because it will throw "permission error in /data/dalvik-cache"
+                                dexfile = DexFile.loadDex(path, path + ".tmp", 0);
+                            } else {
+                                dexfile = new DexFile(path);
+                            }
 
-                            LogUtils.d("getARouterClass addPluginApkToDex pathListField = " + pathListField);
-
-                            Class dexPathListClass = Class.forName("dalvik.system.DexPathList");
-                            Field elementsField = dexPathListClass.getDeclaredField("dexElements");
-                            elementsField.setAccessible(true);
-
-                            Object pathListObj = pathListField.get(dexClassLoader);
-                            Object[] dexElementsObj =
-                                    (Object[]) elementsField.get(pathListObj);
-
-
-                            LogUtils.d("getARouterClass dexElementsObj.length =" + dexElementsObj.length);
-
-                            Class aClass = Class.forName("dalvik.system.DexPathList");
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                            Enumeration<String> dexEntries = dexfile.entries();
+                            while (dexEntries.hasMoreElements()) {
+                                String className = dexEntries.nextElement();
+                                if (className.startsWith(ROUTE_ROOT_PAKCAGE)) {
+                                    LogUtils.d("getARouterClass className=" + className);
+                                    classNames.add(className);
+                                }
+                            }
+                        } catch (Throwable ignore) {
+                            LogUtils.e("ARouter", "getARouterClass Scan map file in dex" +
+                                    " files made error.", ignore);
+                        } finally {
+                            if (null != dexfile) {
+                                try {
+                                    dexfile.close();
+                                } catch (Throwable ignore) {
+                                }
+                            }
                         }
 
                         countDownLatch.countDown();

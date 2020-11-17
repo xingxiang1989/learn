@@ -199,4 +199,6 @@ class NearbyFragment : BaseFragment(), View.OnClickListener, ItemDragListener, I
 
         private val TAG = "xingtest-NearbyFragment"
     }
+
+
 }
