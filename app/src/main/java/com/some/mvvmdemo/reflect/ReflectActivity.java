@@ -20,11 +20,13 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.Utils;
 import com.some.mvvmdemo.R;
 import com.some.mvvmdemo.base.BaseActiviy;
+import com.some.mvvmdemo.entity.Account;
 import com.some.mvvmdemo.proxy.IHello;
 import com.some.mvvmdemo.proxy.RealSubject;
 
 import java.io.File;
 import java.lang.reflect.Array;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -59,15 +61,15 @@ public class ReflectActivity extends BaseActiviy implements View.OnClickListener
         findViewById(R.id.btn1).setOnClickListener(this);
         findViewById(R.id.btn2).setOnClickListener(this);
 
-        getARouterClass();
-
-
+//        getARouterClass();
 
 //        addPluginApkToDex("");
 
 //        testInnovationHandler();
 
 //        testClassLoaderFromApk();
+
+        createInstance();
     }
 
 
@@ -346,6 +348,8 @@ public class ReflectActivity extends BaseActiviy implements View.OnClickListener
         try {
             //就前面两步与Class.forName()有区别，通过newInstance构建对象
             Class<?> classz = dexClassLoader.loadClass("com.some.testdemo.LogUtils");
+
+            //方式1 构造对象
             Object object = classz.newInstance();
             Method method = classz.getDeclaredMethod("printLog");
             method.setAccessible(true);
@@ -397,5 +401,28 @@ public class ReflectActivity extends BaseActiviy implements View.OnClickListener
         final AssetManager assetManager = createAssetManager(pFilePath);
         Resources superRes = this.getResources();
         return new Resources(assetManager, superRes.getDisplayMetrics(), superRes.getConfiguration());
+    }
+
+    /**
+     * 两种构造器的方法
+     * 已经理解
+     */
+    private void createInstance(){
+        try {
+            Account object = Account.class.newInstance();
+            LogUtils.d("createInstance 11 name = " + object.getName() +
+                    " level = " + object.getLevel());
+
+            Constructor<?> constructor = Account.class.getConstructor(String.class,
+                    int.class);
+            Account account = (Account) constructor.newInstance("LI Lei",11);
+            LogUtils.d("createInstance 22  name = " + account.getName() +
+                    " level = " + account.getLevel());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            LogUtils.d("createInstance 33  e = " + e.toString());
+        }
+
     }
 }

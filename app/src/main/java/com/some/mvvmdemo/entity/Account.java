@@ -8,6 +8,10 @@ public class Account {
 
     private int level;
 
+    public Account(){
+
+    }
+
     public Account(String name, int level){
         this.name = name;
         this.level = level;
