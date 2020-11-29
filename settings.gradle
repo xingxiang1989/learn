@@ -1,2 +1,2 @@
-include ':app', ':common', ':modulea', ':jiaGuPlugin', ':aoplib'
+include ':app', ':common', ':modulea', ':jiaGuPlugin', ':aoplib', ':demo-annotation'
 rootProject.name='MvvmDemo'
