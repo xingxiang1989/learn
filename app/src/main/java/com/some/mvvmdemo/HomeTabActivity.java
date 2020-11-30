@@ -16,6 +16,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.example.HelloWorld;
+import com.some.demo_annotation.HelloAnnotation;
 import com.some.mvvmdemo.base.BaseActiviy;
 import com.some.mvvmdemo.databinding.ActivityHomeTabBinding;
 import com.some.mvvmdemo.reentranlock.SynchronizedExceptionRunnable;
@@ -25,6 +27,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 
+@HelloAnnotation
 public class HomeTabActivity extends BaseActiviy implements View.OnClickListener {
 
     ActivityHomeTabBinding mBinding;
@@ -81,6 +84,8 @@ public class HomeTabActivity extends BaseActiviy implements View.OnClickListener
 
             }
         });
+
+        HelloWorld.main(null);
 
     }
 

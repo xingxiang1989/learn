@@ -81,6 +81,10 @@ dependencies {
 
     implementation "org.aspectj:aspectjrt:1.9.6"
 
+    implementation project(path: ':demo_annotation')
+    annotationProcessor project(':demo-compiler')
+
+
 }
 repositories {
     mavenCentral()
