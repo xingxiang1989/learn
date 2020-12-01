@@ -164,14 +164,56 @@ public class DeepLinkProcessor extends BaseProcessor{
                 .endControlFlow()
                 .build();
 
+
+        MethodSpec dispatch2 = MethodSpec.methodBuilder("dispatchFrom2")
+                .addModifiers(Modifier.PUBLIC)
+                .returns(void.class)
+                //因为在这个java module中，无法得到Activiy类，只有通过ClassName
+                .addParameter(ANDROID_ACTIVITY,"activity")
+                //beginControlFlow,endControlFlow 成对出现，并且自带{ ,} . addStatement 自带分号：
+                .beginControlFlow("if(activity == null)")
+                .addStatement("throw new NullPointerException($S)","activity is null")
+                .endControlFlow()
+                .addStatement("$T sourceIntent = activity.getIntent()",ANDROID_INTENT)
+                .addStatement("$T uri = sourceIntent.getData()",ANDROID_URI)
+                .beginControlFlow("if(uri != null)")
+                .addStatement("$T uriString = uri.toString()",String.class)
+                .addStatement("$T deepLinkEntry = loader.parseUri(uriString)",
+                        DeepLinkEntry.class)
+                .beginControlFlow("if (deepLinkEntry != null)")
+                .addStatement("$T newIntent = new Intent(activity, deepLinkEntry" +
+                        ".getActivityClass())",ANDROID_INTENT)
+                .beginControlFlow("if(sourceIntent.getExtras() != null)")
+                .addStatement("newIntent.putExtras(sourceIntent.getExtras())")
+                .endControlFlow()
+                .addStatement("newIntent.setData(sourceIntent.getData())")
+                .addComment("add some custom data")
+                .addStatement("activity.startActivity(newIntent)")
+                .endControlFlow()
+                .endControlFlow()
+                .build();
+
+        MethodSpec mainMethod = MethodSpec.methodBuilder("main")
+                .addModifiers(Modifier.PUBLIC,Modifier.STATIC)
+                .returns(void.class)
+                .addParameter(String[].class,"args")
+                .addStatement("$T.out.println($S)",System.class,"Hello, JavaPoet!")
+                .build();
+
+        FieldSpec fieldSpec = FieldSpec.builder(String.class,"name",Modifier.PUBLIC)
+                .build();
+
         FieldSpec loader = FieldSpec.builder(CLASS_DEEPLINKLOADER, "loader", Modifier.PRIVATE)
                 .build();
 
         TypeSpec deepLinkDispatch = TypeSpec.classBuilder(DEEPLINK_DISPATCH)
                 .addModifiers(Modifier.PUBLIC)
                 .addField(loader)
+                .addField(fieldSpec)
+                .addMethod(mainMethod)
                 .addMethod(constructor)
                 .addMethod(dispatch)
+                .addMethod(dispatch2)
                 .build();
 
         JavaFile.builder(DEEPLINK_PACKAGE, deepLinkDispatch).build().writeTo(mFiler);
