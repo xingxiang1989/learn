@@ -7,13 +7,14 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 
+import com.some.demo_annotation.DeepLink;
 import com.some.mvvmdemo.base.BaseActiviy;
 import com.some.mvvmdemo.base.BaseFragment;
 import com.some.mvvmdemo.databinding.ActivityHomeViewpagerBinding;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@DeepLink("acdef://wenkiwu.com/a/")
 public class HomeViewPagerActivity extends BaseActiviy implements View.OnClickListener{
 
     ActivityHomeViewpagerBinding binding;

@@ -7,7 +7,11 @@ dependencies {
 
     implementation 'com.squareup:javapoet:1.8.0'
     implementation project(path: ':demo_annotation')
+
+    implementation 'org.apache.commons:commons-lang3:3.5'
+    implementation 'org.apache.commons:commons-collections4:4.1'
+    implementation fileTree(dir: '/Library/Java/JavaVirtualMachines/jdk1.8.0_221.jdk/Contents/Home/lib', include: ['*.aar', '*.jar'], exclude: [])
 }
 
-sourceCompatibility = "7"
-targetCompatibility = "7"
+sourceCompatibility = "8"
+targetCompatibility = "8"

@@ -1,5 +1,4 @@
-import com.some.demo_annotation.DeepLink;
-
+package com.some.demo_annotation;
 /**
  * @author xiangxing
  */
@@ -20,11 +19,13 @@ public class DeepLinkEntry {
         this.path = path;
     }
 
-    public Class<?> getClassz() {
+    public Class<?> getActivityClass() {
         return classz;
     }
 
     public void setClassz(Class<?> classz) {
         this.classz = classz;
     }
+
+
 }

@@ -14,6 +14,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.LogUtils;
 import com.some.common.arouter.RouterUrl;
+import com.some.demo_annotation.DeepLink;
 import com.some.mvvmdemo.base.BaseActiviy;
 import com.some.mvvmdemo.databinding.ActivityMainBinding;
 import com.some.mvvmdemo.entity.Account;
@@ -22,6 +23,7 @@ import com.some.mvvmdemo.testkotlin.Entity;
 /**
  * @author xiangxing
  */
+@DeepLink("acdef://wenkiwu.com/c/")
 @Route(path = RouterUrl.Main)
 public class MainActivity extends BaseActiviy implements View.OnClickListener {
 

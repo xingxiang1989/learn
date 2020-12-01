@@ -20,15 +20,12 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 
 @AutoService(Processor.class)
-public class HelloAnnotationProcessor extends AbstractProcessor {
+public class HelloAnnotationProcessor extends BaseProcessor {
 
-    private Filer filer;
 
     @Override
     public synchronized void init(ProcessingEnvironment processingEnvironment) {
         super.init(processingEnvironment);
-        //for creating file
-        filer = processingEnvironment.getFiler();
     }
 
     @Override
@@ -56,7 +53,7 @@ public class HelloAnnotationProcessor extends AbstractProcessor {
                     JavaFile javaFile = JavaFile.builder("com.example",helloWorld)
                             .addFileComment(" This codes are generated automatically. Do not modify!")
                             .build();
-                    javaFile.writeTo(filer);
+                    javaFile.writeTo(mFiler);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
