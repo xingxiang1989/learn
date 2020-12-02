@@ -9,11 +9,13 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.LogUtils;
 import com.some.common.arouter.RouterUrl;
+import com.some.demo_annotation.BindView;
 import com.some.demo_annotation.DeepLink;
 import com.some.mvvmdemo.base.BaseActiviy;
 import com.some.mvvmdemo.databinding.ActivityMainBinding;
@@ -30,6 +32,9 @@ public class MainActivity extends BaseActiviy implements View.OnClickListener {
     Account account;
     ActivityMainBinding binding;
     Animation animDown,animUp, animLeftIn, animLeftOut,animRightIn, animRightOut;
+
+    @BindView(R.id.topLayout)
+    LinearLayout rootLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

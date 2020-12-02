@@ -1,9 +1,9 @@
 package com.some.hookactivity;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentActivity;
 
 /**
@@ -11,9 +11,11 @@ import androidx.fragment.app.FragmentActivity;
  */
 public class ProxyActivity extends FragmentActivity {
 
+
+    private TextView tv;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DataBindingUtil.setContentView(this,R.layout.activity_proxy);
+        setContentView(R.layout.activity_proxy);
     }
 }

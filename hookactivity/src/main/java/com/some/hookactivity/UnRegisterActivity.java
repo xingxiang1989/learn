@@ -14,6 +14,6 @@ public class UnRegisterActivity extends FragmentActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DataBindingUtil.setContentView(this,R.layout.activity_unregister);
+        setContentView(R.layout.activity_unregister);
     }
 }
