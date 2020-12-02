@@ -83,6 +83,7 @@ dependencies {
 
     implementation project(path: ':demo_annotation')
     annotationProcessor project(':demo-compiler')
+    implementation project(path: ':hookactivity')
 
 
 }

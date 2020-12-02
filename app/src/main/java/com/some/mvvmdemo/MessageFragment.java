@@ -14,6 +14,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.some.hookactivity.UnRegisterActivity;
 import com.some.mvvmdemo.aidl.AIDLActivity;
 import com.some.mvvmdemo.base.BaseFragment;
 import com.some.mvvmdemo.databinding.FragmentMsgBinding;
@@ -143,6 +144,13 @@ public class MessageFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(mActivity, LayoutInflaterActivity.class));
+            }
+        });
+
+        binding.hook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mActivity, UnRegisterActivity.class));
             }
         });
     }
