@@ -23,6 +23,7 @@ public class HookUtils {
 
     /**
      * 其实难点是在Android系统版本的兼容
+     * 忽然明白了，当前项目选的sdk版本是29，而自己从网上查看的源码是28。刚好这里有差异，要注意看同一版本的代码才行。
      */
     public static void hookAMSAidl(){
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.P){
