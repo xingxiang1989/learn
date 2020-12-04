@@ -1,7 +1,4 @@
 apply plugin: 'com.android.application'
-//please uncomment fellow line before you build a patch
-//apply plugin: 'auto-patch-plugin'
-apply plugin: 'robust'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.some.jiaguplugin'

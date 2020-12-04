@@ -58,9 +58,6 @@ dependencies {
     api "androidx.lifecycle:lifecycle-livedata-ktx:$livedata_version"
     api "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
-    api 'com.meituan.robust:robust:0.4.99'
-
-
 }
 repositories {
     mavenCentral()
