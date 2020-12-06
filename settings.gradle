@@ -1,2 +1,2 @@
-include ':app', ':common', ':modulea', ':jiaGuPlugin', ':aoplib', ':demo-compiler', ':demo_annotation', ':hookactivity'
+include ':app', ':common', ':modulea', ':jiaGuPlugin', ':aoplib', ':demo-compiler', ':demo_annotation', ':hookactivity', ':gradle-plugin', ':autopatchbase'
 rootProject.name='MvvmDemo'
