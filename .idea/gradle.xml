@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/autopatchbase" />
             <option value="$PROJECT_DIR$/common" />
+            <option value="$PROJECT_DIR$/custom-plugin" />
             <option value="$PROJECT_DIR$/demo-compiler" />
             <option value="$PROJECT_DIR$/demo_annotation" />
             <option value="$PROJECT_DIR$/gradle-plugin" />
