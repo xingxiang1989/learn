@@ -1,5 +1,7 @@
 package com.some.custom_plugin;
 
+import com.android.build.gradle.AppExtension;
+
 import org.gradle.api.Action;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
@@ -9,6 +11,9 @@ public class CustomPlugin implements Plugin<Project> {
     @Override
     public void apply(Project project) {
         System.out.println("CustomPlugin 执行了");
+
+        AppExtension appExtension = project.getExtensions().getByType(AppExtension.class);
+        appExtension.registerTransform(new AsmTransform());
 
         project.beforeEvaluate(new Action<Project>() {
             @Override
