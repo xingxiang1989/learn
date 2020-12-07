@@ -30,6 +30,9 @@ public class JiaGuPlugin implements Plugin<Project> {
             @Override
             public void execute(final Project project) {
 
+                System.out.println("JiaGuPlugin 执行了  afterEvaluate ---- > ");
+
+
                 AppExtension appExtension =
                         project.getExtensions().getByType(AppExtension.class);
 
@@ -41,7 +44,7 @@ public class JiaGuPlugin implements Plugin<Project> {
                             @Override
                             public void execute(BaseVariantOutput baseVariantOutput) {
                                 File outPutFile = baseVariantOutput.getOutputFile();
-                                System.out.println("outPutFile =" + outPutFile.getAbsolutePath());
+                                System.out.println("JiaGuPlugin outPutFile =" + outPutFile.getAbsolutePath());
                                 String name = baseVariantOutput.getName();
                                 project.getTasks().create("jiagu" + name,
                                         JiaguTask.class, outPutFile, jiaguExt);
@@ -59,7 +62,7 @@ public class JiaGuPlugin implements Plugin<Project> {
         project.beforeEvaluate(new Action<Project>() {
             @Override
             public void execute(Project project) {
-                System.out.println("project.beforeEvaluate ---- > ");
+                System.out.println("JiaGuPlugin 执行了  beforeEvaluate ---- > ");
 
             }
         });

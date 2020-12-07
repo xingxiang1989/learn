@@ -2,7 +2,7 @@ apply plugin: 'java-library'
 apply plugin: 'maven'
 
 group = 'com.xiangxing.plugin'
-version = '1.0.0'
+version = '1.0.2'
 uploadArchives {
     repositories {
         mavenDeployer {
@@ -16,6 +16,10 @@ dependencies {
     implementation gradleApi()
     //因为要得到打包路径，名称，因此插件也要依赖插件
     implementation 'com.android.tools.build:gradle:3.5.0'
+
+    //ASM依赖
+    implementation 'org.ow2.asm:asm:7.1'
+    implementation 'org.ow2.asm:asm-commons:7.1'
 }
 
 sourceCompatibility = "7"

@@ -1,7 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 apply plugin: 'com.alibaba.arouter'
 apply from: 'config.gradle'
-//apply plugin: 'com.some.custom_plugin'
 
 
 buildscript {
@@ -14,9 +13,9 @@ buildscript {
     }
     repositories {
         //自定义上传到本地maven的地址文件
-//        maven {
-//            url '../custom_plugin_repo'
-//        }
+        maven {
+            url './custom_plugin_repo'
+        }
         google()
         jcenter()
     }
@@ -30,7 +29,7 @@ buildscript {
         classpath 'org.aspectj:aspectjrt:1.9.6'       // add
 
         //自定义练习的插件
-//        classpath 'com.xiangxing.plugin:custom-plugin:1.0.0'
+        classpath 'com.xiangxing.plugin:custom-plugin:1.0.1'
 
 
         // NOTE: Do not place your application dependencies here; they belong
