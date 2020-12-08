@@ -1,8 +1,9 @@
 apply plugin: 'java-library'
+apply plugin: 'groovy'
 apply plugin: 'maven'
 
 group = 'com.xiangxing.plugin'
-version = '1.0.4'
+version = '1.0.5'
 uploadArchives {
     repositories {
         mavenDeployer {
@@ -14,6 +15,8 @@ uploadArchives {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation gradleApi()
+    implementation localGroovy()
+
     //因为要得到打包路径，名称，因此插件也要依赖插件
     implementation 'com.android.tools.build:gradle:3.5.0'
 
