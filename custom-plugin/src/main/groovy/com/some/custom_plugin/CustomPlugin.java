@@ -1,7 +1,6 @@
 package com.some.custom_plugin;
 
 import com.android.build.gradle.AppExtension;
-import com.some.custom.PageTransform;
 
 import org.gradle.api.Action;
 import org.gradle.api.Plugin;
@@ -14,7 +13,7 @@ public class CustomPlugin implements Plugin<Project> {
         System.out.println("CustomPlugin 执行了");
 
         AppExtension appExtension = project.getExtensions().getByType(AppExtension.class);
-//        appExtension.registerTransform(new AsmTransform2());
+        appExtension.registerTransform(new PageTransform());
 
         project.beforeEvaluate(new Action<Project>() {
             @Override
