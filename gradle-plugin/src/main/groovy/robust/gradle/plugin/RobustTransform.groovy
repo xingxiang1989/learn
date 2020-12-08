@@ -153,6 +153,7 @@ class RobustTransform extends Transform implements Plugin<Project> {
             jarFile.delete();
         }
 
+        //scan all class and add it in classPool
         ClassPool classPool = new ClassPool()
         project.android.bootClasspath.each {
             classPool.appendClassPath((String) it.absolutePath)

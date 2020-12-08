@@ -4,12 +4,24 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.xiangxing.plugin</groupId>
   <artifactId>custom-plugin</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.4</version>
   <dependencies>
     <dependency>
       <groupId>com.android.tools.build</groupId>
       <artifactId>gradle</artifactId>
       <version>3.5.0</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.ow2.asm</groupId>
+      <artifactId>asm</artifactId>
+      <version>7.1</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.ow2.asm</groupId>
+      <artifactId>asm-commons</artifactId>
+      <version>7.1</version>
       <scope>runtime</scope>
     </dependency>
   </dependencies>

@@ -118,6 +118,14 @@ public class AsmInsertImpl extends InsertcodeStrategy {
             return (access & ~(Opcodes.ACC_PRIVATE | Opcodes.ACC_PROTECTED)) | Opcodes.ACC_PUBLIC;
         }
 
+        /**
+         * 过滤掉一些无需添加的方法
+         * @param access
+         * @param name
+         * @param desc
+         * @param c
+         * @return
+         */
         private boolean isQualifiedMethod(int access, String name, String desc, Map<String, Boolean> c) {
             //类初始化函数和构造函数过滤
 //            if (AsmUtils.CLASS_INITIALIZER.equals(name) || AsmUtils.CONSTRUCTOR.equals(name)) {
