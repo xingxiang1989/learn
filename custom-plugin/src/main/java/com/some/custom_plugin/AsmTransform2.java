@@ -14,7 +14,12 @@ import com.android.build.gradle.internal.TaskManager;
 import com.android.build.gradle.internal.pipeline.TransformManager;
 import com.android.utils.FileUtils;
 
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.ClassWriter;
+
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Collection;
@@ -22,14 +27,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import jdk.internal.org.objectweb.asm.ClassReader;
-import jdk.internal.org.objectweb.asm.ClassVisitor;
-import jdk.internal.org.objectweb.asm.ClassWriter;
 
 /**
  * @author xiangxing
+ *
+ * java写的方法有问题，正则匹配不对
  */
-public class AsmTransform extends Transform {
+public class AsmTransform2 extends Transform {
 
     Pattern pattern = Pattern.compile("/*.class");
 
@@ -84,17 +88,23 @@ public class AsmTransform extends Transform {
                        System.out.println("CustomPlugin AsmTransform fileList.size =" + fileList.size());
 
                        for(File file : fileList){
-                           ClassReader classReader = new ClassReader(file.getAbsolutePath());
+                           if(file.isDirectory()){
+                               System.out.println("CustomPlugin AsmTransform interor " +
+                                       "file isDirectory continue ");
+                               continue;
+                           }
+                           //step1： init classReader
+                           ClassReader classReader =
+                                   new ClassReader(new FileInputStream(file));
+                           //step2：define a classWriter
                            ClassWriter classWriter = new ClassWriter(classReader,
                                    ClassWriter.COMPUTE_MAXS);
-                           //访问class文件的内容
                            ClassVisitor classVisitor = new PageClassVisitor(classWriter);
-                           //调用classVisitor的各个方法
+                           //step3： accept method
                            classReader.accept(classVisitor, ClassReader.EXPAND_FRAMES);
 
-                           //将修改的字节码以byte数组返回
+                           //write
                            byte[] bytes = classWriter.toByteArray();
-                           //通过文件流写入方式覆盖原先的内容，完成class文件的修改
                            FileOutputStream outputStream =
                                    new FileOutputStream(file.getAbsolutePath());
                            outputStream.write(bytes);

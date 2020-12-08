@@ -1,8 +1,9 @@
 package com.some.custom_plugin;
 
-import jdk.internal.org.objectweb.asm.ClassVisitor;
-import jdk.internal.org.objectweb.asm.MethodVisitor;
-import jdk.internal.org.objectweb.asm.Opcodes;
+
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.MethodVisitor;
+import org.objectweb.asm.Opcodes;
 
 /**
  * @author xiangxing
@@ -23,7 +24,7 @@ public class PageClassVisitor extends ClassVisitor {
     private String superName;
 
     public PageClassVisitor(ClassVisitor classVisitor) {
-        super(Opcodes.ASM5, classVisitor);
+        super(Opcodes.ASM7, classVisitor);
     }
 
     @Override

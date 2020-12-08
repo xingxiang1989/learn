@@ -13,7 +13,7 @@ public class CustomPlugin implements Plugin<Project> {
         System.out.println("CustomPlugin 执行了");
 
         AppExtension appExtension = project.getExtensions().getByType(AppExtension.class);
-        appExtension.registerTransform(new AsmTransform());
+        appExtension.registerTransform(new AsmTransform2());
 
         project.beforeEvaluate(new Action<Project>() {
             @Override
