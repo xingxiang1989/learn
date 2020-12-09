@@ -1,21 +1,21 @@
 apply plugin: 'java-library'
+apply plugin: 'maven'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
 
-sourceCompatibility = "7"
-targetCompatibility = "7"
+sourceCompatibility = "8"
+targetCompatibility = "8"
 
-apply plugin:'maven-publish'
 
-publishing{
-    publications{
-        Jiagu(MavenPublication){
-            from components.java  //要把源码生成的jar包上传
-            groupId 'com.xiangxing'
-            artifactId "autopatchbase"
-            version "1.0"
+
+group = 'com.xiangxing.autopatchbase'
+version = '1.0.0'
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri('../autopatchbase_repo'))
         }
     }
 }

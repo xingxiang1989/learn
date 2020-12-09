@@ -29,7 +29,7 @@ buildscript {
         classpath 'org.aspectj:aspectjrt:1.9.6'       // add
 
         //自定义练习的插件
-        classpath 'com.xiangxing.plugin:custom-plugin:1.0.6'
+        classpath 'com.xiangxing.plugin:custom-plugin:1.0.8'
 
 
         // NOTE: Do not place your application dependencies here; they belong

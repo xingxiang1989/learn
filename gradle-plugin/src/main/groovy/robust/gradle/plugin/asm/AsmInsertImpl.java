@@ -178,6 +178,9 @@ public class AsmInsertImpl extends InsertcodeStrategy {
 
         }
 
+        /**
+         * 使用GeneratorAdapter 比 methodVisitor更方便
+         */
         class MethodBodyInsertor extends GeneratorAdapter implements Opcodes {
             private String className;
             private Type[] argsType;
