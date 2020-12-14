@@ -14,8 +14,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview"
             android:background="@color/color_F4C11F"
+            android:padding="10dp"
             android:layout_width="match_parent"
-            android:layout_height="150dp" />
+            android:layout_height="200dp" />
 
     </LinearLayout>
 </layout>

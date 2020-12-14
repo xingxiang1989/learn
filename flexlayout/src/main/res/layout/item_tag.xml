@@ -7,6 +7,8 @@
 
     <LinearLayout
         android:orientation="vertical"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -14,6 +16,8 @@
             android:id="@+id/name"
             android:padding="10dp"
             android:textSize="14sp"
+            android:singleLine="true"
+            android:maxLines="1"
             android:textColor="@color/color_ffffff"
             android:background="@color/color_EE2DE8"
             android:text="111"
