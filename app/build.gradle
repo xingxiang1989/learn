@@ -3,7 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.some.jiaguplugin'
 apply plugin: 'com.some.custom_plugin'
-
+apply plugin: 'com.tencent.tinker.patch'
 
 jiagu{
     userName '15267436589'
@@ -86,6 +86,12 @@ dependencies {
     annotationProcessor project(':demo-compiler')
     implementation project(path: ':hookactivity')
     implementation project(path: ':flexlayout')
+
+
+    //optional, help to generate the final application
+    compileOnly "com.tencent.tinker:tinker-android-anno:$tinker_version"
+    //tinker's main Android lib
+    implementation "com.tencent.tinker:tinker-android-lib:$tinker_version"
 
 
 }
