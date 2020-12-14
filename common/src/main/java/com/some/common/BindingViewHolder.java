@@ -1,4 +1,4 @@
-package com.some.mvvmdemo;
+package com.some.common;
 
 import android.view.View;
 

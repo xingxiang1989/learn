@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.some.common.BindingViewHolder;
 import com.some.mvvmdemo.databinding.ItemNearbyBinding;
 import com.some.mvvmdemo.entity.Account;
 import com.some.mvvmdemo.swipe.ItemDragListener;
