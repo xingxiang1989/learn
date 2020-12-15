@@ -63,6 +63,14 @@ dependencies {
 
     api 'androidx.recyclerview:recyclerview:1.0.0'
 
+    api "androidx.multidex:multidex:2.0.1"
+
+    //optional, help to generate the final application
+    compileOnly "com.tencent.tinker:tinker-android-anno:$tinker_version"
+    annotationProcessor "com.tencent.tinker:tinker-android-anno:$tinker_version"
+    //tinker's main Android lib
+    api "com.tencent.tinker:tinker-android-lib:$tinker_version"
+
 
 }
 repositories {
