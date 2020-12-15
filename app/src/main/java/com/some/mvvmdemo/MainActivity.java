@@ -5,6 +5,7 @@ import androidx.databinding.DataBindingUtil;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -21,6 +22,7 @@ import com.some.mvvmdemo.base.BaseActiviy;
 import com.some.mvvmdemo.databinding.ActivityMainBinding;
 import com.some.mvvmdemo.entity.Account;
 import com.some.mvvmdemo.testkotlin.Entity;
+import com.tencent.tinker.lib.tinker.TinkerInstaller;
 
 /**
  * @author xiangxing
@@ -191,6 +193,11 @@ public class MainActivity extends BaseActiviy implements View.OnClickListener {
                 break;
             case R.id.btn_right_out:
                 binding.RightLayout.startAnimation(animRightOut);
+                break;
+            case R.id.btnLoadPatch:
+                TinkerInstaller.onReceiveUpgradePatch(getApplicationContext(),
+                        Environment.getExternalStorageDirectory().getAbsolutePath() + "/patch_signed_7zip.apk");
+
                 break;
 
         }

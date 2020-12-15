@@ -51,6 +51,18 @@ public class FlexLayoutActivity extends Activity {
         nameList.add("的点点滴滴 得到党的点点滴滴" );
         nameList.add("sfdksdfj" );
 
+//        nameList.add("中国" );
+//        nameList.add("中国" );
+//        nameList.add("中国" );
+//        nameList.add("中国" );
+//        nameList.add("中国" );
+//        nameList.add("中国" );
+//        nameList.add("中国" );
+//        nameList.add("中国" );
+//        nameList.add("中国" );
+//        nameList.add("中国" );
+
+
         LogUtils.d("nameList size =" + nameList.size());
 
         mBinding.recyclerview.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
