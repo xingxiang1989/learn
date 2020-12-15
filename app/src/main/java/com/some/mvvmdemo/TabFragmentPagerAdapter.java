@@ -6,8 +6,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 
+import com.some.common.util.SampleApplicationContext;
 import com.some.mvvmdemo.base.BaseFragment;
-import com.some.mvvmdemo.base.MainApplication;
+
 
 import java.util.List;
 
@@ -82,7 +83,7 @@ public class TabFragmentPagerAdapter extends FragmentPagerAdapter {
                     && titles.length > position){
                 int resId = titles[position];
                 return resId != 0 ?
-                        MainApplication.getInstance().getApplicationContext().getText(resId) : "";
+                        SampleApplicationContext.application.getText(resId) : "";
             }
         }else if(type == TYPE_STRING){
             if (fragments != null && titleStrs != null

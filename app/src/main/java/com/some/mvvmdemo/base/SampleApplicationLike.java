@@ -5,9 +5,14 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.StrictMode;
+import android.util.Log;
 
 import androidx.multidex.MultiDex;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.blankj.utilcode.util.CrashUtils;
+import com.some.common.BuildConfig;
 import com.some.common.Log.MyLogImp;
 import com.some.common.util.SampleApplicationContext;
 import com.some.common.util.TinkerManager;
@@ -70,15 +75,39 @@ public class SampleApplicationLike extends DefaultApplicationLike {
     @Override
     public void onCreate() {
         super.onCreate();
-        init();
+        if (BuildConfig.DEBUG) {
+
+            Log.d(TAG,"onCreate ");
+
+            CrashUtils.init();
+
+            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+                    .detectCustomSlowCalls()
+                    .detectDiskReads()
+                    .detectDiskWrites()
+                    .detectNetwork()   // or .detectAll() for all detectable problems
+                    .penaltyLog()
+                    .build());
+            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+                    .detectLeakedSqlLiteObjects()
+                    .detectLeakedClosableObjects()
+                    .penaltyLog()
+                    .penaltyDeath()
+                    .build());
+        }
+
+        initRouter();
 
     }
 
-    private void init(){
-
-    }
-
-    private void onUserEvent(){
-
+    /**
+     * 初始化路由
+     */
+    private void initRouter() {
+        if (BuildConfig.DEBUG) {           // 这两行必须写在init之前，否则这些配置在init过程中将无效
+            ARouter.openLog();     // 打印日志
+            ARouter.openDebug();   // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
+        }
+        ARouter.init(getApplication());
     }
 }
