@@ -14,6 +14,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.some.common.arouter.RouterUrl;
 import com.some.flexlayout.FlexLayoutActivity;
 import com.some.hookactivity.HookUtils;
 import com.some.hookactivity.UnRegisterActivity;
@@ -160,7 +162,8 @@ public class MessageFragment extends BaseFragment {
         binding.flexbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(mActivity, FlexLayoutActivity.class));
+//                startActivity(new Intent(mActivity, FlexLayoutActivity.class));
+                ARouter.getInstance().build(RouterUrl.flexOut).navigation();
             }
         });
     }

@@ -31,7 +31,7 @@ buildscript {
 
         //自定义练习的插件
         classpath 'com.xiangxing.plugin:custom-plugin:1.0.8'
-        classpath 'com.tencent.tinker:tinker-patch-gradle-plugin:1.9.14.10'
+//        classpath 'com.tencent.tinker:tinker-patch-gradle-plugin:1.9.14.10'
 
 
         // NOTE: Do not place your application dependencies here; they belong

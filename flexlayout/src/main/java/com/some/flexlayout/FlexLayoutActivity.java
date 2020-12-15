@@ -8,12 +8,14 @@ import android.widget.BaseAdapter;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.blankj.utilcode.util.LogUtils;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;
 import com.google.android.flexbox.FlexboxItemDecoration;
 import com.google.android.flexbox.FlexboxLayoutManager;
 import com.google.android.flexbox.JustifyContent;
+import com.some.common.arouter.RouterUrl;
 import com.some.flexlayout.databinding.ActivityFlexLayoutBinding;
 
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ import java.util.Random;
 /**
  * @author xiangxing
  */
+@Route(path = RouterUrl.flexOut)
 public class FlexLayoutActivity extends Activity {
 
     private List<String> nameList = new ArrayList<>();

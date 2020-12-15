@@ -3,6 +3,7 @@ package com.some.common.arouter;
 public class RouterUrl {
 
     public static final String SCHEME = "/oversea/";
+
     public static final String SYSTEM = "/arouter/";//ARouter系统内置path
 
     //自定义全局降级策略
@@ -14,6 +15,11 @@ public class RouterUrl {
 
     //赚取页面
     public static final String Main = SCHEME + "main";
+
+    //----flexlayout 模块---------//
+    public static final String SCHEME_FLEX = "/flex/";
+    //flexout 练习页面
+    public static final String flexOut = SCHEME_FLEX + "flexOut";
 
 
 
