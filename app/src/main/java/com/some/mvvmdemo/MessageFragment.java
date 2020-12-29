@@ -166,6 +166,13 @@ public class MessageFragment extends BaseFragment {
                 ARouter.getInstance().build(RouterUrl.flexOut).navigation();
             }
         });
+
+        binding.jni.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mActivity, JniTestActivity.class));
+            }
+        });
     }
 
     @Override
