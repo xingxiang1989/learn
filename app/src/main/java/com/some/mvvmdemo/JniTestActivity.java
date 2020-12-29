@@ -22,6 +22,8 @@ public class JniTestActivity extends BaseActiviy {
 
     private static JniUtil jniUtil;
 
+    private int[] array = new int[]{1,2,3,4,5};
+
     static {
         jniUtil = new JniUtil();
         localKeyPairs.put(jniUtil.getKey1(), jniUtil.getVaule1());
@@ -54,6 +56,8 @@ public class JniTestActivity extends BaseActiviy {
 
                 builder.append(jniUtil.getTimeStamp());
                 builder.append("\n");
+
+//                builder.append("sum = " + jniUtil.sumArray(array));
 
                 tv.setText(builder.toString());
             }

@@ -22,4 +22,7 @@ public class JniUtil {
     public native String getVaule1();
 
 
+    public native int sumArray(int[] array);
+
+
 }
