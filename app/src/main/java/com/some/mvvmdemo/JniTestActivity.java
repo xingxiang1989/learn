@@ -1,11 +1,14 @@
 package com.some.mvvmdemo;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.some.common.JniUtil;
 import com.some.mvvmdemo.base.BaseActiviy;
 
@@ -62,5 +65,30 @@ public class JniTestActivity extends BaseActiviy {
                 tv.setText(builder.toString());
             }
         });
+
+        long M = 1024 * 1024;
+        ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        //虚拟机java堆大小的上限，分配对象时突破这个大小就会OOM
+        int memory = activityManager.getMemoryClass();
+        //manifest中设置largeheap=true时虚拟机java堆的上限
+        int largeMemory = activityManager.getLargeMemoryClass();
+        LogUtils.d("java heap memory = " + memory + " M");
+        LogUtils.d("java heap max largeMemory = " + largeMemory+ " M");
+
+        //当前虚拟机实例的内存使用上限，为上述两者之一(getMemoryClass, getLargeMemoryClass())
+        long maxMemory = Runtime.getRuntime().maxMemory() / M;
+        //当前已经申请的内存，包括已经使用的和还没有使用的
+        long totalMemory = Runtime.getRuntime().totalMemory() / M;
+        // 上一条中已经申请但是尚未使用的那部分。那么已经申请并且正在使用的部分used=totalMemory() - freeMemory()
+        long freeMemory = Runtime.getRuntime().freeMemory() / M ;
+        LogUtils.d("maxMemory = " + maxMemory + " M" + " totalMemory = " + totalMemory+ " M"
+         + " freeMemory = "+ freeMemory + " M");
+
+         ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
+         //设备总内存
+         long totalMem = memoryInfo.totalMem;
+         //设备当前可用内存
+         long availMem = memoryInfo.availMem;
+        LogUtils.d("totalMem = " + totalMem + " availMem = " + availMem);
     }
 }
