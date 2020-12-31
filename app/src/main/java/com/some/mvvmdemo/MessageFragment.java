@@ -173,6 +173,13 @@ public class MessageFragment extends BaseFragment {
                 startActivity(new Intent(mActivity, JniTestActivity.class));
             }
         });
+
+        binding.oom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mActivity, OOMTestActivity.class));
+            }
+        });
     }
 
     @Override
