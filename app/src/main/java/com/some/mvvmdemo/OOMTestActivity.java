@@ -66,6 +66,7 @@ public class OOMTestActivity extends AppCompatActivity implements View.OnClickLi
         findViewById(R.id.bt6).setOnClickListener(this);
         findViewById(R.id.bt7).setOnClickListener(this);
         findViewById(R.id.bt8).setOnClickListener(this);
+        findViewById(R.id.bt9).setOnClickListener(this);
     }
 
     @Override
@@ -126,6 +127,9 @@ public class OOMTestActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.bt8:
                 heap=new ArrayList<>();
                 System.gc();
+                break;
+            case R.id.bt9:
+                showFileContent("/proc/"+ android.os.Process.myPid()+"/task");
                 break;
         }
     }

@@ -1,17 +1,21 @@
 package com.some.mvvmdemo.base;
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.StrictMode;
 import android.util.Log;
 
+import androidx.core.app.ActivityCompat;
 import androidx.multidex.MultiDex;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.CrashUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.some.common.BuildConfig;
 import com.some.common.Log.MyLogImp;
 import com.some.common.util.SampleApplicationContext;
@@ -25,15 +29,12 @@ import com.tencent.tinker.loader.shareutil.ShareConstants;
 /**
  * @author xiangxing
  */
-@DefaultLifeCycle(application = "tinker.sample.android.app.MainAppApplication",
-        flags = ShareConstants.TINKER_ENABLE_ALL,
-        loadVerifyFlag = false)
+@DefaultLifeCycle(application = "tinker.sample.android.app.MainAppApplication", flags = ShareConstants.TINKER_ENABLE_ALL, loadVerifyFlag = false)
 public class SampleApplicationLike extends DefaultApplicationLike {
 
     private static final String TAG = "Tinker.SampleApplicationLike";
 
-    public SampleApplicationLike(Application application, int tinkerFlags, boolean tinkerLoadVerifyFlag,
-                                 long applicationStartElapsedTime, long applicationStartMillisTime, Intent tinkerResultIntent) {
+    public SampleApplicationLike(Application application, int tinkerFlags, boolean tinkerLoadVerifyFlag, long applicationStartElapsedTime, long applicationStartMillisTime, Intent tinkerResultIntent) {
         super(application, tinkerFlags, tinkerLoadVerifyFlag, applicationStartElapsedTime, applicationStartMillisTime, tinkerResultIntent);
     }
 
@@ -77,9 +78,20 @@ public class SampleApplicationLike extends DefaultApplicationLike {
         super.onCreate();
         if (BuildConfig.DEBUG) {
 
-            Log.d(TAG,"onCreate ");
+            Log.d(TAG, "onCreate ");
+            if (ActivityCompat.checkSelfPermission(getApplication(),
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                Log.d(TAG," init crash utils ");
+                CrashUtils.init("", new CrashUtils.OnCrashListener() {
+                    @Override
+                    public void onCrash(String crashInfo, Throwable e) {
 
-            CrashUtils.init();
+
+
+                    }
+                });
+            }
+
 
 //            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
 //                    .detectCustomSlowCalls()
