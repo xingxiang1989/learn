@@ -24,6 +24,8 @@ import com.some.mvvmdemo.entity.Account;
 import com.some.mvvmdemo.testkotlin.Entity;
 import com.tencent.tinker.lib.tinker.TinkerInstaller;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
 /**
  * @author xiangxing
  */

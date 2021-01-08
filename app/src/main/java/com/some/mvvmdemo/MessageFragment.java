@@ -22,6 +22,7 @@ import com.some.hookactivity.UnRegisterActivity;
 import com.some.mvvmdemo.aidl.AIDLActivity;
 import com.some.mvvmdemo.base.BaseFragment;
 import com.some.mvvmdemo.databinding.FragmentMsgBinding;
+import com.some.mvvmdemo.hilt.HiltActivity;
 import com.some.mvvmdemo.http.RetrofitTestActivity;
 import com.some.mvvmdemo.inflate.LayoutInflaterActivity;
 import com.some.mvvmdemo.mvvm.ShareDataVM;
@@ -178,6 +179,13 @@ public class MessageFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(mActivity, OOMTestActivity.class));
+            }
+        });
+
+        binding.hilt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mActivity, HiltActivity.class));
             }
         });
     }

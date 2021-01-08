@@ -57,6 +57,8 @@
         <activity android:name=".JniTestActivity"/>
 
         <activity android:name=".OOMTestActivity"/>
+
+        <activity android:name=".hilt.HiltActivity"/>
     </application>
 
 </manifest>

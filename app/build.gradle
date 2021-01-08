@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.some.jiaguplugin'
 apply plugin: 'com.some.custom_plugin'
 apply plugin: 'com.tencent.tinker.patch'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 
 jiagu{
     userName '15267436589'
@@ -95,7 +97,8 @@ dependencies {
     compileOnly "com.tencent.tinker:tinker-android-anno:$tinker_version"
     annotationProcessor "com.tencent.tinker:tinker-android-anno:$tinker_version"
 
-
+    implementation "com.google.dagger:hilt-android:2.28-alpha"
+    annotationProcessor "com.google.dagger:hilt-android-compiler:2.28-alpha"
 
 }
 repositories {
