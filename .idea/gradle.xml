@@ -24,6 +24,7 @@
             <option value="$PROJECT_DIR$/hookactivity" />
             <option value="$PROJECT_DIR$/jiaGuPlugin" />
             <option value="$PROJECT_DIR$/modulea" />
+            <option value="$PROJECT_DIR$/mylibrary" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

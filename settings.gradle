@@ -1,2 +1,3 @@
+include ':mylibrary'
 include ':app', ':common', ':modulea', ':jiaGuPlugin', ':aoplib', ':demo-compiler', ':demo_annotation', ':hookactivity', ':gradle-plugin', ':autopatchbase', ':custom-plugin', ':flexlayout'
 rootProject.name='MvvmDemo'

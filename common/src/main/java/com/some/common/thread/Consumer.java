@@ -62,7 +62,7 @@ public class Consumer {
                     mList.add(" 产品id = " + index);
                     Log.e(TAG,"生产者，生产数据" + " 产品id = " + index);
                     index++;
-                    while(mList.size() >= 2){
+                    while(mList.size() >= 10){
                         Log.e(TAG,"生产者，list.size >= 10, 休息中 ");
                         mCondition.await();
                     }
@@ -72,8 +72,14 @@ public class Consumer {
                 }catch (Exception e){
 
                 }finally {
-                    Log.e(TAG,"生产者，释放锁 ");
+                    Log.e(TAG,"生产者，释放锁 并且睡眠一下");
                     mLock.unlock();
+
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }

@@ -32,9 +32,10 @@
 
         <activity android:name=".http.RetrofitTestActivity"/>
 
-        <activity android:name=".view.FiveRingsActivity"/>
+        <activity android:name=".view.FiveRingsActivity"
+            android:taskAffinity="com.hkfuliao.chamet"
+            android:allowTaskReparenting="true"/>
 
-        <activity android:name=".view.CakeViewActivity"/>
 
         <activity android:name=".slideconflict.SlideConfictActivity"/>
 
@@ -59,6 +60,23 @@
         <activity android:name=".OOMTestActivity"/>
 
         <activity android:name=".hilt.HiltActivity"/>
+
+        <activity android:name=".view.CakeViewActivity"
+            android:taskAffinity="com.cakeview"/>
+
+        <activity-alias
+            android:name="CakeLauncherActivity"
+            android:enabled="true"
+            android:icon="@mipmap/race_but_history"
+            android:label="cake"
+            android:taskAffinity="com.cakeview"
+            android:targetActivity="com.some.mvvmdemo.view.CakeViewActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity-alias>
     </application>
 
 </manifest>

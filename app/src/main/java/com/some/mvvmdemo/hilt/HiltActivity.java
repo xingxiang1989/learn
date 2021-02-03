@@ -14,14 +14,13 @@ import dagger.hilt.android.AndroidEntryPoint;
 /**
  * @author xiangxing
  */
-@AndroidEntryPoint
 public class HiltActivity extends BaseActiviy {
 
-    @Inject
-    String hash;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hilt);
+
+        getLifecycle().addObserver(new Manager());
     }
 }
