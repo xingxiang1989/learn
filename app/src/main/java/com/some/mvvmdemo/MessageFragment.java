@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.blankj.utilcode.util.LogUtils;
 import com.some.common.arouter.RouterUrl;
 import com.some.flexlayout.FlexLayoutActivity;
 import com.some.hookactivity.HookUtils;
@@ -90,7 +91,11 @@ public class MessageFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onclick to FiveRingsActivity ");
+                LogUtils.d("xiangxingtest taskid = " + getActivity().getTaskId());
+
+//                startActivity(new Intent(mActivity, FiveRingsActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 startActivity(new Intent(mActivity, FiveRingsActivity.class));
+
             }
         });
 
@@ -98,6 +103,7 @@ public class MessageFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onclick to CakeViewActivity ");
+
                 startActivity(new Intent(mActivity, CakeViewActivity.class));
             }
         });

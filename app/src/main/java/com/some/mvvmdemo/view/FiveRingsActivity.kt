@@ -23,6 +23,10 @@ class FiveRingsActivity: BaseActiviy() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        LogUtils.d("xiangxingtest taskid = $taskId")
+
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_five_ring)
 
         binding.btn.setOnClickListener{

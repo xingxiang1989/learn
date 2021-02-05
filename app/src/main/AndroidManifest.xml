@@ -32,9 +32,6 @@
 
         <activity android:name=".http.RetrofitTestActivity"/>
 
-        <activity android:name=".view.FiveRingsActivity"
-            android:taskAffinity="com.hkfuliao.chamet"
-            android:allowTaskReparenting="true"/>
 
 
         <activity android:name=".slideconflict.SlideConfictActivity"/>
@@ -77,6 +74,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity-alias>
+
+        <activity android:name=".view.FiveRingsActivity"
+            android:launchMode="singleTask"
+            android:taskAffinity="com.hkfuliao.chamet"
+            android:allowTaskReparenting="true"/>
+
     </application>
 
 </manifest>
