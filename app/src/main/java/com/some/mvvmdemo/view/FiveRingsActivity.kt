@@ -13,6 +13,7 @@ import com.some.mvvmdemo.R
 import com.some.mvvmdemo.base.BaseActiviy
 import com.some.mvvmdemo.databinding.ActivityFiveRingBinding
 import com.some.mvvmdemo.service.TestServiceOne
+import com.some.room.db.AppDataBase
 
 /**
  * @author xiangxing

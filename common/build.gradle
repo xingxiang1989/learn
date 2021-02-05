@@ -87,6 +87,7 @@ dependencies {
     //tinker's main Android lib
     api "com.tencent.tinker:tinker-android-lib:$tinker_version"
 
+    api "com.blankj:utilcodex:1.23.7"
 
 }
 repositories {

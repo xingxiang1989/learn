@@ -25,6 +25,7 @@
             <option value="$PROJECT_DIR$/jiaGuPlugin" />
             <option value="$PROJECT_DIR$/modulea" />
             <option value="$PROJECT_DIR$/mylibrary" />
+            <option value="$PROJECT_DIR$/room" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
