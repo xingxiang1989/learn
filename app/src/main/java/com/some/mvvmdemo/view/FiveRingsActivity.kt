@@ -9,11 +9,13 @@ import android.os.Handler
 import android.os.IBinder
 import androidx.databinding.DataBindingUtil
 import com.blankj.utilcode.util.LogUtils
+import com.blankj.utilcode.util.Utils
 import com.some.mvvmdemo.R
 import com.some.mvvmdemo.base.BaseActiviy
 import com.some.mvvmdemo.databinding.ActivityFiveRingBinding
 import com.some.mvvmdemo.service.TestServiceOne
 import com.some.room.db.AppDataBase
+import com.some.room.entity.Car
 
 /**
  * @author xiangxing
@@ -42,6 +44,11 @@ class FiveRingsActivity: BaseActiviy() {
         },
                 2000)
 
+        val dao = AppDataBase.getInstance(Utils.getApp()).getCarDao()
+        val car = Car(1,"SUV","url","url","url","#ffffff")
+        val car2 = Car(2,"跑车","url","url","url","#ffffff")
+        dao.insert(car)
+        dao.insert(car2)
 
     }
 

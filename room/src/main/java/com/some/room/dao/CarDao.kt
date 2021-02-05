@@ -11,12 +11,15 @@ interface CarDao {
     @Query("SELECT * FROM Car")
     fun getAll(): List<Car>
 
+    @Query("SELECT * FROM Car where carId=:carId")
+    fun getCar(carId: Int): Car?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(car: Car)
 
     @Delete
     fun delete(car: Car)
 
-//    @Query()
-//    fun update()
+    @Query("update car set carName =:carName where carId = :carId")
+    fun update(carName: String, carId: Int)
 }

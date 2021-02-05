@@ -10,6 +10,7 @@ import com.some.room.entity.Road
 
 /**
  * @author xiangxing
+ * 要去执行数据库操作，比如插入一条数据才可以显示出来
  */
 @Database(entities = [Car::class, Road::class], version = 1)
 abstract class AppDataBase : RoomDatabase() {
@@ -22,6 +23,7 @@ abstract class AppDataBase : RoomDatabase() {
                 instance = Room.databaseBuilder(context.applicationContext,
                         AppDataBase::class.java,
                         "raceGame.db")
+                        .allowMainThreadQueries()
                         .build()
             }
             return instance as AppDataBase
