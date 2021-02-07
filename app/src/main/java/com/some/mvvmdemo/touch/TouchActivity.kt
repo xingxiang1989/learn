@@ -83,6 +83,43 @@ import java.util.concurrent.TimeUnit
  * 事件只会传递到childView
  *
  * 4.同层级事件分发
+ * 4.1 childView，childViewTwo 均不做事件消费
+ * activity --> dispatchTouchEvent Action_down
+ * parentView ---> dispatchTouchEvent Action_down
+ * parentView ---> onInterceptTouchEvent Action_down
+ * （接下来很重要，根据层级关系chidTwoView，childView会依次执行事件，各自走各自的事件分发）
+ * childTwoView ---> dispatchTouchEvent Action_down
+ * childTwoView ---> onInterceptTouchEvent Action_down （层级有多深就传递有多深）
+ * childTwoView ---> onTouchEvent Action_down
+ * childView ---> dispatchTouchEvent Action_down
+ * childView ---> onInterceptTouchEvent Action_down （层级有多深就传递有多深）
+ * childView ---> onTouchEvent Action_down
+ * parentView ---> onTouchEvent Action_down
+ * activity --> onTouchEvent Action_down
+ * (事件最后传到activity，后面的比较重要，将不再往下传递)
+ * activity --> dispatchTouchEvent Action_move
+ * activity --> onTouchEvent Action_move
+ * activity --> dispatchTouchEvent Action_up
+ * activity --> onTouchEvent Action_up
+ *
+ * 4.2 childView，childTwoView
+ * 同层级，两个都做点击事件（这个就类似直播间做的滑动事件，上层是recyvlerview的滑动，下面是contentview）
+ * 只会响应childTwoView，并且事件根本不会分发到childView中，可以跟4.1情况做比较
+ * activity --> dispatchTouchEvent Action_down
+ * parentView ---> dispatchTouchEvent Action_down
+ * parentView ---> onInterceptTouchEvent Action_down
+ * childTwoView ---> dispatchTouchEvent Action_down
+ * childTwoView ---> onInterceptTouchEvent Action_down （层级有多深就传递有多深）
+ * childTwoView ---> onTouchEvent Action_down（事件被消耗）
+ * activity --> dispatchTouchEvent Action_move
+ * parentView ---> dispatchTouchEvent Action_move
+ * parentView ---> onInterceptTouchEvent Action_move
+ * childTwoView ---> dispatchTouchEvent Action_move
+ * childTwoView ---> onInterceptTouchEvent Action_move （层级有多深就传递有多深）
+ * childTwoView ---> onTouchEvent Action_move（事件被消耗）
+ *
+ * 4.3 如何让事件透传，保证上下两个view都能接收到事件
+ * 直接在parentView中dispatchTouchEvent方法中进行手动的分发，这样就可以（直播间就是这样做的）
  *
  */
 class TouchActivity: BaseActiviy() {
@@ -106,6 +143,10 @@ class TouchActivity: BaseActiviy() {
         mBinding.childView.setOnClickListener {
             Log.d(TAG,"childView onClick")
 
+        }
+
+        mBinding.childTwoView.setOnClickListener {
+            Log.d(TAG,"childTwoView onClick")
         }
 
 
@@ -179,6 +220,7 @@ class TouchActivity: BaseActiviy() {
             MotionEvent.ACTION_CANCEL -> Log.d(TAG, "dispatchTouchEvent ACTION_CANCEL")
             MotionEvent.ACTION_UP -> Log.d(TAG, "dispatchTouchEvent ACTION_UP")
         }
+//        mBinding.childView.dispatchTouchEvent(ev!!)
         return super.dispatchTouchEvent(ev)
     }
 

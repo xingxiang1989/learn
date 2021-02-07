@@ -6,6 +6,7 @@
     </data>
 
     <com.some.mvvmdemo.touch.ParentView
+        android:id="@+id/parentView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -26,6 +27,7 @@
 
 
         <com.some.mvvmdemo.touch.ChildTwoView
+            android:id="@+id/childTwoView"
             android:background="@color/color_1c004c_30"
             android:layout_width="300dp"
             android:layout_height="400dp">
