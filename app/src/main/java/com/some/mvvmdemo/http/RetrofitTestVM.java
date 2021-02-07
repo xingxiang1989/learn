@@ -7,14 +7,19 @@ import androidx.lifecycle.AndroidViewModel;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.some.http.Constants;
+import com.some.http.RetrofitUtil;
 import com.some.mvvmdemo.entity.Translation;
-import com.some.mvvmdemo.http.request.Api;
+import com.some.mvvmdemo.http.entity.EncryptInfo;
+import com.some.mvvmdemo.http.request.ApiService;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitTestVM extends AndroidViewModel {
 
@@ -22,24 +27,21 @@ public class RetrofitTestVM extends AndroidViewModel {
         super(application);
     }
 
-    public void request(){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://fy.iciba.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+    public void request() {
 
-        final Api request = retrofit.create(Api.class);
-        Call<Translation> call = request.getConfig();
-        call.enqueue(new Callback<Translation>() {
+        final ApiService request = RetrofitUtil.Companion.getService(Constants.INSTANCE.getREQUEST_BASE_URL(),
+                ApiService.class);
+        Disposable disposable =
+                request.getConfig().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<EncryptInfo>() {
             @Override
-            public void onResponse(Call<Translation> call, Response<Translation> response) {
-                response.body().show();
+            public void accept(EncryptInfo encryptInfo) throws Exception {
+                LogUtils.d("getEncrypt = " + encryptInfo.getEncrypt());
             }
-
+        }, new Consumer<Throwable>() {
             @Override
-            public void onFailure(Call<Translation> call, Throwable t) {
-                ToastUtils.showShort("链接失败");
-                LogUtils.d(t.toString());
+            public void accept(Throwable throwable) throws Exception {
+                LogUtils.d("getEncrypt err= " + throwable.getMessage());
+
             }
         });
     }

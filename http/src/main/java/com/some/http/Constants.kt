@@ -5,7 +5,7 @@ package com.some.http
  */
 object Constants {
 
-    val REQUEST_BASE_URL = "http://v.juhe.cn/"
+    val REQUEST_BASE_URL = "https://api.ichamet.net"
 
     val KEY = "1be865c0e67e3"
 }

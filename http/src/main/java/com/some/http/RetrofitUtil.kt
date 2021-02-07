@@ -10,13 +10,15 @@ import java.util.concurrent.TimeUnit
 
 /**
  * @author xiangxing
+ * TODO: 单例
+ *
  */
 class RetrofitUtil {
     companion object{
         /**
          * 创建Retrofit
          */
-        fun create(url: String): Retrofit {
+        private fun create(url: String): Retrofit {
             //日志显示级别
             val level: HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.BODY
             //新建log拦截器
@@ -24,17 +26,17 @@ class RetrofitUtil {
                 message -> Log.e("RetrofitUtil","OkHttp: " + message)
             })
             loggingInterceptor.level = level
-            // okHttpClientBuilder
-            val okHttpClientBuilder = OkHttpClient().newBuilder()
 
-            okHttpClientBuilder.connectTimeout(60, TimeUnit.SECONDS)
-            okHttpClientBuilder.readTimeout(10, TimeUnit.SECONDS)
-            //OkHttp进行添加拦截器loggingInterceptor
-            //okHttpClientBuilder.addInterceptor(loggingInterceptor)
+            val okHttpClient = OkHttpClient.Builder()
+                    .connectTimeout(10, TimeUnit.SECONDS)
+                    .readTimeout(10, TimeUnit.SECONDS)
+                    .writeTimeout(10, TimeUnit.SECONDS)
+                    .addInterceptor(loggingInterceptor)
+                    .build()
 
             return Retrofit.Builder()
                     .baseUrl(url)
-                    .client(okHttpClientBuilder.build())
+                    .client(okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .build()
