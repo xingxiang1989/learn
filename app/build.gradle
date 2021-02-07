@@ -74,10 +74,6 @@ dependencies {
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
 
 
-    //  retrofit的依赖
-    implementation 'com.squareup.retrofit2:retrofit:2.8.1'
-    //将JSON字符串转换为对象需要使用的依赖
-    implementation 'com.squareup.retrofit2:converter-gson:2.8.1'
     implementation "androidx.core:core-ktx:+"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
