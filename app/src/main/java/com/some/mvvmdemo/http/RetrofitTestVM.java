@@ -29,7 +29,7 @@ public class RetrofitTestVM extends AndroidViewModel {
 
     public void request() {
 
-        final ApiService request = RetrofitUtil.Companion.getService(Constants.INSTANCE.getREQUEST_BASE_URL(),
+        final ApiService request = RetrofitUtil.Companion.getService(Constants.REQUEST_BASE_URL,
                 ApiService.class);
         Disposable disposable =
                 request.getConfig().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<EncryptInfo>() {
