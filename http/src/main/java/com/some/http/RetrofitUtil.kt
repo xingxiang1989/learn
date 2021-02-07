@@ -1,7 +1,10 @@
 package com.some.http
 
+import android.util.Log
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
@@ -15,12 +18,12 @@ class RetrofitUtil {
          */
         fun create(url: String): Retrofit {
             //日志显示级别
-//            val level: HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.BODY
-//            //新建log拦截器
-//            val loggingInterceptor: HttpLoggingInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger {
-//                message -> Logger.e("OkHttp: " + message)
-//            })
-//            loggingInterceptor.level = level
+            val level: HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.BODY
+            //新建log拦截器
+            val loggingInterceptor: HttpLoggingInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger {
+                message -> Log.e("RetrofitUtil","OkHttp: " + message)
+            })
+            loggingInterceptor.level = level
             // okHttpClientBuilder
             val okHttpClientBuilder = OkHttpClient().newBuilder()
 
@@ -33,7 +36,7 @@ class RetrofitUtil {
                     .baseUrl(url)
                     .client(okHttpClientBuilder.build())
                     .addConverterFactory(GsonConverterFactory.create())
-//                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .build()
         }
 
