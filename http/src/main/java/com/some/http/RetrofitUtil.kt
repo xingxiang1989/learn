@@ -22,7 +22,7 @@ class RetrofitUtil {
             //日志显示级别
             val level: HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.BODY
             //新建log拦截器
-            val loggingInterceptor: HttpLoggingInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger {
+            val loggingInterceptor = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger {
                 message -> Log.e("RetrofitUtil","OkHttp: " + message)
             })
             loggingInterceptor.level = level
