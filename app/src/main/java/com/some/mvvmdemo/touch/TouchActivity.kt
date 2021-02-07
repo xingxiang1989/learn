@@ -21,7 +21,6 @@ import java.util.concurrent.TimeUnit
  * @author xiangxing
  * 验证的场景如下：
  * 1.全部都使用默认值，且不对控件做任何点击事件
- *
  * 1.1 activity,parentView 只包含这两者的事件传递
  * activity --> dispatchTouchEvent Action_down
  * parentView ---> dispatchTouchEvent Action_down
@@ -50,11 +49,40 @@ import java.util.concurrent.TimeUnit
  * activity --> dispatchTouchEvent Action_up
  * activity --> onTouchEvent Action_up
  *
+ * 1.3 activity,parentView，childView，customView
+ * 传递层级与1.2 一致，只是传递路径更深
+ *
  * 2.对textview或者btn做点击事件(setOnClickListener事件，setOnTouchListener事件)
+ * 2.1 对textview做setOnClickListener事件
+ * 设置点击事件，会自动设置为setClickable(true)，这样在OnTouchEvent（）中有进行是否可点击的判断，如果有，则会返回true，事件
+ * Action_down被消耗掉。
+ * activity --> dispatchTouchEvent Action_down
+ * parentView ---> dispatchTouchEvent Action_down
+ * parentView ---> onInterceptTouchEvent Action_down
+ * childView ---> dispatchTouchEvent Action_down
+ * childView ---> onInterceptTouchEvent Action_down （层级有多深就传递有多深）
+ * customView ---> dispatchTouchEvent Action_down
+ * customView ---> onTouchEvent Action_down (此处事件被消耗，就不再向上传递onTouchEvent事件)
+ * activity --> dispatchTouchEvent Action_move
+ * parentView ---> dispatchTouchEvent Action_move
+ * parentView ---> onInterceptTouchEvent Action_move
+ * childView ---> dispatchTouchEvent Action_move
+ * childView ---> onInterceptTouchEvent Action_move
+ * customView ---> dispatchTouchEvent Action_move
+ * customView ---> onTouchEvent Action_move
+ * 后面省略...
+ * customView ---> onTouchEvent Action_up
+ * textView onClick （onclick 事件是在OnTouchEvent中 action_up中进行判断触发）
+ *
+ * 2.2 对childView设置setOnClickListener事件
+ * 点击区域与customView不重合，事件触发顺序与点击textview类似，只是层级会少
+ * 点击区域与customView重合，childView点击事件不会触发，因为onTouchEvent action_down事件会优先会customView消耗掉
  *
  * 3.父viewGroup 进行了拦截
+ * customView，childView都设置点击事件，且点击重叠区域，childView进行事件拦截
+ * 事件只会传递到childView
  *
- * 4.
+ * 4.同层级事件分发
  *
  */
 class TouchActivity: BaseActiviy() {
@@ -71,11 +99,14 @@ class TouchActivity: BaseActiviy() {
                 .activity_touch)
         Log.d(TAG,"init")
 
-//        mBinding.tv.setOnClickListener {
-//            ToastUtils.showShort("textView onClick")
-//        }
+        mBinding.tv.setOnClickListener {
+            Log.d(TAG,"textView onClick")
+        }
 
+        mBinding.childView.setOnClickListener {
+            Log.d(TAG,"childView onClick")
 
+        }
 
 
 

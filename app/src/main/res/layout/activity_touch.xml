@@ -10,17 +10,27 @@
         android:layout_height="match_parent">
 
         <com.some.mvvmdemo.touch.ChildView
+            android:id="@+id/childView"
             android:background="@color/color_F4C11F"
-            android:layout_width="200dp"
-            android:layout_height="200dp"/>
+            android:layout_width="300dp"
+            android:layout_height="400dp">
+            <com.some.mvvmdemo.touch.CustomTextView
+                android:id="@+id/tv"
+                android:text="1111111111111111111"
+                android:padding="10dp"
+                android:background="@color/blue"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"/>
 
-        <com.some.mvvmdemo.touch.CustomTextView
-            android:id="@+id/tv"
-            android:text="1111111111111111111"
-            android:padding="10dp"
-            android:background="@color/blue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        </com.some.mvvmdemo.touch.ChildView>
+
+
+        <com.some.mvvmdemo.touch.ChildTwoView
+            android:background="@color/color_1c004c_30"
+            android:layout_width="300dp"
+            android:layout_height="400dp">
+        </com.some.mvvmdemo.touch.ChildTwoView>
+
 
     </com.some.mvvmdemo.touch.ParentView>
 </layout>
