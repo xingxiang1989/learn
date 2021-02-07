@@ -2,6 +2,7 @@ package com.some.mvvmdemo.touch
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.MotionEvent
 import android.widget.FrameLayout
 import com.blankj.utilcode.util.LogUtils
@@ -10,6 +11,7 @@ import com.blankj.utilcode.util.LogUtils
  * @author xiangxing
  */
 class ParentView: FrameLayout {
+    private val TAG = "TouchTest_parent"
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
@@ -17,22 +19,32 @@ class ParentView: FrameLayout {
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
         when (ev.action) {
-            MotionEvent.ACTION_DOWN -> LogUtils.d("dispatchTouchEvent ACTION_DOWN")
-            MotionEvent.ACTION_MOVE -> LogUtils.d( "dispatchTouchEvent ACTION_MOVE")
+            MotionEvent.ACTION_DOWN -> Log.d(TAG,"dispatchTouchEvent ACTION_DOWN")
+            MotionEvent.ACTION_MOVE -> Log.d(TAG, "dispatchTouchEvent ACTION_MOVE")
+            MotionEvent.ACTION_CANCEL -> Log.d(TAG, "dispatchTouchEvent ACTION_CANCEL")
+            MotionEvent.ACTION_UP -> Log.d(TAG, "dispatchTouchEvent ACTION_UP")
         }
         return super.dispatchTouchEvent(ev)
     }
 
     override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
         when (ev?.action) {
-            MotionEvent.ACTION_DOWN -> LogUtils.d("onInterceptTouchEvent ACTION_DOWN")
-            MotionEvent.ACTION_MOVE -> LogUtils.d( "onInterceptTouchEvent ACTION_MOVE")
+            MotionEvent.ACTION_DOWN -> Log.d(TAG,"onInterceptTouchEvent ACTION_DOWN")
+            MotionEvent.ACTION_MOVE -> Log.d(TAG, "onInterceptTouchEvent ACTION_MOVE")
+            MotionEvent.ACTION_CANCEL -> Log.d(TAG, "onInterceptTouchEvent ACTION_CANCEL")
+            MotionEvent.ACTION_UP -> Log.d(TAG, "onInterceptTouchEvent ACTION_UP")
         }
         return super.onInterceptTouchEvent(ev)
     }
 
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        LogUtils.d("onTouchEvent ACTION_DOWN")
-        return true
+    override fun onTouchEvent(ev: MotionEvent?): Boolean {
+        when (ev?.action) {
+            MotionEvent.ACTION_DOWN -> Log.d(TAG,"onTouchEvent ACTION_DOWN")
+            MotionEvent.ACTION_MOVE -> Log.d(TAG, "onTouchEvent ACTION_MOVE")
+            MotionEvent.ACTION_CANCEL -> Log.d(TAG, "onTouchEvent ACTION_CANCEL")
+            MotionEvent.ACTION_UP -> Log.d(TAG, "onTouchEvent ACTION_UP")
+        }
+        return super.onTouchEvent(ev)
     }
+
 }
