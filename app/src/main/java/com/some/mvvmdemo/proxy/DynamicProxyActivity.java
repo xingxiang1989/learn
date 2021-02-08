@@ -8,6 +8,7 @@ import com.blankj.utilcode.util.LogUtils;
 import com.some.mvvmdemo.R;
 import com.some.mvvmdemo.base.BaseActiviy;
 
+import java.io.FileOutputStream;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -52,6 +53,9 @@ public class DynamicProxyActivity extends BaseActiviy {
 
         LogUtils.d("proxySubject = " + proxySubject.getClass().getName());
         LogUtils.d("proxySubject getSuperclass = " + proxySubject.getClass().getSuperclass().getName());
+
+
+
 
     }
 }

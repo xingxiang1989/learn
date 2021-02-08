@@ -17,6 +17,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RetrofitTestVM extends AndroidViewModel {
 
@@ -41,6 +44,24 @@ public class RetrofitTestVM extends AndroidViewModel {
             public void accept(Throwable throwable) throws Exception {
                 LogUtils.d("getEncrypt err= " + throwable.getMessage());
 
+            }
+        });
+
+
+        request.getConfig2().enqueue(new Callback<BaseEntity<EncryptInfo>>() {
+            @Override
+            public void onResponse(Call<BaseEntity<EncryptInfo>> call, Response<BaseEntity<EncryptInfo>> response) {
+                LogUtils.d("getConfig2 onResponse  ");
+                BaseEntity<EncryptInfo> entity =  response.body();
+                int encrypt =  entity.getInfo().getEncrypt();
+
+                LogUtils.d("getConfig2 onResponse  encrypt = " + encrypt);
+
+            }
+
+            @Override
+            public void onFailure(Call<BaseEntity<EncryptInfo>> call, Throwable t) {
+                LogUtils.d("getConfig2 onFailure err= " + t.getMessage());
             }
         });
     }
