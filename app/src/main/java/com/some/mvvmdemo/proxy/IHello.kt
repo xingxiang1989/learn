@@ -5,7 +5,7 @@ package com.some.mvvmdemo.proxy
  */
 interface IHello {
 
-    fun sayHello()
+    fun sayHello(message: String)
 
-    fun sayBye()
+    fun sayBye(message: String, type: Int)
 }

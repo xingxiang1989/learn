@@ -291,36 +291,7 @@ public class ReflectActivity extends BaseActiviy implements View.OnClickListener
     }
 
 
-    /**
-     * 动态代理
-     */
-    private void testInnovationHandler(){
-        final IHello hello = new RealSubject();
 
-        InvocationHandler invocationHandler = new InvocationHandler() {
-            @Override
-            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                if(method.getName().equals("sayHello")){
-                    LogUtils.d("sayHello before--> ");
-                }else if(method.getName().equals("sayBye")){
-                    LogUtils.d("sayBye before--> ");
-                }
-                method.invoke(hello,args);
-                return null;
-            }
-        };
-
-        IHello proxySubject =
-                (IHello) Proxy.newProxyInstance(hello.getClass().getClassLoader(),
-                new Class<?>[]{IHello.class},invocationHandler);
-
-        proxySubject.sayHello();
-        proxySubject.sayBye();
-
-        LogUtils.d("proxySubject = " + proxySubject.getClass().getName());
-        LogUtils.d("proxySubject = " + proxySubject.getClass().getSuperclass().getName());
-
-    }
 
     /**
      * 插件开发

@@ -22,8 +22,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".mvvm.MvvmActivity"/>
-
         <activity android:name=".NearbyActivity"/>
 
         <activity android:name=".HomeTabActivity"/>
@@ -79,6 +77,8 @@
             android:launchMode="singleTask"
             android:taskAffinity="com.hkfuliao.chamet"
             android:allowTaskReparenting="true"/>
+
+        <activity android:name=".proxy.DynamicProxyActivity"/>
 
     </application>
 
