@@ -1,6 +1,7 @@
 package com.some.mvvmdemo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,14 +18,15 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.some.mvvmdemo.base.BaseFragment;
 import com.some.mvvmdemo.databinding.FragmentMsgBinding;
+import com.some.mvvmdemo.databinding.FragmentSettingBinding;
 import com.some.mvvmdemo.mvvm.ShareDataVM;
 import com.some.mvvmdemo.widget.LoadingView;
 
-public class SettingFragment extends BaseFragment implements View.OnClickListener{
+public class SettingFragment extends BaseFragment{
 
     private static final String TAG = "xingtest-SettingFragment";
 
-    private FragmentMsgBinding binding;
+    private FragmentSettingBinding binding;
     private View emptyView;
     private ShareDataVM shareDataVM;
 
@@ -32,10 +34,9 @@ public class SettingFragment extends BaseFragment implements View.OnClickListene
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView ");
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_msg,container,
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_setting,container,
                 false);
 
-        binding.setClick(this);
 
         return binding.getRoot();
     }
@@ -57,6 +58,13 @@ public class SettingFragment extends BaseFragment implements View.OnClickListene
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Log.d(TAG, "onActivityCreated ");
+
+        binding.btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(),AnimActivity.class));
+            }
+        });
     }
 
     @Override
@@ -105,38 +113,6 @@ public class SettingFragment extends BaseFragment implements View.OnClickListene
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         Log.d(TAG, "onHiddenChanged hidden = " + hidden);
-    }
-
-    @Override
-    public void onClick(View v) {
-        if(v.getId() == R.id.tv){
-            ViewStub viewStub = binding.viewstub.getViewStub();
-            if(viewStub != null){
-                emptyView = viewStub.inflate();
-                emptyView.findViewById(R.id.btn).setOnClickListener(this);
-            }else{
-                emptyView.setVisibility(View.VISIBLE);
-            }
-
-        }else if(v.getId() == R.id.tv2){
-            ViewStub viewStub = binding.viewstub.getViewStub();
-            if(viewStub != null){
-                emptyView = viewStub.inflate();
-                emptyView.setVisibility(View.GONE);
-            }else{
-                emptyView.setVisibility(View.GONE);
-            }
-        }else if(v.getId() == R.id.btn){
-            Toast.makeText(getActivity(),"11",Toast.LENGTH_SHORT).show();
-        }else if(v.getId() == R.id.tv_loading){
-            ViewStub viewStub = binding.viewStubLoading.getViewStub();
-            if(viewStub != null){
-                LoadingView loadingView = (LoadingView) viewStub.inflate();
-            }
-
-            shareDataVM.getLiveData().postValue("点击settingfragment 的内容");
-
-        }
     }
 
     @Override

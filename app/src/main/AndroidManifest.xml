@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".HomeTabActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,7 +24,7 @@
 
         <activity android:name=".NearbyActivity"/>
 
-        <activity android:name=".HomeTabActivity"/>
+        <activity android:name=".AnimActivity"/>
 
         <activity android:name=".HomeViewPagerActivity"/>
 

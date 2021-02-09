@@ -19,22 +19,19 @@ import com.some.common.arouter.RouterUrl;
 import com.some.demo_annotation.BindView;
 import com.some.demo_annotation.DeepLink;
 import com.some.mvvmdemo.base.BaseActiviy;
-import com.some.mvvmdemo.databinding.ActivityMainBinding;
+import com.some.mvvmdemo.databinding.ActivityAnimBinding;
 import com.some.mvvmdemo.entity.Account;
-import com.some.mvvmdemo.testkotlin.Entity;
 import com.tencent.tinker.lib.tinker.TinkerInstaller;
-
-import dagger.hilt.android.AndroidEntryPoint;
 
 /**
  * @author xiangxing
  */
 @DeepLink("acdef://wenkiwu.com/c/")
 @Route(path = RouterUrl.Main)
-public class MainActivity extends BaseActiviy implements View.OnClickListener {
+public class AnimActivity extends BaseActiviy implements View.OnClickListener {
 
     Account account;
-    ActivityMainBinding binding;
+    ActivityAnimBinding binding;
     Animation animDown,animUp, animLeftIn, animLeftOut,animRightIn, animRightOut;
 
     @BindView(R.id.topLayout)
@@ -44,7 +41,7 @@ public class MainActivity extends BaseActiviy implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,
-                R.layout.activity_main);
+                R.layout.activity_anim);
 
         account = new Account("XiaoLei",100);
         binding.setAccount(account);
@@ -169,11 +166,11 @@ public class MainActivity extends BaseActiviy implements View.OnClickListener {
         switch (v.getId()){
             case R.id.btn:
                 LogUtils.d("xiangxingtest 点击btn");
-                startActivity(new Intent(MainActivity.this, HomeTabActivity.class));
+                startActivity(new Intent(AnimActivity.this, HomeTabActivity.class));
                 overridePendingTransition(R.anim.anim_left_in,0);
                 break;
             case R.id.btnviewpager:
-                startActivity(new Intent(MainActivity.this, HomeViewPagerActivity.class));
+                startActivity(new Intent(AnimActivity.this, HomeViewPagerActivity.class));
                 break;
             case R.id.btn_down:
 //                binding.topLayout.startAnimation(animDown);
