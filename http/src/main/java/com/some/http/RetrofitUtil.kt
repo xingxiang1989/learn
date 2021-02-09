@@ -1,6 +1,7 @@
 package com.some.http
 
 import android.util.Log
+import com.some.http.converter.MyGsonConverterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -38,6 +39,7 @@ class RetrofitUtil {
                     .baseUrl(url)
                     .client(okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create())
+//                    .addConverterFactory(MyGsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build()
         }

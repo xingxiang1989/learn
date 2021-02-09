@@ -1,4 +1,4 @@
-package com.some.http
+package com.some.http.entity
 
 /**
  * @author xiangxing

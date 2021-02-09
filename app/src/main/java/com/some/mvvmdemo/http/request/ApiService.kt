@@ -1,6 +1,6 @@
 package com.some.mvvmdemo.http.request
 
-import com.some.http.BaseEntity
+import com.some.http.entity.BaseEntity
 import com.some.mvvmdemo.http.entity.EncryptInfo
 import io.reactivex.Observable
 import retrofit2.Call
@@ -14,6 +14,6 @@ interface ApiService {
     @POST("/pub/config/getAppInfo")
     fun getConfig(): Observable<BaseEntity<EncryptInfo>>
 
-    @POST("/pub/config/getAppInfo")
-    fun getConfig2(): Call<BaseEntity<EncryptInfo>>
+//    @POST("/pub/config/getAppInfo")
+//    fun getConfig2(): Call<BaseEntity<EncryptInfo>>
 }
