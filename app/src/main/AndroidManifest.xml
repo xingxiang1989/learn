@@ -80,6 +80,8 @@
 
         <activity android:name=".proxy.DynamicProxyActivity"/>
 
+        <activity android:name=".file.FileActivity"/>
+
     </application>
 
 </manifest>

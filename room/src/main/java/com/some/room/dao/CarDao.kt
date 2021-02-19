@@ -1,5 +1,6 @@
 package com.some.room.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.some.room.entity.Car
 
@@ -9,7 +10,7 @@ import com.some.room.entity.Car
 @Dao
 interface CarDao {
     @Query("SELECT * FROM Car")
-    fun getAll(): List<Car>
+    fun getAll(): LiveData<Car>
 
     @Query("SELECT * FROM Car where carId=:carId")
     fun getCar(carId: Int): Car?

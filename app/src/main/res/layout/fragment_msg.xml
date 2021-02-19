@@ -214,6 +214,15 @@
             android:padding="10dp"
             android:layout_height="wrap_content"/>
 
+        <TextView
+            android:id="@+id/file"
+            android:text="文件存储相关"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:layout_height="wrap_content"/>
+
     </LinearLayout>
 
 

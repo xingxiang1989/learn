@@ -24,6 +24,7 @@ import com.some.hookactivity.UnRegisterActivity;
 import com.some.mvvmdemo.aidl.AIDLActivity;
 import com.some.mvvmdemo.base.BaseFragment;
 import com.some.mvvmdemo.databinding.FragmentMsgBinding;
+import com.some.mvvmdemo.file.FileActivity;
 import com.some.mvvmdemo.hilt.HiltActivity;
 import com.some.mvvmdemo.http.RetrofitTestActivity;
 import com.some.mvvmdemo.inflate.LayoutInflaterActivity;
@@ -201,6 +202,13 @@ public class MessageFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(mActivity, DynamicProxyActivity.class));
+            }
+        });
+
+        binding.file.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mActivity, FileActivity.class));
             }
         });
     }
