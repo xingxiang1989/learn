@@ -11,6 +11,8 @@ import javax.inject.Inject;
 
 /**
  * @author xiangxing
+ * 这是标准的Task类型的实现，
+ * 当创建一个新的Task的时候，它会基于DefaultTask
  */
 public class JiaguTask extends DefaultTask {
 

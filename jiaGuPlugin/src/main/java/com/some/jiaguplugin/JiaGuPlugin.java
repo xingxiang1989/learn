@@ -17,6 +17,8 @@ public class JiaGuPlugin implements Plugin<Project> {
 
     @Override
     public void apply(Project project) {
+        System.out.println("JiaGuPlugin 执行了 ");
+
         //因为需要用户填数据，因此要使用插件扩展
         //让使用者配置JiaguExt的参数
         final JiaguExt jiaguExt = project.getExtensions().create("jiagu",JiaguExt.class);
@@ -37,6 +39,7 @@ public class JiaGuPlugin implements Plugin<Project> {
                         project.getExtensions().getByType(AppExtension.class);
 
                 //得到一个集合，【debug， Release】
+                //动态的创建task
                 appExtension.getApplicationVariants().all(new Action<ApplicationVariant>() {
                     @Override
                     public void execute(ApplicationVariant applicationVariant) {
