@@ -27,6 +27,8 @@ public class JiaguTask extends DefaultTask {
         setGroup("jiagu");
         this.apkFile = apkFile;
         this.jiaguExt = jiaguExt;
+
+
     }
 
     @TaskAction
