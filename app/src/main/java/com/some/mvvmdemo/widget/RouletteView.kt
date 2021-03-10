@@ -54,9 +54,6 @@ class RouletteView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
     private var mPathList: MutableList<Path> = mutableListOf()
     private var mOnPartClickListener: ((index: Int) -> Unit)? = null
 
-    interface OnPartClickListener {
-        fun onPartClick(index: Int)
-    }
 
     fun setOnPartClickListener(block: (index: Int) -> Unit) {
         this.mOnPartClickListener = block

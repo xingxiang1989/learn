@@ -1,11 +1,10 @@
 package com.some.mvvmdemo.widget
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.RectF
+import android.graphics.*
 import android.util.AttributeSet
+import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.blankj.utilcode.util.LogUtils
@@ -25,8 +24,17 @@ class CakeView: View {
     var sum = 0f
     var mTextPaint: Paint
 
+    /**
+     * 这个是右边的小方块的w,h
+     */
     var rectW = SizeUtils.dp2px(40f)
     var rectH = SizeUtils.dp2px(25f)
+
+    //存储的是路径
+    var mPathList: MutableList<Path> = mutableListOf()
+    var mCenterX: Float = 0f
+    var mCenterY: Float = 0f
+    private var mOnPartClickListener: ((CakeBean) -> Unit)?= null
 
     constructor(context: Context?) : this(context, null)
     constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0)
@@ -34,6 +42,7 @@ class CakeView: View {
 
         mPaint = Paint()
         mPaint.isAntiAlias = true
+        mPaint.style = Paint.Style.FILL
 
         mTextPaint = Paint()
         mTextPaint.isAntiAlias = true
@@ -42,11 +51,16 @@ class CakeView: View {
 
     }
 
+    fun setOnPartyClickListener(block:(CakeBean) -> Unit){
+        mOnPartClickListener = block
+    }
+
     fun setCakeList(list: MutableList<CakeBean>){
 
-
+        mPathList.clear()
         for(bean in list){
             sum += bean.amount
+            mPathList.add(Path())
         }
         for(bean in list){
             bean.degree = bean.amount/sum * 360
@@ -120,6 +134,53 @@ class CakeView: View {
 
     }
 
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        when (event?.action) {
+            MotionEvent.ACTION_DOWN -> {
+//                stopRotate()
+//                parent?.requestDisallowInterceptTouchEvent(true)
+            }
+            MotionEvent.ACTION_UP -> {
+                val partIndex = getPointPart(event.x, event.y)
+                mList?.let {
+                    mOnPartClickListener?.invoke(it[partIndex])
+                }
+
+            }
+        }
+        return true
+    }
+
+    private fun getPointPart(x: Float, y: Float): Int {
+        var resIndex: Int = -1
+        mPathList.forEachIndexed { index, path ->
+            if (pointIsInPath(x, y, path)) {
+                resIndex = index
+            }
+        }
+        return resIndex
+    }
+
+    private fun pointIsInPath(x: Float, y: Float, path: Path): Boolean {
+        val bounds = RectF()
+        path.computeBounds(bounds, true)
+        val region = Region()
+        region.setPath(
+                path,
+                Region(
+                        Rect(
+                                bounds.left.toInt(),
+                                bounds.top.toInt(),
+                                bounds.right.toInt(),
+                                bounds.bottom.toInt()
+                        )
+                )
+        )
+
+        return region.contains(x.toInt(), y.toInt())
+    }
+
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         LogUtils.d("onSizeChanged w=$w,h=$h,oldw=$oldh,oldH=$oldh")
@@ -128,6 +189,7 @@ class CakeView: View {
 
     }
 
+    @SuppressLint("DrawAllocation")
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
@@ -139,6 +201,9 @@ class CakeView: View {
         var rectF = RectF(0f, 0f, minParamer.toFloat(), minParamer.toFloat())
         var startDegree = 0f
 
+        mCenterX = minParamer/2f
+        mCenterY = mCenterX
+
         var left = (minParamer + SizeUtils.dp2px(10f)).toFloat()
         var right = left + rectW
         var top = 0f
@@ -146,12 +211,22 @@ class CakeView: View {
         LogUtils.d("minParamer = $minParamer, left = $left, right = $right")
 
 
-        for(bean in mList!!){
-
+        mList?.forEachIndexed { index, bean ->
             mPaint.color = bean.color
-            //绘制扇形区域
+            //方法1：绘制扇形区域，这种无法进行区域点击
             canvas?.drawArc(rectF, startDegree, bean.degree, true, mPaint)
 
+            //方法2：利用绘制扇形区域
+            mPathList[index].apply {
+                reset()
+                addArc(rectF,startDegree,bean.degree)
+                lineTo(mCenterX,mCenterY)
+                close()
+            }
+            canvas?.drawPath(mPathList[index],mPaint)
+
+
+            //绘制文本
             drawText2(startDegree,bean,canvas)
 
             startDegree += bean.degree

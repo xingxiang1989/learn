@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.os.IBinder
 import androidx.databinding.DataBindingUtil
 import com.blankj.utilcode.util.LogUtils
+import com.blankj.utilcode.util.ToastUtils
 import com.some.mvvmdemo.R
 import com.some.mvvmdemo.base.BaseActiviy
 import com.some.mvvmdemo.databinding.ActivityCakeviewBinding
@@ -38,6 +39,10 @@ class CakeViewActivity: BaseActiviy() {
 
         val intent = Intent(this, TestServiceOne::class.java)
         this.bindService(intent,serviceConn, Context.BIND_AUTO_CREATE)
+
+        binding.cakeview.setOnPartyClickListener {
+            ToastUtils.showShort(it.name)
+        }
     }
 
     private val serviceConn = object: ServiceConnection {
