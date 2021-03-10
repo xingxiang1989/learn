@@ -82,6 +82,8 @@
 
         <activity android:name=".file.FileActivity"/>
 
+        <activity android:name=".view.RouletteViewActivity"/>
+
     </application>
 
 </manifest>

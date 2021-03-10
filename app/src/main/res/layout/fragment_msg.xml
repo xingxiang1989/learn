@@ -94,6 +94,15 @@
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:id="@+id/cakeViewTv2"
+            android:text="自定义饼状图--2"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
             android:id="@+id/viewpager2"
             android:text="viewpager2"
             android:layout_width="match_parent"

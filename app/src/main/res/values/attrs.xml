@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- RouletteView -->
+    <attr format="dimension" name="radius"/>
+    <declare-styleable name="RouletteView">
+        <attr name="radius"/>
+        <attr format="integer" name="part"/>
+    </declare-styleable>
+
+    <!-- 菜单所在位置 -->
+    <attr format="enum" name="sm_position">
+        <enum name="sm_left_top" value="1"/>
+        <enum name="sm_right_top" value="2"/>
+        <enum name="sm_left_bottom" value="4"/>
+        <enum name="sm_right_bottom" value="8"/>
+    </attr>
+    <!-- 半径 -->
+<!--    <attr format="dimension" name="sm_radius"/>-->
+    <!--  卫星菜单 style  -->
+    <declare-styleable name="SatelliteMenu">
+        <attr name="sm_position"/>
+<!--        <attr name="sm_radius"/> 引用的外部定义的 -->
+        <attr format="dimension" name="sm_radius"/>
+    </declare-styleable>
+
+    <!--    -->
+    <declare-styleable name="TitleToolbar">
+        <attr name="leftText" format="string" />
+        <attr name="leftVisibility" format="boolean" />
+        <attr name="leftImage" format="reference" />
+        <attr name="leftImageVisibility" format="boolean" />
+        <attr name="middleText" format="string" />
+        <attr name="rightText" format="string" />
+        <attr name="rightVisibility" format="boolean" />
+        <attr name="rightImage" format="reference" />
+        <attr name="rightImageVisibility" format="boolean" />
+        <attr name="rightView" format="reference" />
+    </declare-styleable>
+
+</resources>
