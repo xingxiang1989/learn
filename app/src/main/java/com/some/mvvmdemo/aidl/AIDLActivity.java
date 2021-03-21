@@ -23,6 +23,8 @@ import java.util.Random;
 
 /**
  * @author xiangxing
+ * 去开启一个服务，使用bindService，bindService这样是可以进行activity与Service的通信
+ * 而StartService 则没有达到这个效果。
  */
 public class AIDLActivity extends Activity {
 

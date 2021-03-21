@@ -1,6 +1,7 @@
 package com.some.mvvmdemo;
 
 import com.some.mvvmdemo.entity.Book;
+import com.some.mvvmdemo.entity.Author;
 
 interface BookManager{
 
@@ -10,5 +11,7 @@ interface BookManager{
   void addBook(in Book book);
 
   List<Book> getBooks();
+
+  void addAuthor(in Author author);
 
 }
