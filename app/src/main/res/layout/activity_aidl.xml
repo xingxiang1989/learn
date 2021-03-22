@@ -17,8 +17,22 @@
 
         <Button
             android:id="@+id/btn"
+            android:text="tag: in"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btnout"
+            android:text="tag: out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btninout"
+            android:text="tag: inout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
 
     </LinearLayout>
 </layout>

@@ -7,6 +7,7 @@ import android.os.RemoteException;
 
 import androidx.annotation.Nullable;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.some.mvvmdemo.BookManager;
 import com.some.mvvmdemo.entity.Author;
 import com.some.mvvmdemo.entity.Book;
@@ -25,8 +26,19 @@ public class RemoteService extends Service {
 
     private IBinder binder = new BookManager.Stub() {
         @Override
-        public void addBook(Book book) throws RemoteException {
-            mBooks.add(book);
+        public void addBookIn(Book book) throws RemoteException {
+            LogUtils.d("addBookIn book =" + book.toString());
+        }
+
+        @Override
+        public void addBookOut(Book book) throws RemoteException {
+            LogUtils.d("addBookOut book =" + book.toString());
+
+        }
+
+        @Override
+        public void addBookInOut(Book book) throws RemoteException {
+            LogUtils.d("addBookInOut book =" + book.toString());
         }
 
         @Override

@@ -55,10 +55,42 @@ public class AIDLActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Random random = new Random();
-                Book book = new Book("mask bOOk- " + random.nextInt(), 100.0f);
+                Book book = new Book("book in " + random.nextInt(), 100.0f);
 
                 try {
-                    manager.addBook(book);
+                    manager.addBookIn(book);
+                    List<Book> bookList = manager.getBooks();
+                    mBinding.tv.setText(bookList.toString());
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        mBinding.btnout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Random random = new Random();
+                Book book = new Book("book out " + random.nextInt(), 100.0f);
+
+                try {
+                    manager.addBookOut(book);
+                    List<Book> bookList = manager.getBooks();
+                    mBinding.tv.setText(bookList.toString());
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        mBinding.btninout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Random random = new Random();
+                Book book = new Book("book inout " + random.nextInt(), 100.0f);
+
+                try {
+                    manager.addBookInOut(book);
                     List<Book> bookList = manager.getBooks();
                     mBinding.tv.setText(bookList.toString());
                 } catch (RemoteException e) {

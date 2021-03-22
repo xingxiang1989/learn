@@ -35,6 +35,11 @@ public class Book implements Parcelable {
         this.price = (Float) in.readValue(Float.class.getClassLoader());
     }
 
+    public void readFromParcel(Parcel in){
+        this.name = in.readString();
+        this.price = (Float) in.readValue(Float.class.getClassLoader());
+    }
+
     public static final Creator<Book> CREATOR = new Creator<Book>() {
         @Override
         public Book createFromParcel(Parcel source) {
@@ -46,4 +51,12 @@ public class Book implements Parcelable {
             return new Book[size];
         }
     };
+
+
+
+
+    @Override
+    public String toString() {
+        return "Book{" + "name='" + name + '\'' + ", price=" + price + '}';
+    }
 }
