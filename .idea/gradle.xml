@@ -23,10 +23,12 @@
             <option value="$PROJECT_DIR$/gradle-plugin" />
             <option value="$PROJECT_DIR$/hookactivity" />
             <option value="$PROJECT_DIR$/http" />
+            <option value="$PROJECT_DIR$/im" />
             <option value="$PROJECT_DIR$/jiaGuPlugin" />
             <option value="$PROJECT_DIR$/modulea" />
             <option value="$PROJECT_DIR$/mylibrary" />
             <option value="$PROJECT_DIR$/room" />
+            <option value="$PROJECT_DIR$/traceLog" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

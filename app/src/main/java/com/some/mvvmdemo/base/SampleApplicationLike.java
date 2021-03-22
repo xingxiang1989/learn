@@ -20,6 +20,7 @@ import com.some.common.BuildConfig;
 import com.some.common.Log.MyLogImp;
 import com.some.common.util.SampleApplicationContext;
 import com.some.common.util.TinkerManager;
+import com.some.im.ImClient;
 import com.tencent.tinker.anno.DefaultLifeCycle;
 import com.tencent.tinker.entry.DefaultApplicationLike;
 import com.tencent.tinker.lib.tinker.Tinker;
@@ -110,6 +111,7 @@ public class SampleApplicationLike extends DefaultApplicationLike {
 
         initRouter();
 
+        ImClient.Companion.init(getApplication().getApplicationContext());
     }
 
     /**

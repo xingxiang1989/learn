@@ -20,6 +20,23 @@
         <module name="MvvmDemo.demo-compiler" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.8" />
+    <bytecodeTargetLevel target="1.7">
+      <module name="MvvmDemo.aoplib" target="1.8" />
+      <module name="MvvmDemo.app" target="1.8" />
+      <module name="MvvmDemo.autopatchbase" target="1.8" />
+      <module name="MvvmDemo.common" target="1.8" />
+      <module name="MvvmDemo.custom-plugin" target="1.8" />
+      <module name="MvvmDemo.demo-compiler" target="1.8" />
+      <module name="MvvmDemo.demo_annotation" target="1.8" />
+      <module name="MvvmDemo.flexlayout" target="1.8" />
+      <module name="MvvmDemo.gradle-plugin" target="1.8" />
+      <module name="MvvmDemo.hookactivity" target="1.8" />
+      <module name="MvvmDemo.http" target="1.8" />
+      <module name="MvvmDemo.im" target="1.8" />
+      <module name="MvvmDemo.jiaGuPlugin" target="1.8" />
+      <module name="MvvmDemo.modulea" target="1.8" />
+      <module name="MvvmDemo.mylibrary" target="1.8" />
+      <module name="MvvmDemo.room" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
