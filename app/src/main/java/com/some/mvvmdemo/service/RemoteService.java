@@ -27,18 +27,26 @@ public class RemoteService extends Service {
     private IBinder binder = new BookManager.Stub() {
         @Override
         public void addBookIn(Book book) throws RemoteException {
-            LogUtils.d("addBookIn book =" + book.toString());
+            LogUtils.d("addBookIn before book =" + book.toString());
+            book.setName(book.getName() + " modify");
+            book.setPrice(200f);
+            mBooks.add(book);
         }
 
         @Override
         public void addBookOut(Book book) throws RemoteException {
-            LogUtils.d("addBookOut book =" + book.toString());
-
+            LogUtils.d("addBookOut before book =" + book.toString());
+            book.setName(book.getName() + " modify");
+            book.setPrice(200f);
+            mBooks.add(book);
         }
 
         @Override
         public void addBookInOut(Book book) throws RemoteException {
             LogUtils.d("addBookInOut book =" + book.toString());
+            book.setName(book.getName() + " modify");
+            book.setPrice(200f);
+            mBooks.add(book);
         }
 
         @Override

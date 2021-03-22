@@ -12,6 +12,7 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.some.mvvmdemo.BookManager;
 import com.some.mvvmdemo.R;
 import com.some.mvvmdemo.databinding.ActivityAidlBinding;
@@ -35,19 +36,6 @@ public class AIDLActivity extends Activity {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this,R.layout.activity_aidl);
 
-        ServiceConnection connection = new ServiceConnection() {
-            @Override
-            public void onServiceConnected(ComponentName name, IBinder service) {
-                manager = BookManager.Stub.asInterface(service);
-
-            }
-
-            @Override
-            public void onServiceDisconnected(ComponentName name) {
-                manager = null;
-            }
-        };
-
         Intent intent = new Intent(this, RemoteService.class);
         bindService(intent,connection, BIND_AUTO_CREATE);
 
@@ -60,7 +48,10 @@ public class AIDLActivity extends Activity {
                 try {
                     manager.addBookIn(book);
                     List<Book> bookList = manager.getBooks();
-                    mBinding.tv.setText(bookList.toString());
+//                    mBinding.tv.setText(bookList.toString());
+                    mBinding.tv.setText(book.toString());
+
+
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
@@ -76,7 +67,9 @@ public class AIDLActivity extends Activity {
                 try {
                     manager.addBookOut(book);
                     List<Book> bookList = manager.getBooks();
-                    mBinding.tv.setText(bookList.toString());
+//                    mBinding.tv.setText(bookList.toString());
+                    mBinding.tv.setText(book.toString());
+
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
@@ -92,12 +85,36 @@ public class AIDLActivity extends Activity {
                 try {
                     manager.addBookInOut(book);
                     List<Book> bookList = manager.getBooks();
-                    mBinding.tv.setText(bookList.toString());
+//                    mBinding.tv.setText(bookList.toString());
+
+                    mBinding.tv.setText(book.toString());
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
             }
         });
 
+    }
+
+    ServiceConnection connection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            LogUtils.d("onServiceConnected -- >");
+            manager = BookManager.Stub.asInterface(service);
+
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            LogUtils.d("onServiceDisconnected -- >");
+            manager = null;
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //必须要解绑，否则有内存泄漏的问题
+        unbindService(connection);
     }
 }
