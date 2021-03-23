@@ -1,6 +1,6 @@
 // OnReceiveMessageListener.aidl
-package com.some.mvvmdemo;
-import com.some.mvvmdemo.entity.Message;
+package com.some.im;
+import com.some.im.Message;
 
 // Declare any non-default types here with import statements
 

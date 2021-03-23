@@ -1,4 +1,4 @@
-package com.some.mvvmdemo.entity;
+package com.some.im;
 
 import android.os.Parcel;
 import android.os.Parcelable;

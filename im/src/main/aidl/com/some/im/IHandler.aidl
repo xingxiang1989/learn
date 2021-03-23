@@ -1,6 +1,6 @@
 // IHandler.aidl
-package com.some.mvvmdemo;
-import com.some.mvvmdemo.OnReceiveMessageListener;
+package com.some.im;
+import com.some.im.OnReceiveMessageListener;
 // Declare any non-default types here with import statements
 
 interface IHandler {

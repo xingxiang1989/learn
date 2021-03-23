@@ -1,4 +1,4 @@
 // Message.aidl
-package com.some.mvvmdemo.entity;
+package com.some.im;
 
 parcelable Message;
