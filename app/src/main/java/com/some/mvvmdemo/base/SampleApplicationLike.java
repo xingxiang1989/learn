@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.os.StrictMode;
 import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
@@ -15,12 +14,11 @@ import androidx.multidex.MultiDex;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.CrashUtils;
-import com.blankj.utilcode.util.LogUtils;
 import com.some.common.BuildConfig;
 import com.some.common.Log.MyLogImp;
 import com.some.common.util.SampleApplicationContext;
 import com.some.common.util.TinkerManager;
-import com.some.im.ImClient;
+import com.some.im.RongIMClient;
 import com.tencent.tinker.anno.DefaultLifeCycle;
 import com.tencent.tinker.entry.DefaultApplicationLike;
 import com.tencent.tinker.lib.tinker.Tinker;
@@ -111,7 +109,7 @@ public class SampleApplicationLike extends DefaultApplicationLike {
 
         initRouter();
 
-        ImClient.Companion.init(getApplication().getApplicationContext());
+        RongIMClient.Companion.init(getApplication().getApplicationContext());
     }
 
     /**

@@ -2,30 +2,33 @@ package com.some.im
 
 import android.app.Activity
 import android.app.Application
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.ServiceConnection
 import android.os.Bundle
+import android.os.IBinder
 import android.util.Log
 
 /**
  * @author xiangxing
  * 仿照融云im编写，里面有很多值得学习
  */
-class ImClient private constructor() {
+class RongIMClient private constructor() {
 
     private var topForeGroundActivity: Activity? = null
     private val tag = "ImClient"
     private var mContext: Context? = null
-    private var mAppKey: String?= null
+    private var mAppKey: String? = null
+    private var mAIdlConnection: AIdlConnection? = null
 
     companion object {
 
         private var isEnablePush: Boolean = false
         private var isInForeground = false
 
-
-        private val instance: ImClient by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
-            ImClient()
+        private val INSTANCE: RongIMClient by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
+            RongIMClient()
         }
 
         fun init(context: Context) {
@@ -38,8 +41,12 @@ class ImClient private constructor() {
 
         fun init(context: Context, appKey: String?, isEnablePush: Boolean) {
             this.isEnablePush = isEnablePush
-            instance.initSdk(context, appKey)
+            INSTANCE.initSdk(context, appKey)
         }
+    }
+
+    init {
+        mAIdlConnection = AIdlConnection()
     }
 
     private fun initSdk(context: Context, appKey: String?) {
@@ -91,25 +98,37 @@ class ImClient private constructor() {
     }
 
     private fun onAppBackgroundChanged(isForeground: Boolean) {
-        if(mContext != null){
+        if (mContext != null) {
             isInForeground = isForeground
             //这里有判断，判断serviceConn是否已经连接，如果有连接则进行检测
             //如果没有，则进行bindService
-            if(isForeground){
+            if (isForeground) {
                 initBindService()
             }
         }
     }
 
-    private fun initBindService(){
+    private fun initBindService() {
         try {
-            val intent = Intent(mContext, ImService::class.java)
+            val intent = Intent(mContext, RongService::class.java)
             intent.putExtra("appKey", this.mAppKey)
             intent.putExtra("deviceId", "1111")
-//            mContext!!.bindService(intent, this.mAidlConnection, 1)
+            mAIdlConnection?.let {
+                mContext!!.bindService(intent, it, Context.BIND_AUTO_CREATE)
+            }
         } catch (var2: SecurityException) {
-            Log.e("RongIMClient", "initBindService SecurityException")
-            Log.e("RongIMClient", "initBindService", var2)
+            Log.e(tag, "initBindService SecurityException")
+            Log.e(tag, "initBindService", var2)
+        }
+    }
+
+    class AIdlConnection : ServiceConnection {
+        override fun onServiceConnected(p0: ComponentName?, p1: IBinder?) {
+            Log.e("ImClient", "onServiceConnected")
+        }
+
+        override fun onServiceDisconnected(p0: ComponentName?) {
+            Log.e("ImClient", "onServiceDisconnected")
         }
     }
 }

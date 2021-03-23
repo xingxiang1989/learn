@@ -16,7 +16,7 @@
     <application>
 
         <!-- 声明云信后台服务 -->
-        <service android:name=".ImService"
+        <service android:name=".RongService"
             android:process=":core"/>
 
     </application>

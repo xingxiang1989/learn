@@ -9,11 +9,11 @@ import android.util.Log
 
 /**
  * @author xiangxing
- * imService crash的捕获以及日志的打印并上报
+ * RongService crash的捕获以及日志的打印并上报
  */
-class ImService : Service(), Thread.UncaughtExceptionHandler {
+class RongService : Service(), Thread.UncaughtExceptionHandler {
 
-    private val tag = "ImService"
+    private val tag = "RongService"
     private var defaultExceptionHandler: Thread.UncaughtExceptionHandler? = null
 
     override fun onCreate() {
