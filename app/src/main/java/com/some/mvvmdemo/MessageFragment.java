@@ -221,6 +221,13 @@ public class MessageFragment extends BaseFragment {
                 startActivity(new Intent(mActivity, FileActivity.class));
             }
         });
+
+        binding.encode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mActivity, AlgorithmActivity.class));
+            }
+        });
     }
 
     @Override

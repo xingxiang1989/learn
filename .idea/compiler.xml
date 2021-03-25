@@ -21,6 +21,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.7">
+      <module name="MvvmDemo.algorithm" target="1.8" />
       <module name="MvvmDemo.aoplib" target="1.8" />
       <module name="MvvmDemo.app" target="1.8" />
       <module name="MvvmDemo.autopatchbase" target="1.8" />

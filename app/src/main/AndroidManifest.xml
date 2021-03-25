@@ -84,6 +84,8 @@
 
         <activity android:name=".view.RouletteViewActivity"/>
 
+        <activity android:name=".AlgorithmActivity"/>
+
     </application>
 
 </manifest>
