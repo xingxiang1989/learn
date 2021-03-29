@@ -28,11 +28,16 @@ class RetrofitUtil {
             })
             loggingInterceptor.level = level
 
+            //将本地的证书放到本地
+            //InputStream inputStream = context.getResources().openRawResource(R.raw.sever_vipbcw);
+
             val okHttpClient = OkHttpClient.Builder()
                     .connectTimeout(10, TimeUnit.SECONDS)
                     .readTimeout(10, TimeUnit.SECONDS)
                     .writeTimeout(10, TimeUnit.SECONDS)
                     .addInterceptor(loggingInterceptor)
+                    //设置ssl证书
+//                    .sslSocketFactory(HttpsUtil.buildSSLSocketFactory(context, inputStream), X509TrustManagerImpl())
                     .build()
 
             return Retrofit.Builder()
