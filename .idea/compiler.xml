@@ -25,6 +25,7 @@
       <module name="MvvmDemo.aoplib" target="1.8" />
       <module name="MvvmDemo.app" target="1.8" />
       <module name="MvvmDemo.autopatchbase" target="1.8" />
+      <module name="MvvmDemo.changeSkin" target="1.8" />
       <module name="MvvmDemo.common" target="1.8" />
       <module name="MvvmDemo.custom-plugin" target="1.8" />
       <module name="MvvmDemo.demo-compiler" target="1.8" />
