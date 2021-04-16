@@ -110,6 +110,9 @@ public class SampleApplicationLike extends DefaultApplicationLike {
         initRouter();
 
         RongIMClient.Companion.init(getApplication().getApplicationContext());
+
+
+
     }
 
     /**

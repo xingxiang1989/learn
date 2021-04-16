@@ -73,7 +73,7 @@ dependencies {
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
 
     api "com.blankj:utilcodex:1.23.7"
-    implementation "androidx.core:core-ktx:+"
+    implementation "androidx.core:core-ktx:1.2.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin_version}"
 
     //增加协程核心，和Android 协程依赖
