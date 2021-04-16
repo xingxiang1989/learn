@@ -228,6 +228,14 @@ public class MessageFragment extends BaseFragment {
                 startActivity(new Intent(mActivity, AlgorithmActivity.class));
             }
         });
+
+        binding.changeSkin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mActivity, ChangeSkinActivity.class));
+
+            }
+        });
     }
 
     @Override

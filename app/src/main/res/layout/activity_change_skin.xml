@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/changeSkin"
+            android:textColor="@color/color_change_skin"
+            android:text="换肤"
+            android:background="@color/light_green"
+            android:gravity="center"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
+
+
+        <TextView
+            android:id="@+id/revertSkin"
+            android:layout_marginTop="50dp"
+            android:textColor="@color/color_change_skin"
+            android:text="取消换肤"
+            android:background="@color/light_green"
+            android:gravity="center"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:background="@mipmap/race_but_history"
+            android:layout_marginTop="50dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:src="@mipmap/race_but_history"
+            android:layout_marginTop="50dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_marginTop="50dp"
+            android:textColor="@color/color_change_skin"
+            android:text="drawableLeft"
+            android:drawableStart="@mipmap/race_but_history"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"/>
+
+    </LinearLayout>
+</layout>

@@ -59,4 +59,6 @@
     <color name="color_1c004c_80">#CC1C004C</color>
     <color name="color_ffffff_10">#1affffff</color>
     <color name="color_ffffff_20">#33ffffff</color>
+
+    <color name="color_change_skin">#000000</color>
 </resources>
