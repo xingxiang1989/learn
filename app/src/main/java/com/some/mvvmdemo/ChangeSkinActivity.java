@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 
+import com.some.changeskin.SkinManager;
 import com.some.mvvmdemo.base.BaseActiviy;
 import com.some.mvvmdemo.databinding.ActivityChangeSkinBinding;
 
@@ -24,14 +25,15 @@ public class ChangeSkinActivity extends BaseActiviy {
         binding.changeSkin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                SkinManager.Companion.getInstance().loadSkin("/storage/emulated/0/ASkin" +
+                        "/skin.apk");
             }
         });
 
         binding.revertSkin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                SkinManager.Companion.getInstance().loadSkin("");
             }
         });
     }

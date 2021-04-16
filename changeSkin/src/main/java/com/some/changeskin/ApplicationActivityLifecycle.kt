@@ -10,6 +10,7 @@ import java.util.*
 
 /**
  * @author xiangxing
+ * 监听activity的生命周期，用于为每个activity设置新的factory2，以及管理activity对应的factory
  */
 class ApplicationActivityLifecycle(observable: Observable): Application.ActivityLifecycleCallbacks {
 
@@ -25,6 +26,7 @@ class ApplicationActivityLifecycle(observable: Observable): Application.Activity
 
     override fun onActivityCreated(activity: Activity, p1: Bundle?) {
         /**
+         * TODO：需要查看onActivityCreated执行时机，factory2是在何时进行设置的
          * 更新状态栏
          */
         SkinThemeUtils.updateStatusBarColor(activity)

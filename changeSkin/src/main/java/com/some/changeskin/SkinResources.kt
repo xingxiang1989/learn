@@ -35,7 +35,8 @@ class SkinResources private constructor(context: Context){
                 }
             }
         }
-
+        //这种写法一般不是很通用，要么按照skinManger来写，要么按照腾讯文档来写，在getInstance中传递参数，然后
+        //再进行对象的单例实例化
         fun getInstance(): SkinResources {
             return instance!!
         }

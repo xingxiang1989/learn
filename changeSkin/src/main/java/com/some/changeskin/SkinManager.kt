@@ -25,7 +25,7 @@ class SkinManager private constructor(application: Application): Observable() {
      * 应用每次启动后，就会加载原来已经保存的apk地址信息
      */
     init {
-        Log.d(tag, "init block")
+        Log.d(tag, "init constructor----》")
         mContext = application
         //初始化sp
         SkinPreference.init(application)
@@ -35,13 +35,18 @@ class SkinManager private constructor(application: Application): Observable() {
         skinActivityLifecycle = ApplicationActivityLifecycle(this)
         application.registerActivityLifecycleCallbacks(skinActivityLifecycle)
 
-        //加载上次使用保存的皮肤
+        //每次应用启动，初始化都会自动 加载上次使用保存的皮肤
         loadSkin(SkinPreference.getInstance().skin)
+
+        Log.d(tag, "init constructor end----》")
+
 
     }
 
     companion object{
-        @Volatile private var instance: SkinManager? = null
+        //默认是否set，get方法，现在对set方法前添加私有
+        @Volatile var instance: SkinManager? = null
+                        private set
 
         /**
          * 初始化 必须在Application中先进行初始化
@@ -65,7 +70,7 @@ class SkinManager private constructor(application: Application): Observable() {
      *
      * 存储的是类似这种格式："/data/data/com.enjoy.skin/skin/skin-debug.apk"，apk的路径
      */
-    private fun loadSkin(skinPath: String){
+    fun loadSkin(skinPath: String){
         if(TextUtils.isEmpty(skinPath)){
             SkinPreference.getInstance().reset()
             SkinResources.getInstance().reset()
