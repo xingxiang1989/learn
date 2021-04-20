@@ -35,6 +35,7 @@ import javax.lang.model.element.TypeElement;
 @AutoService(Processor.class)
 public class DeepLinkProcessor extends BaseProcessor{
 
+
     private static final String DEEPLINK_PACKAGE = "com.wenkiwu.deeplink";
     private static final String DEEPLINK_LOADER = "DeepLinkLoader";
     private static final String DEEPLINK_DISPATCH = "DeepLinkDispatch";
