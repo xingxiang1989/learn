@@ -40,7 +40,7 @@ public class SkinPreference {
     }
 
     public String getSkin() {
-        return mPref.getString(KEY_SKIN_PATH, null);
+        return mPref.getString(KEY_SKIN_PATH, "");
     }
 
 }
