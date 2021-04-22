@@ -10,7 +10,8 @@ import java.lang.reflect.Constructor
 import java.util.*
 
 /**
- * 用来接管系统的view的生产过程
+ * 用来接管系统的view的生产过程,
+ * factory 是观察者，该类override onCreateView来获取view的相关属性并将页面中所有的view记录在SkinAttribute对象中。
  * @author xiangxing
  */
 class SkinLayoutInflaterFactory(activity: Activity): LayoutInflater.Factory2, Observer {
@@ -24,6 +25,7 @@ class SkinLayoutInflaterFactory(activity: Activity): LayoutInflater.Factory2, Ob
             "android.view."
     )
     private var skinAttribute: SkinAttribute?= null
+    private var mActivity: Activity
 
     //记录对应VIEW的构造函数
     private val mConstructorSignature = arrayOf(
@@ -35,9 +37,12 @@ class SkinLayoutInflaterFactory(activity: Activity): LayoutInflater.Factory2, Ob
     private val mConstructorMap = HashMap<String, Constructor<out View?>>()
     init {
         skinAttribute = SkinAttribute()
+        mActivity = activity
     }
 
     override fun onCreateView(parent: View?, name: String, context: Context, attrs: AttributeSet): View? {
+
+        Log.d(TAG,"1.0 onCreateView start ---> activity = ${mActivity.javaClass.simpleName}")
         //换肤就是在需要时候替换 View的属性(src、background等)
         //所以这里创建 View,从而修改View属性
         var view = createSDKView(name, context, attrs)
@@ -49,6 +54,8 @@ class SkinLayoutInflaterFactory(activity: Activity): LayoutInflater.Factory2, Ob
             //加载属性
             skinAttribute?.look(view, attrs)
         }
+        Log.d(TAG,"onCreateView end --->")
+
         return view
     }
 
@@ -57,7 +64,7 @@ class SkinLayoutInflaterFactory(activity: Activity): LayoutInflater.Factory2, Ob
     }
 
     private fun createSDKView(name: String, context: Context, attrs: AttributeSet):View?{
-        Log.e(TAG, " createSDKView name=$name")
+        Log.e(TAG, "2.0 createSDKView name=$name")
         /**
          * 如果是系统提供的view，view的name直接是名称，比如TextView，ImageView这些都是系统提供的view
          * 而自定义的view，则会有报名路径
@@ -76,7 +83,7 @@ class SkinLayoutInflaterFactory(activity: Activity): LayoutInflater.Factory2, Ob
     }
 
     private fun createView(name: String, context: Context, attrs: AttributeSet):View?{
-        Log.e(TAG, "createView name=$name")
+        Log.e(TAG, "3.0 createView name=$name")
         val constructor = findConstructor(context, name)
         if(constructor != null){
             return constructor.newInstance(context, attrs)
@@ -88,12 +95,18 @@ class SkinLayoutInflaterFactory(activity: Activity): LayoutInflater.Factory2, Ob
      * 通过name反射拿到view，再通过view获取constructor
      */
     private fun findConstructor(context: Context, name: String): Constructor<out View?>? {
+        Log.e(TAG, "4.0 findConstructor name=$name")
         var constructor = mConstructorMap[name]
         if(constructor == null){
-            //这里也可以使用Class.ForName()
-            val view = context.classLoader.loadClass(name).asSubclass(View::class.java)
-            constructor = view.getConstructor(*mConstructorSignature)
-            mConstructorMap[name] = constructor
+            try {
+                //这里也可以使用Class.ForName()
+                val view = context.classLoader.loadClass(name).asSubclass(View::class.java)
+                constructor = view.getConstructor(*mConstructorSignature)
+                mConstructorMap[name] = constructor
+            }catch (e: Exception){
+                //存在反射拿不到的情况
+                Log.e(TAG, "findConstructor Exception $e")
+            }
         }
         return constructor
     }

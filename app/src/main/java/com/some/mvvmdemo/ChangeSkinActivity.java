@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.some.changeskin.SkinManager;
 import com.some.mvvmdemo.base.BaseActiviy;
 import com.some.mvvmdemo.databinding.ActivityChangeSkinBinding;
@@ -19,6 +20,8 @@ public class ChangeSkinActivity extends BaseActiviy {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LogUtils.d("ApplicationActivityLifecycle","xiangxingtest ChangeSkinActivity onCreate");
+
         binding = DataBindingUtil.setContentView(this,
                 R.layout.activity_change_skin);
 
@@ -36,5 +39,12 @@ public class ChangeSkinActivity extends BaseActiviy {
                 SkinManager.Companion.getInstance().loadSkin("");
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LogUtils.d("ApplicationActivityLifecycle","xiangxingtest ChangeSkinActivity onDestroy");
+
     }
 }

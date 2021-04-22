@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import androidx.collection.ArrayMap
-import androidx.core.view.LayoutInflaterCompat
 import java.util.*
 
 /**
@@ -54,11 +53,7 @@ class ApplicationActivityLifecycle(observable: Observable): Application.Activity
         fieldFactory2.set(layoutInflater,skinLayoutInflaterFactory)
         fieldFactory.set(layoutInflater,skinLayoutInflaterFactory)
 
-
-
-
         mLayoutInflaterFactories[activity] = skinLayoutInflaterFactory
-
         //每一个页面会创建，那么就会作为观察者被加入进去
         mObservable?.addObserver(skinLayoutInflaterFactory)
 
@@ -80,6 +75,8 @@ class ApplicationActivityLifecycle(observable: Observable): Application.Activity
     }
 
     override fun onActivityDestroyed(activity: Activity) {
+        Log.d(tag,"onActivityDestroyed, activity = ${activity.javaClass.name}")
+
         val factory = mLayoutInflaterFactories.remove(activity)
         mObservable?.deleteObserver(factory)
 

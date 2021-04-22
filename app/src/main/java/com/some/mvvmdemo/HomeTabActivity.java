@@ -2,7 +2,6 @@ package com.some.mvvmdemo;
 
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -11,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -23,8 +21,6 @@ import com.some.mvvmdemo.reentranlock.SynchronizedExceptionRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import io.reactivex.Observable;
 
 @HelloAnnotation
 public class HomeTabActivity extends BaseActiviy implements View.OnClickListener {
@@ -48,7 +44,7 @@ public class HomeTabActivity extends BaseActiviy implements View.OnClickListener
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        LogUtils.d("xiangxingtest HomeTabActivity");
+        LogUtils.d("ApplicationActivityLifecycle","xiangxingtest HomeTabActivity onCreate");
 
 
         mBinding = DataBindingUtil.setContentView(this,R.layout.activity_home_tab);
