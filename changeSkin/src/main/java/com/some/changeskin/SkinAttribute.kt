@@ -114,13 +114,16 @@ class SkinAttribute {
      */
     data class SkinPair(val attributeName: String, val resId: Int)
 
+    /**
+     * 遍历view的属性，符合的话构成SkinView，并加入到mSKinViews中
+     */
     fun look(view: View?, attrs: AttributeSet){
         val mSkinPairs = arrayListOf<SkinPair>()
         for(i in 0 until attrs.attributeCount){
             val attributeName = attrs.getAttributeName(i)
             if(mAttributes.contains(attributeName)){
                 val attributeValue = attrs.getAttributeValue(i)
-                Log.e(TAG, "attributeName = $attributeName, attributeValue=$attributeValue")
+                Log.d(TAG, "attributeName = $attributeName, attributeValue=$attributeValue")
                 //需要过滤部分情况
                 // #
                 // ?722727272
@@ -128,12 +131,11 @@ class SkinAttribute {
                 if(attributeValue.startsWith("#")){
                     continue
                 }
-                var resId = 0
-                if(attributeValue.startsWith("?")){
+                val resId = if (attributeValue.startsWith("?")) {
                     val attrId = attributeValue.substring(1).toInt()
-                    resId = SkinThemeUtils.getResId(view!!.context, intArrayOf(attrId))[0]
-                }else{
-                    resId = attributeValue.substring(1).toInt()
+                    SkinThemeUtils.getResId(view!!.context, intArrayOf(attrId))[0]
+                } else {
+                    attributeValue.substring(1).toInt()
                 }
                 val skinPair = SkinPair(attributeName,resId)
                 mSkinPairs.add(skinPair)
