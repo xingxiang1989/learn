@@ -103,12 +103,12 @@ class SkinManager private constructor(application: Application): Observable() {
             }catch (e: Exception){
 
             }
-            //通知采集的View 更新皮肤
-            //被观察者改变 通知所有观察者
-            setChanged()
-            notifyObservers()
-            Log.d(tag, "loadSkin  setChanged")
-
         }
+
+        //通知采集的View 更新皮肤
+        //被观察者改变 通知所有观察者
+        setChanged()
+        notifyObservers()
+        Log.d(tag, "loadSkin  setChanged")
     }
 }

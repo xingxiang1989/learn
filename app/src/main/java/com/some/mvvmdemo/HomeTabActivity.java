@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.some.changeskin.SkinResources;
 import com.some.demo_annotation.HelloAnnotation;
 import com.some.mvvmdemo.base.BaseActiviy;
 import com.some.mvvmdemo.databinding.ActivityHomeTabBinding;
@@ -180,9 +181,9 @@ public class HomeTabActivity extends BaseActiviy implements View.OnClickListener
     private void switchBottomTab(int selected){
         for(int i = 0 ; i <mTabViews.size() ; i++){
             if(i == selected){
-                mTabViews.get(i).setTextColor(getResources().getColor(R.color.colorAccent));
+                mTabViews.get(i).setTextColor(SkinResources.Companion.getInstance().getColor(R.color.colorAccent));
             }else {
-                mTabViews.get(i).setTextColor(getResources().getColor(R.color.black));
+                mTabViews.get(i).setTextColor(SkinResources.Companion.getInstance().getColor(R.color.black));
             }
         }
     }
