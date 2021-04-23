@@ -28,9 +28,9 @@ class SkinAttribute {
             mAttributes.add("background")
             mAttributes.add("src")
             mAttributes.add("textColor")
-            mAttributes.add("drawableLeft")
+            mAttributes.add("drawableStart")
             mAttributes.add("drawableTop")
-            mAttributes.add("drawableRight")
+            mAttributes.add("drawableEnd")
             mAttributes.add("drawableBottom")
         }
 
@@ -47,8 +47,8 @@ class SkinAttribute {
          * 对一个View中的所有的属性进行修改
          */
         fun applySkin(){
-            var drawableLeft: Drawable?= null
-            var drawableRight: Drawable?= null
+            var drawableStart: Drawable?= null
+            var drawableEnd: Drawable?= null
             var drawableTop: Drawable?= null
             var drawableBottom: Drawable?= null
 
@@ -76,12 +76,12 @@ class SkinAttribute {
                         (view as TextView).setTextColor(SkinResources.getInstance()
                                 .getColorStateList(it.resId))
                     }
-                    "drawableLeft" -> {
-                        drawableLeft = SkinResources.getInstance().getDrawable(it
+                    "drawableStart" -> {
+                        drawableStart = SkinResources.getInstance().getDrawable(it
                                 .resId) as Drawable
                     }
-                    "drawableRight" -> {
-                        drawableRight = SkinResources.getInstance().getDrawable(it
+                    "drawableEnd" -> {
+                        drawableEnd = SkinResources.getInstance().getDrawable(it
                                 .resId) as Drawable
                     }
                     "drawableTop" -> {
@@ -95,10 +95,10 @@ class SkinAttribute {
                 }
             }
 
-            if (null != drawableLeft || null != drawableRight || null != drawableTop || null !=
+            if (null != drawableStart || null != drawableEnd || null != drawableTop || null !=
                     drawableBottom) {
-                (view as TextView).setCompoundDrawablesWithIntrinsicBounds(drawableLeft, drawableTop,
-                        drawableRight, drawableBottom)
+                (view as TextView).setCompoundDrawablesWithIntrinsicBounds(drawableStart, drawableTop,
+                        drawableEnd, drawableBottom)
             }
         }
 

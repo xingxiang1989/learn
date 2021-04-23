@@ -28,8 +28,9 @@ public class ChangeSkinActivity extends BaseActiviy {
         binding.changeSkin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SkinManager.Companion.getInstance().loadSkin("/storage/emulated/0/ASkin" +
-                        "/skin.apk");
+                //需要获取存储权限,文件放到了app的沙盒目录下
+                SkinManager.Companion.getInstance().loadSkin("/storage/emulated/0/Android/data/com.some.mvvmdemo/files" +
+                        "/app-debug.apk");
             }
         });
 

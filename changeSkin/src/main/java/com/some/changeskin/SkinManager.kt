@@ -71,6 +71,7 @@ class SkinManager private constructor(application: Application): Observable() {
      * 存储的是类似这种格式："/data/data/com.enjoy.skin/skin/skin-debug.apk"，apk的路径
      */
     fun loadSkin(skinPath: String){
+        Log.d(tag, " loadSkin skinPath = $skinPath")
         if(TextUtils.isEmpty(skinPath)){
             SkinPreference.getInstance().reset()
             SkinResources.getInstance().reset()
@@ -106,7 +107,7 @@ class SkinManager private constructor(application: Application): Observable() {
             //被观察者改变 通知所有观察者
             setChanged()
             notifyObservers()
-            Log.e(tag, "loadSkin  setChanged")
+            Log.d(tag, "loadSkin  setChanged")
 
         }
     }
