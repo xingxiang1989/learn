@@ -90,10 +90,10 @@ dependencies {
     api "androidx.multidex:multidex:2.0.1"
 
     //optional, help to generate the final application
-    compileOnly "com.tencent.tinker:tinker-android-anno:$tinker_version"
-    annotationProcessor "com.tencent.tinker:tinker-android-anno:$tinker_version"
+    compileOnly "com.tencent.tinker:tinker-android-anno:$TINKER_VERSION"
+    annotationProcessor "com.tencent.tinker:tinker-android-anno:$TINKER_VERSION"
     //tinker's main Android lib
-    api "com.tencent.tinker:tinker-android-lib:$tinker_version"
+    api "com.tencent.tinker:tinker-android-lib:$TINKER_VERSION"
 
     api "com.blankj:utilcodex:1.23.7"
 
