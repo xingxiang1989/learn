@@ -57,12 +57,19 @@ class ApplicationActivityLifecycle(observable: Observable): Application.Activity
         //每一个页面会创建，那么就会作为观察者被加入进去
         mObservable?.addObserver(skinLayoutInflaterFactory)
 
+        if(activity is SkinViewSupport){
+            activity.applySkin()
+        }
+
     }
 
     override fun onActivityStarted(p0: Activity) {
     }
 
-    override fun onActivityResumed(p0: Activity) {
+    override fun onActivityResumed(activity: Activity) {
+        if(activity is SkinViewSupport){
+            activity.applySkin()
+        }
     }
 
     override fun onActivityPaused(p0: Activity) {

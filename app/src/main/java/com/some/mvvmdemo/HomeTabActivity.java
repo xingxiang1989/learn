@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.some.changeskin.SkinResources;
+import com.some.changeskin.SkinViewSupport;
 import com.some.demo_annotation.HelloAnnotation;
 import com.some.mvvmdemo.base.BaseActiviy;
 import com.some.mvvmdemo.databinding.ActivityHomeTabBinding;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @HelloAnnotation
-public class HomeTabActivity extends BaseActiviy implements View.OnClickListener {
+public class HomeTabActivity extends BaseActiviy implements View.OnClickListener, SkinViewSupport {
 
     ActivityHomeTabBinding mBinding;
 
@@ -104,6 +105,7 @@ public class HomeTabActivity extends BaseActiviy implements View.OnClickListener
      */
     private void switchTab(int selected){
 
+        currentTab = selected;
         FragmentTransaction transaction = fm.beginTransaction();
         hideFragment(transaction, selected, mMessageFragment,mNearbyFragment,mSettingFragment);
 
@@ -192,5 +194,10 @@ public class HomeTabActivity extends BaseActiviy implements View.OnClickListener
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("currentTab",currentTab);
+    }
+
+    @Override
+    public void applySkin() {
+        switchBottomTab(currentTab);
     }
 }

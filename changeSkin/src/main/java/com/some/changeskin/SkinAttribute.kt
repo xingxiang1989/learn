@@ -102,11 +102,13 @@ class SkinAttribute {
             }
         }
 
-        private fun applySkinViewSupport(){
+        fun applySkinViewSupport(){
             (view as? SkinViewSupport)?.applySkin()
         }
 
     }
+
+
 
     /**
      * 属性名
@@ -145,6 +147,8 @@ class SkinAttribute {
             val skinView = SkinView(view!!,mSkinPairs)
             skinView.applySkin()
             mSkinViews.add(skinView)
+            skinView.applySkinViewSupport()
+
         }
     }
 
