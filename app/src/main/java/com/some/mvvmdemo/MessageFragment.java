@@ -37,6 +37,7 @@ import com.some.mvvmdemo.touch.TouchActivity;
 import com.some.mvvmdemo.view.CakeViewActivity;
 import com.some.mvvmdemo.view.FiveRingsActivity;
 import com.some.mvvmdemo.view.RouletteViewActivity;
+import com.some.mvvmdemo.view.TimeLineActivity;
 import com.some.mvvmdemo.viewpager2.ViewPager2Activity;
 
 public class MessageFragment extends BaseFragment {
@@ -118,6 +119,13 @@ public class MessageFragment extends BaseFragment {
                 Log.d(TAG, "onclick to CakeViewActivity2 ");
 
                 startActivity(new Intent(mActivity, RouletteViewActivity.class));
+            }
+        });
+
+        binding.timeLine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mActivity, TimeLineActivity.class));
             }
         });
 

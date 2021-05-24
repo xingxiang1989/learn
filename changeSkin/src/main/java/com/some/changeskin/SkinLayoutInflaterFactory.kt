@@ -49,7 +49,7 @@ class SkinLayoutInflaterFactory(activity: Activity): LayoutInflater.Factory2, Ob
         if (null == view) {
             view = createView(name, context, attrs)
         }
-        //这就是我们加入的逻辑
+        //根据name获取到所有的view，（系统提供的类和自定义的类），找到控件后，再进行解析属性
         if (null != view) {
             //加载属性
             skinAttribute?.look(view, attrs)
