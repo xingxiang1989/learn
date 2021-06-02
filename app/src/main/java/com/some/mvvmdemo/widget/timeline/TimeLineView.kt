@@ -18,7 +18,7 @@ class TimeLineView: View {
 
     private var mWidth: Int = 0
     private var mHeight: Int = 0
-    private val ITEM_WIDTH = SizeUtils.dp2px(25f)
+    private val ITEM_WIDTH = SizeUtils.dp2px(50f)
     private val RADIUS = SizeUtils.dp2px(6f)
     private var mArrays = ArrayList<DateBean>()
     private var mTextPaint = Paint()
@@ -30,7 +30,7 @@ class TimeLineView: View {
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr){
         mTextPaint.isAntiAlias = true
         mTextPaint.color = ContextCompat.getColor(getContext(), R.color.white)
-        mTextPaint.textSize = 16f
+        mTextPaint.textSize = 30f
 
         mCirclePaint.isAntiAlias = true
         mCirclePaint.color = ContextCompat.getColor(getContext(), R.color.red)
@@ -66,7 +66,7 @@ class TimeLineView: View {
             LogUtils.d("mLeftX = $mLeftX, x = $x , y = $y, itemwidth = $ITEM_WIDTH, textWidth = ${mTextPaint.measureText(dateBean.getText())}")
             canvas?.drawText(dateBean.getText(), x, y.toFloat(), mTextPaint)
 
-            val circleX = mLeftX + ITEM_WIDTH/2 - RADIUS
+            val circleX = mLeftX + ITEM_WIDTH/2
             val circleY = mHeight - SizeUtils.dp2px(25f)
             canvas?.drawCircle(circleX.toFloat(), circleY.toFloat(), RADIUS.toFloat(), mCirclePaint)
 
@@ -74,7 +74,7 @@ class TimeLineView: View {
             val startX = mLeftX + ITEM_WIDTH/2
             canvas?.drawLine(startX.toFloat(),0f,startX.toFloat(), (mHeight - SizeUtils.dp2px(50f)).toFloat(),mTextPaint)
 
-            mLeftX += index * ITEM_WIDTH
+            mLeftX += ITEM_WIDTH
 
         }
     }
