@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.MotionEvent
+import android.view.VelocityTracker
 import android.view.View
 import android.view.ViewConfiguration
 import android.widget.Scroller
@@ -29,6 +30,17 @@ class TimeLineView: View {
     private var mCirclePaint = Paint()
     private var mLinePaint = Paint()
     private var mScroller: Scroller
+    private var mVelocityTracker: VelocityTracker?= null
+
+    /**
+     * 有数据的画布宽
+     */
+    private var mCanvasWidth = 0f
+    /**
+     * 最大速度，最小速度
+     */
+    private var mMinimumVelocity: Int
+    private var mMaximumVelocity: Int
     private var mTouchSlop: Int = 0
     private var mLastX: Float = 0f
     private var mScrollX: Float = 0f
@@ -53,7 +65,9 @@ class TimeLineView: View {
         val viewConfiguration = ViewConfiguration.get(context)
         mTouchSlop = viewConfiguration.scaledTouchSlop
 
-        LogUtils.d("mTouchSlop = $mTouchSlop")
+        mMaximumVelocity = viewConfiguration.scaledMaximumFlingVelocity
+        mMinimumVelocity = viewConfiguration.scaledMinimumFlingVelocity
+        LogUtils.d("mTouchSlop = $mTouchSlop ")
     }
 
 
@@ -94,6 +108,17 @@ class TimeLineView: View {
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
+
+        //当数据长度不足，不做滑动处理
+        if(mCanvasWidth <= mWidth){
+            return true
+        }
+
+        if(mVelocityTracker == null){
+            mVelocityTracker = VelocityTracker.obtain()
+        }
+        mVelocityTracker?.addMovement(event)
+
         when(event?.action){
             MotionEvent.ACTION_DOWN -> {
                 if (!mScroller.isFinished) {
@@ -102,27 +127,48 @@ class TimeLineView: View {
                 mLastX = event.x
             }
             MotionEvent.ACTION_MOVE -> {
-                val x = event.x
-                var deltaX = mLastX - x
-                if (abs(deltaX) > mTouchSlop) {
-                    LogUtils.d("滑动距离大于mTouchSlop")
-                    if (deltaX > 0) {
-                        deltaX -= mTouchSlop
+                // 滑动的距离
+                val scrollLengthX: Float = event.x - mLastX
+                // getScrollX() 小于0，说明画布右移了
+                // getScrollX() 大于0，说明画布左移了
+                val endX = scrollX - scrollLengthX
+
+                LogUtils.d("ACTION_MOVE scrollX = $scrollX , scrollLengthX = $scrollLengthX, endX = $endX ---->")
+                if (scrollLengthX > 0) {    // 画布往右移动 -->
+
+                    // 注意：这里的等号不能去除，否则会有闪动
+                    if (endX <= 0) {
+                        scrollTo(0, 0)
                     } else {
-                        deltaX += mTouchSlop
+                        scrollBy((-scrollLengthX).toInt(), 0)
                     }
-                    mLastX = x
-                    mScrollX += deltaX
-                    invalidate()
-                } else {
-                    LogUtils.d("滑动距离过小")
+                } else if (scrollLengthX < 0) {                    // 画布往左移动  <--
+                    if (endX >= mCanvasWidth - mWidth) {     // 需要考虑是否右越界
+                        scrollTo((mCanvasWidth - mWidth) as Int, 0)
+                    } else {
+                        scrollBy((-scrollLengthX).toInt(), 0)
+                    }
                 }
+                mLastX = event.x
+                LogUtils.d("ACTION_MOVE  111111")
+
             }
             MotionEvent.ACTION_CANCEL -> {
 
             }
             MotionEvent.ACTION_UP -> {
+                //计算当前速度，1000表示每秒像素数等
+                mVelocityTracker?.computeCurrentVelocity(1000, mMaximumVelocity.toFloat())
+                //获取横向速度
+                val initialVelocity = mVelocityTracker?.xVelocity ?: 0f
+                LogUtils.d("ACTION_UP initialVelocity = $initialVelocity")
+                //速度要大于最小的速度值，才开始滑动
+                if (abs(initialVelocity) > mMinimumVelocity) {
+                    fling(initialVelocity.toInt())
+                }
 
+                mVelocityTracker?.recycle()
+                mVelocityTracker = null
             }
         }
         return super.onTouchEvent(event)
@@ -132,7 +178,7 @@ class TimeLineView: View {
         super.computeScroll()
         if(mScroller.computeScrollOffset()){
             LogUtils.d("computeScroll true")
-            scrollTo(mScroller.currX,mScroller.currY)
+            scrollTo(mScroller.currX, mScroller.currY)
             invalidate()
         }else{
             LogUtils.d("computeScroll false")
@@ -140,9 +186,21 @@ class TimeLineView: View {
         }
     }
 
+    /**
+     * 滑行，但是在滑行前需要判断当前位置是否已经触达边界
+     */
+    private fun fling(velocityX: Int){
+        val startX = scrollX
+        LogUtils.d("fling start velocityX = $velocityX, startx= $startX")
+
+        mScroller.fling(startX, 0, velocityX, 0, 0, 0, 0, 0)
+        postInvalidateOnAnimation()
+    }
+
     fun bindData(datas: ArrayList<DateBean>){
         LogUtils.d("bindData -- >")
         mArrays = datas
+        mCanvasWidth = (datas.size * itemWidth).toFloat()
         invalidate()
     }
 }
