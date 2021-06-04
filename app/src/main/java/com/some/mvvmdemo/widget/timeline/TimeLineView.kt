@@ -37,11 +37,23 @@ class TimeLineView: View {
      */
     private var mCanvasWidth = 0f
     /**
-     * 最大速度，最小速度
+     * 最大速度，默认为24000
      */
     private var mMinimumVelocity: Int
+
+    /**
+     * 最小速度，默认150
+     */
     private var mMaximumVelocity: Int
+
+    /**
+     * 最小滑动距离24
+     */
     private var mTouchSlop: Int = 0
+
+    /**
+     * 上一个位置
+     */
     private var mLastX: Float = 0f
     private var mScrollX: Float = 0f
 
@@ -67,7 +79,7 @@ class TimeLineView: View {
 
         mMaximumVelocity = viewConfiguration.scaledMaximumFlingVelocity
         mMinimumVelocity = viewConfiguration.scaledMinimumFlingVelocity
-        LogUtils.d("mTouchSlop = $mTouchSlop ")
+        LogUtils.d("mTouchSlop = $mTouchSlop ，mMaximumVelocity = $mMaximumVelocity, mMinimumVelocity = $mMinimumVelocity")
     }
 
 
@@ -89,9 +101,11 @@ class TimeLineView: View {
         super.onDraw(canvas)
         var mLeftX = 0
         mArrays.forEachIndexed { index, dateBean ->
+
+            LogUtils.d("onDraw index = $index")
             val x = mLeftX + itemWidth/2 - mTextPaint.measureText(dateBean.getText())/2
             val y = mHeight - SizeUtils.dp2px(5f)
-            LogUtils.d("mLeftX = $mLeftX, x = $x , y = $y, itemwidth = $itemWidth, textWidth = ${mTextPaint.measureText(dateBean.getText())}")
+//            LogUtils.d("mLeftX = $mLeftX, x = $x , y = $y, itemwidth = $itemWidth, textWidth = ${mTextPaint.measureText(dateBean.getText())}")
             canvas?.drawText(dateBean.getText(), x, y.toFloat(), mTextPaint)
 
             val circleX = mLeftX + itemWidth/2
@@ -111,6 +125,7 @@ class TimeLineView: View {
 
         //当数据长度不足，不做滑动处理
         if(mCanvasWidth <= mWidth){
+            LogUtils.d("onTouchEvent 长度不足，不做滑动")
             return true
         }
 
