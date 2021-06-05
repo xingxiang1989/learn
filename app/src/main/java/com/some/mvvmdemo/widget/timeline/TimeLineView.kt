@@ -106,10 +106,10 @@ class TimeLineView: View {
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
+
+        LogUtils.d("onDraw start --->")
         var mLeftX = 0
         mArrays.forEachIndexed { index, dateBean ->
-
-            LogUtils.d("onDraw index = $index")
             val x = mLeftX + itemWidth/2 - mTextPaint.measureText(dateBean.getText())/2
             val y = mHeight - SizeUtils.dp2px(5f)
 //            LogUtils.d("mLeftX = $mLeftX, x = $x , y = $y, itemwidth = $itemWidth, textWidth = ${mTextPaint.measureText(dateBean.getText())}")
@@ -130,19 +130,16 @@ class TimeLineView: View {
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-
-        LogUtils.d("onTouchEvent action = ${event?.action}")
-
         //当数据长度不足，不做滑动处理
         if(mCanvasWidth <= mWidth){
             LogUtils.d("onTouchEvent 长度不足，不做滑动")
             return true
         }
 
-//        if(mVelocityTracker == null){
-//            mVelocityTracker = VelocityTracker.obtain()
-//        }
-//        mVelocityTracker?.addMovement(event)
+        if(mVelocityTracker == null){
+            mVelocityTracker = VelocityTracker.obtain()
+        }
+        mVelocityTracker?.addMovement(event)
 
         when(event?.action){
             MotionEvent.ACTION_DOWN -> {
@@ -153,15 +150,14 @@ class TimeLineView: View {
                 mLastX = event.x
             }
             MotionEvent.ACTION_MOVE -> {
-                LogUtils.d("onTouchEvent ACTION_MOVE")
-
                 // 滑动的距离
                 val scrollLengthX: Float = event.x - mLastX
                 // getScrollX() 小于0，说明画布右移了
                 // getScrollX() 大于0，说明画布左移了
                 val endX = scrollX - scrollLengthX
 
-                LogUtils.d("ACTION_MOVE scrollX = $scrollX , scrollLengthX = $scrollLengthX, endX = $endX ---->")
+                LogUtils.d("ACTION_MOVE scrollX = $scrollX , scrollLengthX = $scrollLengthX, endX = $endX， event.x = " +
+                        "${event.x} , mLastX = $mLastX")
                 if (scrollLengthX > 0) {    // 画布往右移动 -->
 
                     // 注意：这里的等号不能去除，否则会有闪动
@@ -178,7 +174,7 @@ class TimeLineView: View {
                     }
                 }
                 mLastX = event.x
-                LogUtils.d("ACTION_MOVE  111111")
+                LogUtils.d("ACTION_MOVE  -----> end")
 
             }
             MotionEvent.ACTION_CANCEL -> {
@@ -202,7 +198,7 @@ class TimeLineView: View {
                 mVelocityTracker = null
             }
         }
-        return super.onTouchEvent(event)
+        return true
     }
 
     /**
@@ -213,9 +209,8 @@ class TimeLineView: View {
     override fun computeScroll() {
         super.computeScroll()
         if(mScroller.computeScrollOffset()){
-            LogUtils.d("computeScroll true")
+            LogUtils.d("computeScroll true and scrollto ")
             scrollTo(mScroller.currX, mScroller.currY)
-            invalidate()
         }else{
             LogUtils.d("computeScroll false")
 
