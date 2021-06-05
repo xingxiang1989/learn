@@ -1,5 +1,6 @@
 package com.some.mvvmdemo.widget.timeline
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
@@ -18,6 +19,7 @@ import kotlin.math.abs
 /**
  * @author xiangxing
  * 时间线练习
+ * https://my.oschina.net/ososchina/blog/600281 关于Scroller写的很透彻
  */
 class TimeLineView: View {
 
@@ -29,6 +31,11 @@ class TimeLineView: View {
     private var mTextPaint = Paint()
     private var mCirclePaint = Paint()
     private var mLinePaint = Paint()
+
+    /**
+     * Scroller只是个计算器，提供插值计算，让滚动过程具有动画属性，但它并不是UI，也不是辅助UI滑动，反而是单纯地为滑动提供计算。
+     * 无论从构造方法还是其他方法，以及Scroller的属性可知，其并不会持有View，辅助ViewGroup滑动
+     */
     private var mScroller: Scroller
     private var mVelocityTracker: VelocityTracker?= null
 
@@ -121,7 +128,10 @@ class TimeLineView: View {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent?): Boolean {
+
+        LogUtils.d("onTouchEvent action = ${event?.action}")
 
         //当数据长度不足，不做滑动处理
         if(mCanvasWidth <= mWidth){
@@ -129,19 +139,22 @@ class TimeLineView: View {
             return true
         }
 
-        if(mVelocityTracker == null){
-            mVelocityTracker = VelocityTracker.obtain()
-        }
-        mVelocityTracker?.addMovement(event)
+//        if(mVelocityTracker == null){
+//            mVelocityTracker = VelocityTracker.obtain()
+//        }
+//        mVelocityTracker?.addMovement(event)
 
         when(event?.action){
             MotionEvent.ACTION_DOWN -> {
+                LogUtils.d("onTouchEvent ACTION_DOWN")
                 if (!mScroller.isFinished) {
                     mScroller.abortAnimation()
                 }
                 mLastX = event.x
             }
             MotionEvent.ACTION_MOVE -> {
+                LogUtils.d("onTouchEvent ACTION_MOVE")
+
                 // 滑动的距离
                 val scrollLengthX: Float = event.x - mLastX
                 // getScrollX() 小于0，说明画布右移了
@@ -169,9 +182,12 @@ class TimeLineView: View {
 
             }
             MotionEvent.ACTION_CANCEL -> {
+                LogUtils.d("onTouchEvent ACTION_CANCEL")
 
             }
             MotionEvent.ACTION_UP -> {
+                LogUtils.d("onTouchEvent ACTION_UP")
+
                 //计算当前速度，1000表示每秒像素数等
                 mVelocityTracker?.computeCurrentVelocity(1000, mMaximumVelocity.toFloat())
                 //获取横向速度
@@ -189,6 +205,11 @@ class TimeLineView: View {
         return super.onTouchEvent(event)
     }
 
+    /**
+     * 1、computeScroll也不是来让ViewGroup滑动的，真正让ViewGroup滑动的是scrollTo,scrollBy。
+     * 2、computeScroll的作用是计算ViewGroup如何滑动。computeScroll是通过draw来调用的。
+     * 3、Scroller不会调用computeScroll，反而是computeScroll调用Scroller。
+     */
     override fun computeScroll() {
         super.computeScroll()
         if(mScroller.computeScrollOffset()){
@@ -216,6 +237,8 @@ class TimeLineView: View {
         LogUtils.d("bindData -- >")
         mArrays = datas
         mCanvasWidth = (datas.size * itemWidth).toFloat()
+        LogUtils.d("bindData -- >mCanvasWidth =$mCanvasWidth")
+
         invalidate()
     }
 }
