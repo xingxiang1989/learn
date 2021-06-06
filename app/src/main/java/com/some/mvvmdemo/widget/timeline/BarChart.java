@@ -16,12 +16,14 @@ import android.widget.Scroller;
 
 import androidx.annotation.Nullable;
 
+import com.blankj.utilcode.util.LogUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by xiangxing5 on 2021/6/3.
- * Describe:
+ * Describe: 这份代码写的有点问题，滚动体验不是很好，但自己先参考学习下，再找份更好的demo参考
  */
 public class BarChart extends View {
 
@@ -208,6 +210,7 @@ public class BarChart extends View {
      * @param barInfoList
      */
     public void setBarInfoList(List<BarInfo> barInfoList) {
+        LogUtils.d("setBarInfoList start ");
         this.mBarInfoList.clear();
         this.mBarInfoList.addAll(barInfoList);
         this.mCanvasWidth = (this.mBarInfoList.size() + 1) * this.mBarInterval;
@@ -253,6 +256,8 @@ public class BarChart extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
+        LogUtils.d("onSizeChanged start ");
+
         // 柱子的高度 = 控件高度 - 上内边距 - 下内边距 - 字体大小 - 字体与柱子的间距
         this.mBarHeight = h - mTopSpacing - mBottomSpacing - mDescTextSize - mBarTextSpacing;
         this.mViewWidth = w;
@@ -261,6 +266,7 @@ public class BarChart extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        LogUtils.d("onDraw start ");
 
         drawBar(canvas);
         drawDot(canvas);
@@ -276,6 +282,7 @@ public class BarChart extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
+        LogUtils.d("onTouchEvent start ");
         // 当数据的长度不足以滑动时，不做滑动处理
         if (mCanvasWidth < mViewWidth) {
             return true;
@@ -287,18 +294,21 @@ public class BarChart extends View {
         mVelocityTracker.addMovement(event);
 
         if (MotionEvent.ACTION_DOWN == event.getAction()) {
-            mLastTouchX = event.getX();
+            LogUtils.d("onTouchEvent ACTION_DOWN ");
 
+            mLastTouchX = event.getX();
             mFling.stop();
         } else if (MotionEvent.ACTION_MOVE == event.getAction()) {
+            LogUtils.d("onTouchEvent ACTION_MOVE ");
             // 滑动的距离
             float scrollLengthX = event.getX() - mLastTouchX;
             // getScrollX() 小于0，说明画布右移了
             // getScrollX() 大于0，说明画布左移了
             float endX = getScrollX() - scrollLengthX;
-
+            LogUtils.d("ACTION_MOVE scrollX =" + getScrollX() + " scrollLengthX = " + scrollLengthX +
+                    " endX = " + endX);
             if (scrollLengthX > 0) {    // 画布往右移动 -->
-
+                LogUtils.d("ACTION_MOVE 右滑 ");
                 // 注意：这里的等号不能去除，否则会有闪动
                 if (endX <= 0) {
                     scrollTo(0, 0);
@@ -308,26 +318,29 @@ public class BarChart extends View {
 
             } else if (scrollLengthX < 0) {                    // 画布往左移动  <--
 
+                LogUtils.d("ACTION_MOVE 左滑 ");
                 if (endX >= mCanvasWidth - mViewWidth) {     // 需要考虑是否右越界
                     scrollTo((int) (mCanvasWidth - mViewWidth), 0);
                 } else {
+                    //滑动之后立即触发onDraw刷新。
                     scrollBy((int) -scrollLengthX, 0);
                 }
 
             }
             mLastTouchX = event.getX();
         } else if (MotionEvent.ACTION_UP == event.getAction()) {
+            LogUtils.d("ACTION_UP  ");
             // 计算当前速度， 1000表示每秒像素数等
             mVelocityTracker.computeCurrentVelocity(1000, mMaximumVelocity);
 
-            // 获取横向速度
+            // 获取横向速度，这个值是负值也正常的
             int velocityX = (int) mVelocityTracker.getXVelocity();
-
+            LogUtils.d("ACTION_UP  velocityX = " + velocityX);
             // 速度要大于最小的速度值，才开始滑动
             if (Math.abs(velocityX) > mMinimumVelocity) {
 
                 int initX = getScrollX();
-
+                LogUtils.d("ACTION_UP  initX = " + initX);
                 int maxX = (int) (mCanvasWidth - mViewWidth);
                 if (maxX > 0) {
                     mFling.start(initX, velocityX, initX, maxX);
@@ -492,6 +505,8 @@ public class BarChart extends View {
                 mScroller.abortAnimation();
             }
 
+            LogUtils.d(" mScroller.fling ");
+
             // 开始 fling
             mScroller.fling(initX, 0, velocityX,
                     0, 0, maxX, 0, 0);
@@ -506,11 +521,12 @@ public class BarChart extends View {
                 return;
             }
 
-            // 计算偏移量
+            // 计算偏移量,getCurrX()是针对Scroller计算器，getScrollX是本身view实际获得位置，
+            //因此计算器Scroller与实际是有偏差的。
             int currX = mScroller.getCurrX();
             int diffX = mInitX - currX;
 
-            Log.i(TAG, "run: [currX: " + currX + "]\n"
+            LogUtils.d("run: [currX: " + currX + "]\n"
                     + "[diffX: " + diffX + "]\n"
                     + "[initX: " + mInitX + "]\n"
                     + "[minX: " + mMinX + "]\n"
