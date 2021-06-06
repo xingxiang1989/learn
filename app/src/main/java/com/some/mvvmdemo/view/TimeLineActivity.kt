@@ -23,7 +23,7 @@ class TimeLineActivity:BaseActiviy() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_timeline)
 
-        for(index in 1..20){
+        for(index in 1..200){
             val bean = DateBean(index)
             mList.add(bean)
         }

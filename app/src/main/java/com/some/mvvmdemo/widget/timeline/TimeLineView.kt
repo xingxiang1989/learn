@@ -159,6 +159,8 @@ class TimeLineView: View {
                 LogUtils.d("ACTION_MOVE scrollX = $scrollX , scrollLengthX = $scrollLengthX, endX = $endX， event.x = " +
                         "${event.x} , mLastX = $mLastX")
                 if (scrollLengthX > 0) {    // 画布往右移动 -->
+                    // 画布往左移动  <--
+                    LogUtils.d("ACTION_MOVE 右滑 ")
 
                     // 注意：这里的等号不能去除，否则会有闪动
                     if (endX <= 0) {
@@ -167,6 +169,8 @@ class TimeLineView: View {
                         scrollBy((-scrollLengthX).toInt(), 0)
                     }
                 } else if (scrollLengthX < 0) {                    // 画布往左移动  <--
+                    // 画布往左移动  <--
+                    LogUtils.d("ACTION_MOVE 左滑 ")
                     if (endX >= mCanvasWidth - mWidth) {     // 需要考虑是否右越界
                         scrollTo((mCanvasWidth - mWidth) as Int, 0)
                     } else {
@@ -208,9 +212,14 @@ class TimeLineView: View {
      */
     override fun computeScroll() {
         super.computeScroll()
+        LogUtils.d("computeScroll scrollx = $scrollX, mScroller.currX = $mScroller.currX")
+
         if(mScroller.computeScrollOffset()){
-            LogUtils.d("computeScroll true and scrollto ")
-            scrollTo(mScroller.currX, mScroller.currY)
+            val difx = scrollX - mScroller.currX
+            LogUtils.d("computeScroll true and difx = $difx ")
+            if(difx != 0){
+                scrollBy(difx,0)
+            }
         }else{
             LogUtils.d("computeScroll false")
 
