@@ -17,9 +17,6 @@ import androidx.lifecycle.ViewModelProviders;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.LogUtils;
 import com.some.common.arouter.RouterUrl;
-import com.some.flexlayout.FlexLayoutActivity;
-import com.some.hookactivity.HookUtils;
-import com.some.hookactivity.ProxyActivity;
 import com.some.hookactivity.UnRegisterActivity;
 import com.some.mvvmdemo.aidl.AIDLActivity;
 import com.some.mvvmdemo.base.BaseFragment;
@@ -36,6 +33,7 @@ import com.some.mvvmdemo.testkotlin.TestKotlinActivity;
 import com.some.mvvmdemo.touch.TouchActivity;
 import com.some.mvvmdemo.view.CakeViewActivity;
 import com.some.mvvmdemo.view.FiveRingsActivity;
+import com.some.mvvmdemo.view.MultiTouchActivity;
 import com.some.mvvmdemo.view.RouletteViewActivity;
 import com.some.mvvmdemo.view.TimeLineActivity;
 import com.some.mvvmdemo.viewpager2.ViewPager2Activity;
@@ -126,6 +124,13 @@ public class MessageFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(mActivity, TimeLineActivity.class));
+            }
+        });
+
+        binding.multiTouch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mActivity, MultiTouchActivity.class));
             }
         });
 
