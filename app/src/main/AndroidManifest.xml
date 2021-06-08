@@ -90,6 +90,8 @@
 
         <activity android:name=".view.TimeLineActivity"/>
 
+        <activity android:name=".view.MultiTouchActivity"/>
+
     </application>
 
 </manifest>
