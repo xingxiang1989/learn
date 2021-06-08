@@ -7,6 +7,7 @@ import android.graphics.BitmapRegionDecoder;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Rect;
+import android.os.Environment;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -18,7 +19,8 @@ import androidx.annotation.Nullable;
 
 import com.blankj.utilcode.util.LogUtils;
 
-import java.io.IOException;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 
 /**
@@ -97,13 +99,10 @@ public class MyBigView extends View implements GestureDetector.OnGestureListener
 
     public void setImage(InputStream is) {
         LogUtils.d("setImage --->");
-
         try {
-            //区域解码器
-            mRegionDecoder = BitmapRegionDecoder.newInstance(is, false);
-        } catch (IOException e) {
-            LogUtils.e("setImage e =" + e.getMessage());
-        }
+        String path = Environment.getExternalStorageDirectory().toString() + "/Pictures/earth.JPEG";
+        LogUtils.d("path = " + path);
+        is = new FileInputStream(new File(path));
 
         mOptions.inJustDecodeBounds = true;
         BitmapFactory.decodeStream(is, null, mOptions);
@@ -111,6 +110,14 @@ public class MyBigView extends View implements GestureDetector.OnGestureListener
         mImageHeight = mOptions.outHeight;
         mOptions.inPreferredConfig = Bitmap.Config.RGB_565;
         mOptions.inJustDecodeBounds = false;
+
+        is = new FileInputStream(new File(path));
+
+            //区域解码器
+            mRegionDecoder = BitmapRegionDecoder.newInstance(is, false);
+        } catch (Exception e) {
+            LogUtils.e("setImage e =" + e.getMessage());
+        }
 
         requestLayout();
     }

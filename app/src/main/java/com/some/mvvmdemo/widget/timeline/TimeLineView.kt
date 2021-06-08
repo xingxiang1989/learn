@@ -112,20 +112,34 @@ class TimeLineView: View {
         mArrays.forEachIndexed { index, dateBean ->
             val x = mLeftX + itemWidth/2 - mTextPaint.measureText(dateBean.getText())/2
             val y = mHeight - SizeUtils.dp2px(5f)
-//            LogUtils.d("mLeftX = $mLeftX, x = $x , y = $y, itemwidth = $itemWidth, textWidth = ${mTextPaint.measureText(dateBean.getText())}")
-            canvas?.drawText(dateBean.getText(), x, y.toFloat(), mTextPaint)
+            if(isInVisibleArea(mLeftX.toFloat())){
+                canvas?.drawText(dateBean.getText(), x, y.toFloat(), mTextPaint)
 
-            val circleX = mLeftX + itemWidth/2
-            val circleY = mHeight - SizeUtils.dp2px(25f)
-            canvas?.drawCircle(circleX.toFloat(), circleY.toFloat(), RADIUS.toFloat(), mCirclePaint)
+                val circleX = mLeftX + itemWidth/2
+                val circleY = mHeight - SizeUtils.dp2px(25f)
+                canvas?.drawCircle(circleX.toFloat(), circleY.toFloat(), RADIUS.toFloat(), mCirclePaint)
 
+                val startX = mLeftX + itemWidth/2
+                canvas?.drawLine(startX.toFloat(), 0f, startX.toFloat(), (mHeight - SizeUtils.dp2px(50f)).toFloat(), mTextPaint)
 
-            val startX = mLeftX + itemWidth/2
-            canvas?.drawLine(startX.toFloat(), 0f, startX.toFloat(), (mHeight - SizeUtils.dp2px(50f)).toFloat(), mTextPaint)
+            }
 
             mLeftX += itemWidth
 
         }
+    }
+
+
+    /**
+     * 是否在可视的范围内
+     *
+     * @param x
+     * @return true：在可视的范围内；false：不在可视的范围内
+     */
+    private fun isInVisibleArea(x: Float): Boolean {
+//        val dx = x - scrollX
+//        return -itemWidth <= dx && dx <= mWidth + itemWidth
+        return true
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -172,7 +186,7 @@ class TimeLineView: View {
                     // 画布往左移动  <--
                     LogUtils.d("ACTION_MOVE 左滑 ")
                     if (endX >= mCanvasWidth - mWidth) {     // 需要考虑是否右越界
-                        scrollTo((mCanvasWidth - mWidth) as Int, 0)
+                        scrollTo((mCanvasWidth - mWidth).toInt(), 0)
                     } else {
                         scrollBy((-scrollLengthX).toInt(), 0)
                     }
@@ -195,7 +209,7 @@ class TimeLineView: View {
                 LogUtils.d("ACTION_UP initialVelocity = $initialVelocity")
                 //速度要大于最小的速度值，才开始滑动
                 if (abs(initialVelocity) > mMinimumVelocity) {
-                    fling(initialVelocity.toInt())
+                    fling(-initialVelocity.toInt())
                 }
 
                 mVelocityTracker?.recycle()
@@ -212,13 +226,12 @@ class TimeLineView: View {
      */
     override fun computeScroll() {
         super.computeScroll()
-        LogUtils.d("computeScroll scrollx = $scrollX, mScroller.currX = $mScroller.currX")
-
         if(mScroller.computeScrollOffset()){
+            LogUtils.d("computeScroll scrollx = $scrollX, mScroller.currX = ${mScroller.currX}")
             val difx = scrollX - mScroller.currX
             LogUtils.d("computeScroll true and difx = $difx ")
             if(difx != 0){
-                scrollBy(difx,0)
+                scrollTo(mScroller.currX,0)
             }
         }else{
             LogUtils.d("computeScroll false")
@@ -231,9 +244,9 @@ class TimeLineView: View {
      */
     private fun fling(velocityX: Int){
         val startX = scrollX
-        LogUtils.d("fling start velocityX = $velocityX, startx= $startX")
-
-        mScroller.fling(startX, 0, velocityX, 0, 0, 0, 0, 0)
+        val maxX = (mCanvasWidth - mWidth)
+        LogUtils.d("fling start velocityX = $velocityX, startx= $startX, maxX = $maxX")
+        mScroller.fling(startX, 0, velocityX, 0, 0, maxX.toInt(), 0, 0)
         postInvalidateOnAnimation()
     }
 
