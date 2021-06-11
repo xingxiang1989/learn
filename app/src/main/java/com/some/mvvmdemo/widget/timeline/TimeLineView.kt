@@ -62,7 +62,7 @@ class TimeLineView: View {
      * 上一个位置
      */
     private var mLastX: Float = 0f
-    private var mScrollX: Float = 0f
+    private var mLeftSide: Float = 0f
 
     constructor(context: Context?) : this(context, null)
     constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0)
@@ -157,6 +157,7 @@ class TimeLineView: View {
 
         when(event?.action){
             MotionEvent.ACTION_DOWN -> {
+                mVelocityTracker?.clear()
                 LogUtils.d("onTouchEvent ACTION_DOWN")
                 if (!mScroller.isFinished) {
                     mScroller.abortAnimation()
@@ -164,33 +165,35 @@ class TimeLineView: View {
                 mLastX = event.x
             }
             MotionEvent.ACTION_MOVE -> {
+                LogUtils.d("ACTION_MOVE mTouchSlop =$mTouchSlop")
                 // 滑动的距离
                 val scrollLengthX: Float = event.x - mLastX
+                scrollDistanceBy(-scrollLengthX)
                 // getScrollX() 小于0，说明画布右移了
                 // getScrollX() 大于0，说明画布左移了
-                val endX = scrollX - scrollLengthX
-
-                LogUtils.d("ACTION_MOVE scrollX = $scrollX , scrollLengthX = $scrollLengthX, endX = $endX， event.x = " +
-                        "${event.x} , mLastX = $mLastX")
-                if (scrollLengthX > 0) {    // 画布往右移动 -->
-                    // 画布往左移动  <--
-                    LogUtils.d("ACTION_MOVE 右滑 ")
-
-                    // 注意：这里的等号不能去除，否则会有闪动
-                    if (endX <= 0) {
-                        scrollTo(0, 0)
-                    } else {
-                        scrollBy((-scrollLengthX).toInt(), 0)
-                    }
-                } else if (scrollLengthX < 0) {                    // 画布往左移动  <--
-                    // 画布往左移动  <--
-                    LogUtils.d("ACTION_MOVE 左滑 ")
-                    if (endX >= mCanvasWidth - mWidth) {     // 需要考虑是否右越界
-                        scrollTo((mCanvasWidth - mWidth).toInt(), 0)
-                    } else {
-                        scrollBy((-scrollLengthX).toInt(), 0)
-                    }
-                }
+//                val endX = scrollX - scrollLengthX
+//
+//                LogUtils.d("ACTION_MOVE scrollX = $scrollX , scrollLengthX = $scrollLengthX, endX = $endX， event.x = " +
+//                        "${event.x} , mLastX = $mLastX")
+//                if (scrollLengthX > 0) {    // 画布往右移动 -->
+//                    // 画布往左移动  <--
+//                    LogUtils.d("ACTION_MOVE 右滑 ")
+//
+//                    // 注意：这里的等号不能去除，否则会有闪动
+//                    if (endX <= 0) {
+//                        scrollTo(0, 0)
+//                    } else {
+//                        scrollBy((-scrollLengthX).toInt(), 0)
+//                    }
+//                } else if (scrollLengthX < 0) {                    // 画布往左移动  <--
+//                    // 画布往左移动  <--
+//                    LogUtils.d("ACTION_MOVE 左滑 ")
+//                    if (endX >= mCanvasWidth - mWidth) {     // 需要考虑是否右越界
+//                        scrollTo((mCanvasWidth - mWidth).toInt(), 0)
+//                    } else {
+//                        scrollBy((-scrollLengthX).toInt(), 0)
+//                    }
+//                }
                 mLastX = event.x
                 LogUtils.d("ACTION_MOVE  -----> end")
 
@@ -210,13 +213,37 @@ class TimeLineView: View {
                 //速度要大于最小的速度值，才开始滑动
                 if (abs(initialVelocity) > mMinimumVelocity) {
                     fling(-initialVelocity.toInt())
-                }
 
+                }
                 mVelocityTracker?.recycle()
                 mVelocityTracker = null
+
             }
         }
         return true
+    }
+    
+    private fun scrollDistanceBy(dx: Float){
+        if(dx<= 0){
+            return
+        }
+
+        val startX = mLeftSide
+        var mScrollDistance = dx
+
+        LogUtils.d("scrollDistanceBy before startX= $startX, mScrollDistance = $mScrollDistance")
+
+        if(startX + mScrollDistance >= mCanvasWidth - mWidth){
+            mScrollDistance = mCanvasWidth - mWidth - startX
+        }else if(startX + mScrollDistance <= 0){
+            mScrollDistance = -startX
+        }
+
+        LogUtils.d("scrollDistanceBy after startX= $startX, mScrollDistance = $mScrollDistance")
+
+
+        mScroller.startScroll(startX.toInt(),0, mScrollDistance.toInt(),0,0)
+        invalidate()
     }
 
     /**
@@ -227,12 +254,12 @@ class TimeLineView: View {
     override fun computeScroll() {
         super.computeScroll()
         if(mScroller.computeScrollOffset()){
-            LogUtils.d("computeScroll scrollx = $scrollX, mScroller.currX = ${mScroller.currX}")
-            val difx = scrollX - mScroller.currX
-            LogUtils.d("computeScroll true and difx = $difx ")
-            if(difx != 0){
-                scrollTo(mScroller.currX,0)
-            }
+            LogUtils.d("computeScroll scrollx = $scrollX, mScroller.currX = ${mScroller.currX}, mLeftSide = $mLeftSide")
+            mLeftSide = mScroller.currX.toFloat()
+
+            LogUtils.d("computeScroll 更新mLeftSide = $mLeftSide")
+
+            scrollTo(mScroller.currX,0)
         }else{
             LogUtils.d("computeScroll false")
 
@@ -241,6 +268,7 @@ class TimeLineView: View {
 
     /**
      * 滑行，但是在滑行前需要判断当前位置是否已经触达边界
+     * velocityX 向左为正，向右为负
      */
     private fun fling(velocityX: Int){
         val startX = scrollX
