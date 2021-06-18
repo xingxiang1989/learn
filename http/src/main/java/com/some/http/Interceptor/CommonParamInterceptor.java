@@ -1,4 +1,4 @@
-package com.some.http.client;
+package com.some.http.Interceptor;
 
 import java.io.IOException;
 
