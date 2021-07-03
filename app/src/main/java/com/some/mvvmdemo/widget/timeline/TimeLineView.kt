@@ -23,6 +23,7 @@ import kotlin.math.abs
  */
 class TimeLineView: View {
 
+
     private var mWidth: Int = 0
     private var mHeight: Int = 0
     private val itemWidth = SizeUtils.dp2px(50f)
