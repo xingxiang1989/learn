@@ -249,6 +249,14 @@ public class MessageFragment extends BaseFragment {
 
             }
         });
+
+        binding.flutter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mActivity, ChangeSkinActivity.class));
+
+            }
+        });
     }
 
     @Override
