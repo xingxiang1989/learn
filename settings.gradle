@@ -7,3 +7,6 @@ include ':room'
 include ':mylibrary'
 include ':app', ':common', ':modulea', ':jiaGuPlugin', ':aoplib', ':demo-compiler', ':demo_annotation', ':hookactivity', ':gradle-plugin', ':autopatchbase', ':custom-plugin', ':flexlayout'
 rootProject.name='MvvmDemo'
+
+setBinding(new Binding([gradle: this]))
+evaluate(new File(settingsDir,'flutter_module/.android/include_flutter.groovy'))
