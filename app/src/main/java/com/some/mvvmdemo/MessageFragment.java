@@ -38,6 +38,8 @@ import com.some.mvvmdemo.view.RouletteViewActivity;
 import com.some.mvvmdemo.view.TimeLineActivity;
 import com.some.mvvmdemo.viewpager2.ViewPager2Activity;
 
+import io.flutter.embedding.android.FlutterActivity;
+
 public class MessageFragment extends BaseFragment {
 
     private static final String TAG = "xingtest-MessageFragment";
@@ -253,8 +255,9 @@ public class MessageFragment extends BaseFragment {
         binding.flutter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(mActivity, ChangeSkinActivity.class));
-
+                startActivity(FlutterActivity.
+                        withCachedEngine("my_engine_id")
+                .build(mActivity));
             }
         });
     }

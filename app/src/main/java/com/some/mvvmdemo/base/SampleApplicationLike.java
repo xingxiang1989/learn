@@ -26,6 +26,10 @@ import com.tencent.tinker.lib.tinker.Tinker;
 import com.tencent.tinker.lib.tinker.TinkerInstaller;
 import com.tencent.tinker.loader.shareutil.ShareConstants;
 
+import io.flutter.embedding.engine.FlutterEngine;
+import io.flutter.embedding.engine.FlutterEngineCache;
+import io.flutter.embedding.engine.dart.DartExecutor;
+
 /**
  * @author xiangxing
  */
@@ -114,8 +118,18 @@ public class SampleApplicationLike extends DefaultApplicationLike {
 
         SkinManager.Companion.init(getApplication());
 
+        flutterEngine = new FlutterEngine(getApplication().getApplicationContext());
+
+        flutterEngine.getDartExecutor().executeDartEntrypoint(
+                DartExecutor.DartEntrypoint.createDefault()
+        );
+
+        FlutterEngineCache.getInstance().put("my_engine_id", flutterEngine);
+
 
     }
+
+    FlutterEngine flutterEngine;
 
     /**
      * 初始化路由
