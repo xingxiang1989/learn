@@ -260,6 +260,14 @@ public class MessageFragment extends BaseFragment {
                 .build(mActivity));
             }
         });
+
+        binding.flutterFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mActivity, FlutterFragmentActivity.class));
+
+            }
+        });
     }
 
     @Override

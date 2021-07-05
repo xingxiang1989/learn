@@ -99,6 +99,8 @@
             android:hardwareAccelerated="true"
             android:windowSoftInputMode="adjustResize" />
 
+        <activity android:name=".FlutterFragmentActivity"/>
+
     </application>
 
 </manifest>
