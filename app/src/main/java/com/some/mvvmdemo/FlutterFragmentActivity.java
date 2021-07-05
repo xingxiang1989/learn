@@ -10,6 +10,8 @@ import com.blankj.utilcode.util.LogUtils;
 import com.some.mvvmdemo.base.BaseActiviy;
 import com.some.mvvmdemo.databinding.ActivityFlutterFragmentBinding;
 
+import io.flutter.embedding.android.FlutterFragment;
+
 /**
  * Created by xiangxing5 on 2021/7/5.
  * Describe:
