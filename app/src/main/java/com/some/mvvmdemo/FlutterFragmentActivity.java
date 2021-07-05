@@ -25,7 +25,7 @@ public class FlutterFragmentActivity extends BaseActiviy {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LogUtils.d("ApplicationActivityLifecycle", "xiangxingtest ChangeSkinActivity onCreate");
+        LogUtils.d("ApplicationActivityLifecycle", "xiangxingtest FlutterFragmentActivity onCreate");
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_flutter_fragment);
 

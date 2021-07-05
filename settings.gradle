@@ -9,4 +9,4 @@ include ':app', ':common', ':modulea', ':jiaGuPlugin', ':aoplib', ':demo-compile
 rootProject.name='MvvmDemo'
 
 setBinding(new Binding([gradle: this]))
-evaluate(new File(settingsDir,'flutter_module/.android/include_flutter.groovy'))
+evaluate(new File(settingsDir,'flutter_module/android/include_flutter.groovy'))
