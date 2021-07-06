@@ -22,6 +22,8 @@
             <option value="$PROJECT_DIR$/demo-compiler" />
             <option value="$PROJECT_DIR$/demo_annotation" />
             <option value="$PROJECT_DIR$/flexlayout" />
+            <option value="$PROJECT_DIR$/flutter_module" />
+            <option value="$PROJECT_DIR$/flutter_module/.android/Flutter" />
             <option value="$PROJECT_DIR$/gradle-plugin" />
             <option value="$PROJECT_DIR$/hookactivity" />
             <option value="$PROJECT_DIR$/http" />
