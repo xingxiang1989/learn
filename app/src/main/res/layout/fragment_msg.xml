@@ -286,6 +286,15 @@
             android:padding="10dp"
             android:layout_height="wrap_content"/>
 
+        <TextView
+            android:id="@+id/dayNight"
+            android:text="日夜模式"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:layout_height="wrap_content"/>
+
     </LinearLayout>
 
 

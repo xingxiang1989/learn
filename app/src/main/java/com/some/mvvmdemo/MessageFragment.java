@@ -77,7 +77,7 @@ public class MessageFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.d(TAG, "onViewCreated ");
-        shareDataVM.getLiveData().observe(this, new Observer<String>() {
+        shareDataVM.getLiveData().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
                 Log.d(TAG, "onViewCreated onChanged ");
@@ -265,6 +265,14 @@ public class MessageFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(mActivity, FlutterFragmentActivity.class));
+
+            }
+        });
+
+        binding.dayNight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mActivity, DayNightActivity.class));
 
             }
         });

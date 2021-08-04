@@ -101,6 +101,8 @@
 
         <activity android:name=".FlutterFragmentActivity"/>
 
+        <activity android:name=".DayNightActivity"/>
+
     </application>
 
 </manifest>

@@ -61,4 +61,7 @@
     <color name="color_ffffff_20">#33ffffff</color>
 
     <color name="color_change_skin">#000000</color>
+
+    <color name="color_dayNight_bg">#FFFFFF</color>
+    <color name="color_dayNight_tv">#000000</color>
 </resources>
